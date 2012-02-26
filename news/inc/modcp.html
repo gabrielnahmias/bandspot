@@ -1,0 +1,62 @@
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td rowspan="2" align="CENTER" valign="TOP">&nbsp;</td>
+    <td height="58"  valign="MIDDLE"><h1>Moderator Control Panel</h1>
+      <hr></td>
+  </tr>
+  <tr>
+    <td align="CENTER"><table width="58%" border="0" cellspacing="1" cellpadding="0"   class="tableborder">
+        <tr>
+          <th colspan="3" class="cat">{ARTICLE_HEADLINE}</th>
+        </tr>
+        <tr>
+          <td width="9">&nbsp;</td>
+          <td class="SpanClass2" width="547">{ARTICLE_SHORT_STORY}</td>
+          <td width="8">&nbsp;</td>
+        </tr>
+        <tr>
+          <td  class="row4" height="19" colspan="3">   $__l_compostedby</td>
+        </tr>
+        <tr>
+          <td  class="row4" height="19" colspan="3">  $__l_compostedon </td>
+        </tr>
+        <tr>
+          <td  class="row4" height="19" colspan="3">  $__l_newsstorage <strong>{ARTICLE_FILE}</strong></td>
+        </tr>
+        <tr>
+          <td  class="row4" height="17" colspan="3">  $__l_articleid <strong>{ARTICLE_ID}</strong></td>
+        </tr>
+        <tr>
+          <td  class="row4" colspan="3">  $__l_commentsnum</td>
+        </tr>
+      </table>
+      <BR>
+      <table width="80%" border="0" cellspacing="1" cellpadding="1" class="tableborder">
+        <tr>
+          <th class="cat">$__L_recordedcomments</th>
+        </tr>
+        <tr>
+          <td height="24"> <table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <form action="index.php?a=modcp&newsarch={ARTICLE_ARCH}&newsid={ARTICLE_ID}" method="POST">
+                <tr>
+                  <td width="84%" height="24" class="row5"> $__l_displayrange {COMMENTS_BID}
+                    - {COMMENTS_EID} </td>
+                  <td width="7%" align="RIGHT" valign="middle" class="row5"> <select name="range">
+                   {PAGINATION_MENU}
+                    </select> </td>
+                  <td width="9%" align="left" valign="middle" class="row5"><input name="Goto" type="submit" value="$__l_go" id="Goto"></td>
+                </tr>
+              </form>
+            </table></td>
+        </tr>
+        <tr>
+          <td class="row2"> <form action="index.php?a=modcp&newsarch={ARTICLE_ARCH}&newsid={ARTICLE_ID}&action=delete" method="POST">
+              {COMMENTS_LIST} <BR>
+              <input type="submit" name="submit" value="$__l_delselected">
+            </form></td>
+        </tr>
+      </table>
+      </form>
+      <p>&nbsp;</p></td>
+  </tr>
+</table>

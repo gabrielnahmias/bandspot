@@ -1,0 +1,600 @@
+.InstallInfo{
+ color: green;
+ font-size: 12px;
+ font-family: Verdana;
+}
+
+.InstallError{
+ color: #D20000;
+ font-size: 12px;
+ font-family: Verdana;
+ font-weight: bold;
+}
+
+A.MenuItem:link,A.MenuItem:active,A.MenuItem:visited   {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #000000;
+	text-decoration: none;
+	height: 20px;
+	text-align: center;
+	vertical-align: middle;
+	width: 116px;
+
+
+}
+
+.SideMenuItemCell{
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-weight: bold;
+	color: #003366;
+	background-color: #F0F3F4;
+	text-align: left;
+	text-indent: 2px;
+	vertical-align: middle;
+	height: 20px;
+	text-decoration: none;
+
+}
+
+A.SideMenuItem:link,A.SideMenuItem:active,A.SideMenuItem:visited{
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-weight: bold;
+	color: #003366;
+	text-decoration: none;
+}
+
+A.SideMenuItem:hover{
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-weight: bold;
+	color: #595566;
+	text-decoration: none;
+		vertical-align: middle;
+	display: block;
+	height: 18px;
+	width: 100%;
+	background-color: #CBD0D3;
+}
+
+A.MenuItem:hover   {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #000000;
+	text-decoration: none;
+	background-color: #cad1db;
+	height: 18px;
+	width: 118px;
+	text-align: center;
+	vertical-align: middle;
+	display: table-cell;
+}
+
+A:link,A:active,A:visited
+{
+ color: #02518A; 
+}
+A:hover {
+ color: #0276CC ;
+}
+
+.LoginBar {
+	background-image: url(img/grad3.jpg);
+	background-repeat: repeat-x;
+	background-position: center bottom;
+	background-color: #f7f6f4;
+	color: #000000;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	padding: 5px;
+	text-decoration: none;
+}
+textarea.largebox:hover{
+	background-color:#FCFDFE;
+	width: 450px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	color: #004080;
+	border: 1px solid #620000;
+}
+textarea.largebox{
+	background-color:#FFFFFF;
+	border: 1px solid #003366;
+	width: 450px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	color: #000000;
+}
+
+input[type=text].largebox:hover
+{
+	background-color:#FAFCFE;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	color: #000000;
+	border: 1px solid #003366;
+	height: 20px;
+	width: 350px;
+}
+
+input[type=text].largebox
+{
+	background-color:#FFFFFF;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	color: #000000;
+	border: 1px solid #003366;
+	height: 20px;
+	width: 350px;
+
+}
+
+iframe.largebox
+{
+	background-color:#FFFFFF;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	color: #000000;
+	border: 1px solid #003366;
+	height: 20px;
+	width: 350px;
+}
+
+
+input[type=text].mediumbox:hover{
+	background-color:#FAFCFE;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	color: #000000;
+	border: 1px solid #003366;
+	height: 20px;
+	width: 200px;
+}
+input[type=text].mediumbox{
+	background-color:#FFFFFF;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	color: #000000;
+	border: 1px solid #003366;
+	height: 20px;
+	width: 200px;
+}
+
+input[type=text].custombox:hover{
+	background-color:#FAFCFE;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #000000;
+	border: 1px solid #003366;
+	height: 20px;
+}
+input[type=text].custombox{
+	background-color:#FFFFFF;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #000000;
+	border: 1px solid #003366;
+	height: 20px;
+}
+
+input[type=text].smallbox:hover,input[type=password].smallbox:hover{
+	background-color:#FAFCFE;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	color: #000000;
+	border: 1px solid #003366;
+	height: 20px;
+	width: 120px;
+}
+input[type=text].smallbox,input[type=password].smallbox{
+	background-color:#FFFFFF;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	color: #000000;
+	border: 1px solid #003366;
+	height: 20px;
+	width: 120px;
+}
+
+input[type=submit]:hover
+{
+	background-color: #CEDDF2;
+	background-repeat: no-repeat;
+	background-position: left center;
+	border: 1px solid #000000;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	color: #333333;
+	height: 20px;
+	vertical-align: middle;
+
+
+}
+
+input[type=submit]
+{
+	border: 1px solid #003366;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	color: #000000;
+	background-color: #F0F3F7;
+	height: 20px;
+
+}
+input[type=submit].mediumbtn
+{
+	width: 120px;
+}
+input[type=submit].mediumbtn:hover
+{
+	width: 120px;
+}
+
+select:hover{
+	background-color:#FAFCFE;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	color: #000000;
+	border: 1px solid #003366;
+	height: 20px;
+
+}
+select{
+	background-color:#FFFFFF;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	color: #000000;
+	border: 1px solid #003366;
+	height: 20px;
+
+}
+
+select.toolbox{
+	background-color:#eaeef0;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	color: #003366;
+	border: 1px solid #003366;
+	height: 18px;
+
+}
+
+
+
+h1,h2,h3{
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 16px;
+	color: #004080;
+
+
+
+}
+
+th.stats{
+	background-image: url(img/headcell.jpg);
+	background-repeat: repeat-x;
+	height: 18px;
+	background-color: #FFFFFF;
+	border-top-width: 1px;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+	border-top-style: none;
+	border-right-style: none;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-top-color: #004080;
+	border-right-color: #004080;
+	border-bottom-color: #004080;
+	border-left-color: #004080;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-weight: bold;
+	color: #FFFFFF;
+}
+
+th.cat
+{
+	background-image: url(img/headcell2.jpg);
+	background-repeat: repeat-x;
+	background-position: left center;
+	height: 20px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #FFFFFF;
+
+}
+
+
+.winheader {
+	background-color: #003366;
+	background-image: url(img/headcell2.jpg);
+	background-repeat: repeat-x;
+	height: 25px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+	color: #FFFFFF;
+	vertical-align: middle;
+	background-position: center center;
+
+
+
+}
+
+
+.SpanClass1, A.ListItem:link,A.ListItem:active,A.ListItem:visited  {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #000000;
+	text-decoration: none;
+}
+
+.greenlight  {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #006600;
+	text-decoration: none;
+}
+
+.redlight  {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #FF0000;
+	text-decoration: none;
+}
+
+.yellowlight  {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #967205;
+	text-decoration: none;
+}
+
+
+.winfooter {
+
+	background-color: #003366;
+	background-image: url(img/winfooter.jpg);
+	background-repeat: repeat-x;
+	height: 25px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+	color: #FFFFFF;
+	vertical-align: middle;
+	background-position: center center;
+}
+.SpanClass2 {
+
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #003C77;
+}
+A.ListItem:hover {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #000000;
+	text-decoration: underline;
+
+}
+a.fontbutton:link,a.fontbutton:visited,a.fontbutton:active {
+	background-color: eaeef0;
+	height: 25px;
+	width: 25px;
+	display: table-cell;
+	text-align: center;
+	vertical-align: middle;
+	border: 1px solid #003366;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	text-decoration: none;
+	color: #000000;
+
+
+
+}
+a.fontbutton:hover {
+	background-color: b9c4c9;
+	height: 25px;
+	width: 25px;
+	display: table-cell;
+	text-align: center;
+	vertical-align: middle;
+	border: 1px dashed #003366;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	text-decoration: none;
+	color: #000000;
+
+}
+.HintBox {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #000000;
+	text-decoration: none;
+	border: 0px none;
+}.Panel {
+	border: 1px dotted #000000;
+}
+label {
+	font-family: Verdana;
+	font-size: 12px;
+	font-weight: bold;
+	color: #000000;
+}
+.SpanClass3 {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: normal;
+	color: #333333;
+}
+.footcell {
+	background-image: url(img/footcell.jpg);
+	background-repeat: repeat-x;
+	height: 20px;
+}
+.headcell-small {
+	background-image: url(img/headcell-small.jpg);
+	background-repeat: repeat-x;
+	background-position: left center;
+	height: 18px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	font-style: normal;
+	color: #FFFFFF;
+
+}
+.tableborder {
+	border: 1px solid #003366;
+}
+.row1 {
+	background-color: #506f8c;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	color: #FFFFFF;
+	text-align: center;
+	vertical-align: middle;
+
+
+}
+.row2 {
+
+	background-color: #f6f7f8;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	color: #000000;
+	text-align: center;
+	vertical-align: middle;
+}
+.row3 {
+	background-color: #F8F9FC;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	color: #000000;
+	text-align: right;
+	vertical-align: middle;
+
+}
+.row2-medium {
+
+
+	background-color: #f6f7f8;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #000000;
+	text-align: center;
+	vertical-align: middle;
+}
+.row4 {
+
+
+	background-color: #f6f7f8;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	color: #000000;
+	vertical-align: middle;
+}
+.row5 {
+
+	background-color: #506f8c;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	color: #FFFFFF;
+	vertical-align: middle;
+}
+.SpanClass4 {
+
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: normal;
+	color: #FFFFFF;
+}
+.MenuItemCell {
+	width: 116px;
+	background-color: #e0e4ea;
+}
+.ErrorClass1 {
+
+
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #FF0000;
+}.BodyFrame {
+	border: 1px solid #003366;
+}
+.row7 {
+	background-color: #f0f2f4;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-weight: normal;
+}
+.row8 {
+	background-color: #f6f7f8;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-weight: normal;
+	text-indent: 2px;
+
+}
+.row9 {
+	background-color: #DCE2ED;
+}
+.Wrapper {
+	border: 1px solid #003366;
+	background-image: url(img/grad1.jpg);
+	background-repeat: repeat-x;
+	background-position: center bottom;
+
+}
+.Wrapper2 {
+	background-image: url(img/grad2.jpg);
+	background-repeat: repeat-x;
+	background-position: center top;
+
+}
+.SpanClass5 {
+
+
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #FFCC00;
+}
+.SpanClass6 {
+
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	color: #000000;
+	text-decoration: none;
+}
+input[type=button] {
+	border: 1px solid #003366;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	color: #000000;
+	background-color: #F0F3F7;
+	height: 20px;
+}
+input[type=button]:hover
+{
+	background-color: #CEDDF2;
+	background-repeat: no-repeat;
+	background-position: left center;
+	border: 1px solid #000000;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	color: #333333;
+	height: 20px;
+	vertical-align: middle;
+
+
+}
+
+input[type=select].multiplesel,select.multiplesel
+{
+	height: 100px;
+	width: 200px;
+ 
+}

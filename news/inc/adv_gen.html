@@ -1,0 +1,99 @@
+<link href="styles.css" rel="stylesheet" type="text/css"> 
+<table width="90%" border="0" align="center" cellpadding="1" cellspacing="1" class="BodyFrame">
+  <tr> 
+    <td height="20" class="row4">$__msg_advertising</td>
+  </tr>
+</table>
+<br>
+<table width="90%" border="0" align="center" cellpadding="1" cellspacing="1" class="BodyFrame">
+  <tr> 
+    <td height="20" class="row4">&nbsp;[ <a href="index.php?a=options&page=advertising&action=setup">$__L_adsetup</a> 
+      ]&nbsp;[ <a href="index.php?a=options&page=advertising&action=edit">$__L_adedit</a> 
+      ]</td>
+  </tr>
+</table>
+<br>
+<table width="90%" border="0" align="center" cellpadding="1" cellspacing="1">
+  <tr> 
+    <td height="45" valign="middle">
+	<span id="hint"> 
+<div id="hintbox" class="hintbox"></div> 
+</span>	
+	</td>
+  </tr>
+</table>
+<br>
+<form action="index.php?a=options&page=advertising&action=dosetup" method="post">
+<table width="90%" border="0" align="center" cellpadding="1" cellspacing="1" class="BodyFrame">
+  <tr> 
+    <th colspan="3" class="cat">$__L_adsetup</th>
+  </tr>
+  <tr> 
+    <td width="25" height="25" class="row7">&nbsp; </td>
+    <td width="25" align="center" valign="middle" class="row7"><input name="advertising#activenews" type="checkbox" id="activenews" value="YES" check_advertising|activenews></td>
+    <td align="left" valign="middle" class="row7">&nbsp;$__l_adsactivenews</td>
+  </tr>
+  <tr align="center"> 
+    <td colspan="3" class="row7"><table width="90%" border="0" cellspacing="1" cellpadding="1">
+          <tr> 
+            <td colspan="3" class="SpanClass1">$__l_adsafter </td>
+            <td class="SpanClass1"><input name="advertising#active_adpos" type="text" id="advertising#active_adpos" value="advertising|active_adpos" onMouseOver="fShowHint('$__mc_adsafter');"></td>
+          </tr>
+          <tr>
+            <td colspan="3" class="SpanClass1">&nbsp;</td>
+            <td class="greenlight"><font size="1">$__msg_adlimit</font></td>
+          </tr>
+          <tr> 
+            <td colspan="4" class="SpanClass1">$__L_adselector</td>
+          </tr>
+          <tr> 
+            <td width="25" rowspan="2">&nbsp;</td>
+            <td width="20"><input name="md_active" type="radio" value="selected" check_md_active_selected></td>
+            <td width="180" class="SpanClass1">$__l_admodeselected</td>
+            <td class="SpanClass1"><select name="active_selad" id="active_selad">
+			  {ACTIVE_ADLIST}
+              </select></td>
+          </tr>
+          <tr> 
+            <td width="20"><input name="md_active" type="radio" value="random" check_md_active_random></td>
+            <td colspan="2" class="SpanClass1">$__l_admoderandom</td>
+          </tr>
+        </table></td>
+  </tr>
+  <tr> 
+    <td height="25" class="row7">&nbsp;</td>
+    <td height="25" align="center" valign="middle" class="row7"><input name="advertising#archivednews" type="checkbox" id="archivednews" value="YES" check_advertising|archivednews></td>
+    <td height="25" class="row7">&nbsp;$__l_adsarchive</td>
+  </tr>
+  <tr align="center"> 
+    <td colspan="3" class="row7"><table width="90%" border="0" cellspacing="1" cellpadding="1">
+          <tr> 
+            <td colspan="3" class="SpanClass1">$__l_adsafter</td>
+            <td class="SpanClass1"><input name="advertising#archive_adpos" type="text" id="advertising#archive_adpos" value="advertising|archive_adpos" onMouseOver="fShowHint('$__mc_adsafter');"></td>
+          </tr>
+          <tr>
+            <td colspan="3" class="SpanClass1">&nbsp;</td>
+            <td class="greenlight"><font size="1">$__msg_adlimit</font></td>
+          </tr>
+          <tr> 
+            <td colspan="4" class="SpanClass1">$__L_adselector</td>
+          </tr>
+          <tr> 
+            <td width="25" rowspan="2">&nbsp;</td>
+            <td width="20"><input name="md_archive" type="radio" value="selected" check_md_archive_selected></td>
+            <td width="180" class="SpanClass1">$__l_admodeselected</td>
+            <td class="SpanClass1"><select name="archive_selad" id="archive_selad">
+			  {ARCHIVE_ADLIST}
+              </select></td>
+          </tr>
+          <tr> 
+            <td width="20"><input name="md_archive" type="radio" value="random" check_md_archive_random></td>
+            <td colspan="2" class="SpanClass1">$__l_admoderandom</td>
+          </tr>
+        </table></td>
+  </tr>
+  <tr align="center"> 
+    <td colspan="3" class="row2-medium"><input type="submit" name="Submit" value="$__l_savechanges"></td>
+  </tr>
+</table>
+</form>

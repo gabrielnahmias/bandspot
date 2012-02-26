@@ -1,0 +1,80 @@
+<form action="install.php?a=edit&t=news_publishing" method="post">
+<table width="90%" border="0" cellspacing="0" cellpadding="0" class="BodyFrame">
+          <tr> 
+            <th valign="middle" class="cat"><div align="left">&nbsp;&nbsp;Setup 
+          Elemovements News 2.0.2 - $__L_cfg_newspublishing</div></th>
+          </tr>
+          <tr> 
+            <td height="23" class="row5"><div align="center"> <br />
+                <table width="80%" border="0" cellspacing="0" cellpadding="0" class="BodyFrame">
+                  <tr> 
+                    <td height="38" class="row4"><blockquote> 
+                        
+                  <p>$__msg_setupnewspublishing</p>
+                      </blockquote></td>
+                  </tr>
+                </table>
+                <br />
+          <table width="80%" border="0" cellspacing="1" cellpadding="1" class="BodyFrame">
+            <tr> 
+              <th height="23" colspan="2" class="cat">$__L_news-</th>
+            </tr>
+            <tr> 
+              <td class="row7" align="right" width="43%"><strong>$__l_firstshownnews</strong></td>
+              <td class="row8" width="57%"><input name="news#show_first" type="text" value="news|show_first" class="custombox" size="6" maxlength="3" onmouseover="fShowHint('$__mc_activecount');"></td>
+            </tr>
+            <tr> 
+              <td align="right" class="row7"><strong>$__l_sortnews</strong></td>
+              <td class="row8"> <select name="news#sort" onmouseover="fShowHint('$__mc_sortmethod');">
+                      news|sort
+                </select></td>
+            </tr>
+            <tr> 
+              <td align="right" class="row7"><strong>$__l_newstimeformat</strong></td>
+              <td class="row8"><input name="news#time_format" type="text" size="15" value="news|time_format" class="custombox" onmouseover="fShowHint('$__mc_newstimef.');"></td>
+            </tr>
+            <tr> 
+              <td align="right" class="row7"><strong>$__l_allowhtmlnews</strong></td>
+              <td class="row8"><input name="news#html" type="checkbox" value="ON" check_news|html onmouseover="fShowHint('$__mc_newshtml');"> 
+                <span class="SpanClass1">$__l_yes</span></td>
+            </tr>
+            <tr> 
+              <td align="right" class="row7"><strong>$__l_allowbbcodenews</strong></td>
+              <td class="row8"><input name="news#bbcode" type="checkbox" value="ON" check_news|bbcode onmouseover="fShowHint('$__mc_newsbbcode');"> 
+                <span class="SpanClass1">$__l_yes</span></td>
+            </tr>
+          </table>
+          <table width="80%" border="0" cellspacing="1" cellpadding="1" class="BodyFrame">
+            <tr> 
+              <th colspan="2" class="cat">$__L_newsicons</th>
+            </tr>
+            <tr> 
+              <td class="row7" align="right" width="43%"><strong>$__l_saveicon</strong></td>
+              <td class="row8" width="57%"><input name="icons#save" type="checkbox" onmouseover="fShowHint('$__mc_saveicons');" value="ON" check_icons|save> 
+                <span class="SpanClass1">Yes</span></td>
+            </tr>
+            <tr> 
+              <td align="right" class="row7"><strong>$__l_iconpath</strong></td>
+              <td class="row8"><input name="icons#path" type="text" class="custombox" onmouseover="fShowHint('$__mc_iconpath');" value="icons|path" size="30"></td>
+            </tr>
+            <tr> 
+              <td align="right" class="row7"><strong>$__l_iconurl</strong></td>
+              <td class="row8"><input name="icons#url" type="text" class="custombox" onmouseover="fShowHint('$__mc_iconurl');" value="icons|url" size="30"></td>
+            </tr>
+            <tr> 
+              <td align="right" class="row7"><strong>$__l_iconwlimit</strong></td>
+              <td class="row8"><input name="icons#limitwidth" type="text" class="custombox" onmouseover="fShowHint('$__mc_iconwlimit');" value="icons|limitwidth" size="10"></td>
+            </tr>
+            <tr> 
+              <td align="right" class="row7"><strong>$__l_iconhlimit</strong></td>
+              <td class="row8"><input name="icons#limitheight" type="text" id="icons#limitheight" class="custombox" onmouseover="fShowHint('$__mc_iconhlimit');" value="icons|limitheight" size="10"></td>
+            </tr>
+          </table>
+          <br />
+              </div></td>
+          </tr>
+          <tr>
+            <td height="23" align="center" class="row9"><input name="goto" type="submit" id="goto" value="$__l_back">
+              <input name="goto" type="submit" id="goto" value="$__l_next"></td>
+          </tr>
+        </table></form>

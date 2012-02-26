@@ -1,0 +1,35 @@
+
+<table width="90%" border="0" align="center" cellpadding="1" cellspacing="1" class="BodyFrame">
+  <tr> 
+    <td height="20" class="row4">$__msg_advertising</td>
+  </tr>
+</table>
+<br>
+<table width="90%" border="0" align="center" cellpadding="1" cellspacing="1" class="BodyFrame">
+  <tr> 
+    <td height="20" class="row4">&nbsp;[ <a href="index.php?a=options&page=advertising&action=setup">$__L_adsetup</a> 
+      ]&nbsp;[ <a href="index.php?a=options&page=advertising&action=edit">$__L_adedit</a> 
+      ]</td>
+  </tr>
+</table>
+<br>
+<form action="index.php?a=options&page=advertising&action={FORM_ACTION}&id={AD_ID}" method="post">
+  <table width="90%" border="0" align="center" cellpadding="1" cellspacing="1" class="BodyFrame">
+    <tr> 
+      <th colspan="2" class="cat">{FORM_TITLE}</th>
+    </tr>
+    <tr> 
+      <td width="28%" height="12" class="row4"><div align="right" class="SpanClass1"><strong>$__l_adname&nbsp;</strong></div></td>
+      <td width="72%" class="row7"><input name="adname" type="text" class="mediumbox" id="adname" value="{AD_NAME}"></td>
+    </tr>
+    <tr> 
+      <td height="12" class="row4"><div align="right" class="SpanClass1"><strong>$__l_adcode&nbsp;</strong></div></td>
+      <td height="12" class="row7"><textarea name="adcode" rows="10" class="largebox" id="adcode">{AD_CODE}</textarea></td>
+    </tr>
+    <tr> 
+      <td height="25" colspan="2" class="row7"><div align="center">
+          <input type="submit" name="Submit" value="$__l_savechanges">
+        </div></td>
+    </tr>
+  </table>
+</form>

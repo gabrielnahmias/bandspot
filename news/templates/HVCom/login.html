@@ -1,0 +1,35 @@
+<form action="{form-action}" method="post">
+<table width="80%" border="1" cellspacing="0" cellpadding="0">
+  <tr> 
+    <td align="CENTER" valign="MIDDLE"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr> 
+          <td align="center" valign="middle" background="{script_url}templates/{template}/images/headcell.jpg"><font color="#FFFFFF" size="2" face="Verdana, Arial, Helvetica, sans-serif"><strong>$__L_login</strong></font></td>
+        </tr>
+        <tr> 
+          <td height="31" align="center" valign="middle" bgcolor="#F7F8F9"><p><font color="#000000" size="-1" face="Verdana, Arial, Helvetica, sans-serif">{message}</font></p>
+              <table width="400" border="0" cellspacing="0" cellpadding="0">
+                <tr> 
+                  <td width="143">$__l_nickname &nbsp;&nbsp;</td>
+                  <td width="257"> <div align="left"> 
+                      <input name="xuser" type="text" id="xuser" size="30">
+                    </div></td>
+                </tr>
+                <tr> 
+                  <td>$__l_password</td>
+                  <td> <div align="left"> 
+                      <input name="xpass" type="password" id="xpass">
+                    </div></td>
+                </tr>
+                <tr> 
+                  <td><div align="center"> </div></td>
+                  <td><input name="Submit" type="submit" id="Submit" value="$__login"></td>
+                </tr>
+              </table>
+            <br />
+			{form-fields}
+          </td>
+        </tr>
+      </table></td>
+  </tr>
+</table>
+</form>

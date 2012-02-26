@@ -1,0 +1,347 @@
+html, body {
+	
+	min-width: 0px;
+	
+	-webkit-text-size-adjust: none;
+	
+}
+
+body.landscape div#logo {
+	
+	background: url('../img/logo_463.png');
+	
+    height: 66px;
+    
+    width: 463px;
+    
+}
+
+body.landscape div#logo:hover {
+	
+	background-position: 0 66px;
+    
+}
+
+body.landscape div#page {
+	
+	width: 476px;
+	
+}
+
+body.landscape div#slider {
+	
+	height: 150px;
+	
+}
+
+body.landscape div#slider img {
+	
+	height: 150px;
+	
+    width: 477px;
+    
+}
+
+body.landscape div#social .inner {
+	
+    width: 400px;
+    
+}
+
+body.landscape div.album {
+	
+	width: 122px;
+	
+}
+
+body.landscape div.article img {
+	
+	width: 130px;
+	
+}
+
+body.landscape div.picture {
+	
+	width: 120px;
+	
+}
+
+body.landscape img.band {
+	
+	height: 191px;
+	
+}
+
+body.landscape .container_16 .grid_11 {
+	
+	width: 463px;	
+	
+}
+
+body.landscape .container_12,
+body.landscape .container_16 {
+	
+	width: 480px;
+	
+}
+
+body.landscape .icon {
+	
+	margin-left: 32px;
+	
+}
+
+body.portrait div#logo,
+div#logo {
+	
+	background: url('../img/logo_303.png');
+	
+    height: 42px;
+    
+    width: 303px;
+    
+}
+
+body.portrait div#logo:hover,
+div#logo:hover {
+	
+	background-position: 0 43px;
+    
+}
+
+body.portrait div#page,
+div#page {
+	
+	width: 316px;
+	
+}
+
+body.portrait div.article img {
+	
+	width: 80px;
+	
+}
+
+body.portrait div.album,
+div.album {
+	
+	width: 115px;
+	
+}
+
+
+body.portrait div.picture {
+	
+	width: 122px;
+	
+}
+
+body.portrait div#slider,
+div#slider {
+	
+	height: 100px;
+    
+}
+
+body.portrait div#slider img,
+div#slider img {
+	
+	height: 100px;
+	
+    width: 318px;
+    
+}
+
+body.portrait div#social .inner {
+	
+    width: 300px;
+    
+}
+
+body.portrait .container_12,
+body.portrait .container_16 {
+	
+	width: 320px;
+	
+}
+
+body.portrait .icon {
+	
+	margin-left: 8px;
+	
+}
+
+div#footer {
+	
+	font-size: 8px;
+	
+}
+
+div#nav.bar a {
+	
+	font-size: 8px;
+	
+	height: 26px;
+	
+	min-width: 0;
+	
+	padding: 14px 8px 0;
+	
+}
+
+div.album-container img {
+	
+	width: 110px;
+	
+}
+
+div.article img {
+	
+	width: 80px;
+	
+}
+
+div.cover img {
+	
+	height: 75px;
+	
+	width: 75px;
+	
+}
+
+div.desktop {
+	
+	margin-top: 5px;
+	
+	position: absolute;
+	
+}
+
+div.picture {
+	
+	height: 86px;
+	
+	margin-right: 0;
+	
+}
+
+div.picture img {
+	
+	height: 86px;
+	
+	width: 86px;
+	
+}
+
+div.table div.left {
+	
+	padding-right: 40px;
+	
+}
+
+div.tracklist {
+	
+	text-align: left;
+	
+	width: 187px;
+	
+}
+
+div.wrapper {
+	
+	padding: 0;
+	
+}
+
+img.band {
+	
+	height: 118px;
+	
+}
+
+img.profile {
+	
+	width: 100px;
+	
+}
+
+.bar {
+	
+	padding: 0;
+	
+}
+
+.container_12, .container_16 {
+	
+	margin: 0;
+	
+}
+
+.container_16 .grid_11 {
+	
+	width: 303px;
+	
+}
+
+.container_12,
+.container_16 {
+	
+	width: 320px;
+	
+}
+
+.date {
+	
+	
+}
+
+.grid_1,
+.grid_2,
+.grid_3,
+.grid_4,
+.grid_5,
+.grid_6,
+.grid_7,
+.grid_8,
+.grid_9,
+.grid_10,
+.grid_11,
+.grid_12,
+.grid_13,
+.grid_14,
+.grid_15,
+.grid_16 {
+	
+	margin: 0 5px;
+	
+}
+
+.tagline {
+	
+	font-size: 14px;
+	
+	padding: 5px 15px;
+	
+}
+
+.quote {
+	
+	background: url("../img/quotes_266.png");
+	
+	font-size: 11px;
+	
+	height: 67px;
+	
+	margin: 10px auto 30px;
+	
+	width: 266px;
+	
+}
+
+.quote .text {
+	
+	padding: 5px 0 0 30px;
+	
+	width: 216px;
+	
+}

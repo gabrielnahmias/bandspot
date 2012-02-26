@@ -1,0 +1,42 @@
+<table width="95%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td>
+      <table width="100%" border="0" cellspacing="0" cellpadding="1">
+        <tr>
+          <th colspan="4" class="cat">Uploaded files</th>
+        </tr>
+        <tr bgcolor="#F2F2F9">
+            <form action="{VIEW_FORM_ACTION}" method="post">
+            <td height="28" colspan="4">
+                <span class="SpanClass2">Looking in <em><strong>{PIC_FOLDER_PATH}
+              <input name="thisdir" type="text" value="{THIS_DIR}">
+              <input type="submit" name="Submit" value="Go">
+              </strong></em></span>
+             </td></form>
+         </tr>
+        <tr>
+        <td>
+         <form action="{FORM_ACTION}" method="post">
+         <table width="100%" cellspacing="1" cellpadding="0" border="0" bgcolor="#D6D6EB">
+         <tr>
+          <td></td>
+          <td></td>
+          <td class="SpanClass1"><b> File name </b></td>
+          <td class="SpanClass1"><b> Resolution </b></td>
+          <td class="SpanClass1"><b> Filesize </b></td>
+          <td class="SpanClass1"><b> Uploaded on</b></td>
+          <td class="SpanClass1"><b> Uploaded by</b></td>		  
+
+         </tr>
+         {FILE_LIST}
+         </table>
+		 </form>
+        </td>
+        </tr>
+        <tr  bgcolor="#F2F2F9">
+        <td align="center"><input type="submit" value="Delete Selected"></td>
+        </tr>
+      </table>
+      </td>
+      </tr>
+    </table>

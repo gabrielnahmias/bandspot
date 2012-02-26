@@ -1,0 +1,36 @@
+<table width="100%" cellspacing="0" cellpadding="0">
+  <tr> 
+    <td width="11%" rowspan="3" align="center" valign="top"><br /> <br /> <img src="inc/img/logo.jpg" width="100" height="100"></td>
+    <td><br /> <h1>$__page_catmanager</h1>
+      <hr> </td>
+  </tr>
+  <tr> 
+    <td align="center" class="SpanClass1">&nbsp;</td>
+  </tr>
+  <tr> 
+    <td height="60" align="center"> 
+      <form action="index.php?a=options&page=catmanager&action=doedit&id={ID}" method="post">
+        <table width="85%" cellspacing="0" cellpadding="0" class="BodyFrame">
+          <tr> 
+            <th colspan="3" class="cat">$__L_catedit</th>
+          </tr>
+          <tr> 
+            <td width="130" rowspan="2" align="center" bgcolor="#E1E4EC" class="SpanClass1">{ICONPREVIEW}</td>
+            <td height="25" align="right" bgcolor="#E1E4EC" class="SpanClass1"><strong>$__l_-catname</strong></td>
+            <td bgcolor="#E1E4EC"><input name="catname" type="text" class="smallbox" id="catname2" value="{CATNAME}"></td>
+          </tr>
+          <tr> 
+            <td height="25" align="right" bgcolor="#E1E4EC" class="SpanClass1"><strong>$__l_-caticon</strong></td>
+            <td bgcolor="#E1E4EC"><input name="caticon" type="text" class="mediumbox" id="catname" value="{CATICON}"></td>
+          </tr>
+          <tr> 
+            <td colspan="2" align="right" bgcolor="#E1E4EC" class="SpanClass1">&nbsp;</td>
+            <td bgcolor="#E1E4EC">{ICONSAVE}</td>
+          </tr>
+          <tr> 
+            <td colspan="3" align="center" class="footcell"><input type="submit" name="Submit" value="$__l_savechanges"></td>
+          </tr>
+        </table>
+      </form></td>
+  </tr>
+</table>

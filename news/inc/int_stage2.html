@@ -1,0 +1,68 @@
+ 
+<form action="index.php?a=options&page=integration&action=generatecode" method="post">
+<input type="hidden" value="{TARGET}" name="target">
+  <table width="80%" border="0" cellspacing="0" cellpadding="0" class="BodyFrame">
+    <tr> 
+      <td height="17" class="row4"><blockquote>
+          <p>&nbsp;$__msg_integrationwizard<br>
+          </p>
+        </blockquote></td>
+    </tr>
+  </table>
+  <br>
+  <table width="80%" border="0" cellpadding="1" cellspacing="1" class="BodyFrame">
+    <tr class="row7"> 
+      <td height="9" colspan="2"><blockquote>$__L_inttypeofpage</blockquote></td>
+    </tr>
+    <tr class="row7"> 
+      <td height="10" colspan="2"><blockquote> 
+          <blockquote> 
+            <blockquote>
+              <p>$__l_intshow{TARGET}</p>
+            </blockquote>
+          </blockquote>
+        </blockquote></td>
+    </tr>
+  </table>
+  <br>
+  <table width="80%" border="0" cellspacing="1" cellpadding="1" class="BodyFrame">
+    <tr> 
+      <td width="47%" height="9" class="row3">$__l_intselcats</td>
+      <td width="53%" class="row7"><select name="selcats[]" size="4" multiple id="selcats" class="multiplesel">
+           <option selected value="">$__l_listany</option>
+		   {CATLIST}
+        </select></td>
+    </tr>
+    <tr> 
+      <td width="47%" height="1" class="row3">$__l_intselauthors</td>
+      <td class="row7"><select name="selauthors[]" size="4" multiple id="selauthors" class="multiplesel">
+	  <option selected value="">$__l_listany</option>
+	  {AUTHORLIST}
+        </select></td>
+    </tr>
+    <tr> 
+      <td width="47%" height="2" class="row3">$__l_intseltemplate</td>
+      <td class="row7"><select name="seltemplate" size="1" id="seltemplate">
+		  <option selected value="default">Default [{DEFTEMPLATE}]</option>
+		  {TEMPLATE_LIST}
+        </select></td>
+    </tr>
+    <!--{BEGIN_ARCH}//-->
+	<tr> 
+      <td width="47%" height="2" class="row3">$__l_intenablepagination</td>
+      <td class="row7"><input name="selpagination" type="checkbox" id="selpagination" value="1"></td>
+    </tr>
+    <tr> 
+      <td height="2" class="row3">$__l_newsperpage</td>
+      <td class="row7"><input name="selrange" type="text" class="CustomBox" value="10" size="5" maxlength="3"></td>
+    </tr>
+	<!--{END_ARCH}//-->
+    <tr> 
+      <td colspan="2" class="row7"><div align="center"> 
+          <input type="submit" name="Submit" value="$__l_go">
+        </div></td>
+    </tr>
+  </table>
+	  </form>
+
+      

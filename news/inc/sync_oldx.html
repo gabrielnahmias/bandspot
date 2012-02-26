@@ -1,0 +1,40 @@
+	  <form action="index.php?a=options&page=synchronizer&action=sync&target=xnews" method="post">
+	  <input type="hidden" name="syncfrom" value="xnews1.0.0">
+      <table width="80%" border="0" cellspacing="1" cellpadding="1" class="BodyFrame">
+        <tr class="row7"> 
+          <td height="20" colspan="2"><blockquote>$__l_syncfrom X-News v1.0.0</blockquote></td>
+        </tr>
+        <tr> 
+            <td width="47%" height="20" class="row3">$__l_-pathto X-News v1.0.0: 
+            </td>
+          <td width="53%" class="row8"><input name="oldxpath" type="text" class="largebox" id="oldxpath"></td>
+        </tr>
+        <tr> 
+          <td height="20" class="row3">$__l_syncnews</td>
+          <td class="row8"><input name="syncnews" type="checkbox" id="syncnews" value="YES"></td>
+        </tr>
+        <tr> 
+          <td height="20" class="row3">$__l_synccomments</td>
+          <td class="row8"><input name="synccomments" type="checkbox" value="YES"></td>
+        </tr>
+        <tr> 
+          <td height="20" class="row3">$__l_synccat</td>
+          <td class="row8"><input name="synccat" type="checkbox" value="YES"></td>
+        </tr>
+        <tr> 
+          
+      <td height="20" class="row3">$__l_syncuserdb</td>
+          <td class="row8"><input name="syncuserdb" type="checkbox" id="syncuserdb" value="YES"></td>
+        </tr>
+		        <tr> 
+          
+      <td height="20" class="row3">$__l_syncranks</td>
+          <td class="row8"><input name="syncranks" type="checkbox" id="syncranks" value="YES"></td>
+        </tr>
+        <tr> 
+          <td colspan="2" class="row7"><div align="center"> 
+              <input type="submit" name="Submit2" value="$__l_go"  onClick="return confirm('$__msg_?syncconfirm')">
+            </div></td>
+        </tr>
+      </table>
+      </form>

@@ -1,0 +1,76 @@
+<table width="100%" cellspacing="0" cellpadding="0">
+  <tr>
+    <td width="13%" height="32" rowspan="2" align="center" valign="top"><p>&nbsp;</p>
+      <p><BR>
+        <img src="inc/img/logo.jpg" width="100" height="100"> </p></td>
+    <td width="87%" height="50"><h1>$__page_usermanager</h1>
+      <hr></td>
+  </tr>
+  <tr>
+    <td height="82" align="center"> <table width="80%" cellspacing="1" cellpadding="1" class="BodyFrame">
+        <tr>
+          <th colspan="5" class="cat">$__L_regusers</th>
+        </tr>
+        <tr>
+          <td width="24%" height="19" align="center" class="row9"><span class="SpanClass1"><strong>$__L_dispname</strong></span></td>
+          <td width="24%" align="center" class="row9"><span class="SpanClass1"><strong>$__L_accname</strong></span></td>
+          <td width="13%" align="center" class="row9"><span class="SpanClass1"><strong>$__L_position</strong></span></td>
+          <td width="23%" align="center" class="row9"><span class="SpanClass1"><strong>$__L_postednewscount</strong></span></td>
+          <td width="16%" align="center" class="row9"><span class="SpanClass1"><strong>$__L_action</strong></span></td>
+        </tr>
+        {USERLIST}
+      </table>
+      <p>&nbsp;</p>
+
+		  	  <form action="index.php?a=options&page=profiles&action=add" method="post">
+		  <table width="60%" border="0" cellspacing="1" cellpadding="1" class="BodyFrame">
+              <tr>
+
+            <th colspan="2" class="headcell-small">$__L_adduser</th>
+              </tr>
+              <tr>
+
+            <td width="35%" align="right" bgcolor="#DCE2ED" class="SpanClass2">$__l_accountname</td>
+                <td width="65%" bgcolor="#DCE2ED"><input name="account" type="text" id="account"></td>
+              </tr>
+              <tr>
+
+            <td align="right" bgcolor="#DCE2ED" class="SpanClass2">$__l_dispname</td>
+                <td bgcolor="#DCE2ED"><input name="displayname" type="text" id="displayname"></td>
+              </tr>
+              <tr>
+
+            <td align="right" bgcolor="#DCE2ED" class="SpanClass2">$__l_password</td>
+                <td bgcolor="#DCE2ED"><input name="password" type="password" id="password"></td>
+              </tr>
+              <tr>
+
+            <td align="right" bgcolor="#DCE2ED" class="SpanClass2">$__l_accesslevel</td>
+                <td bgcolor="#DCE2ED"><select name="accesslevel" id="accesslevel">{RANKLIST}</select></td>
+              </tr>
+              <tr>
+
+            <td align="right" bgcolor="#DCE2ED" class="SpanClass2">$__l_publicemail</td>
+                <td bgcolor="#DCE2ED"><input name="publicemail" type="text" id="publicemail" size="30"></td>
+              </tr>
+              <tr>
+
+            <td align="right" bgcolor="#DCE2ED" class="SpanClass2">$__l_email</td>
+                <td bgcolor="#DCE2ED"><input name="email" type="text" id="email" size="30"></td>
+              </tr>
+              <tr>
+
+            <td align="right" bgcolor="#DCE2ED" class="SpanClass2">$__l_avatar</td>
+                <td bgcolor="#DCE2ED"><input name="avatar" type="text" id="avatar" size="40"></td>
+              </tr>
+              <tr align="center" bgcolor="#026499">
+                <td colspan="2" class="row4"><input type="submit" name="Submit" value="$__L_adduser"></td>
+              </tr>
+            </table>
+
+
+			</form>
+
+    </td>
+  </tr>
+</table>

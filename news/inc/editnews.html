@@ -1,0 +1,77 @@
+<table width="100%" height="168" border="0" cellpadding="0" cellspacing="0">
+  <tr>
+    <td width="11%" rowspan="2" valign="TOP"><p>&nbsp;</p>
+      <p><img src="inc/img/icon_editnews2.gif" width="60" height="60"></p></td>
+    <td width="89%" height="42" valign="top"> <p>&nbsp;</p>
+      <h1>$__page_editarticles</h1>
+      <hr>
+      <p>&nbsp;</p>
+      </td>
+  </tr>
+  <tr>
+    <td height="65" align="center" valign="top"><blockquote>
+     <form action="{FORM_ACTION}" method="get">
+	      <input type="hidden" name="a" value="editnews">
+          <table width="90%" border="0" cellspacing="0" cellpadding="0" class="tableborder">
+            <tr>
+              <td align="CENTER" valign="MIDDLE"><table width="100%" height="68" border="0" cellpadding="0" cellspacing="0">
+                  <tr align="CENTER">
+                    <td height="20" colspan="4" class="headcell-small">$__L_filternews</td>
+                  </tr>
+                  <tr>
+                    <td height="25" align="RIGHT" valign="middle" class="row3"><label>$__l_archive</label></td>
+                    <td width="99" align="left" valign="middle" class="row4"><select name="newsarch" id="newsarch">{ARCHLIST}
+
+                      </select></td>
+                    <td width="169" height="25" align="right" valign="middle" class="row3"><label>$__l_author</label></td>
+                    <td width="170" align="LEFT" valign="middle" class="row4"><input type="text" name="author" class="smallbox"></td>
+                  </tr>
+                  <tr>
+                    <td class="row3" align="RIGHT" width="239" height="25"><label>$__l_category</label></td>
+                    <td class="row4" align="left"><select name="cat">
+                        <option>Any</option>{CATLIST}
+
+                      </select></td>
+                    <td class="row2-medium" align="CENTER" colspan="2"><input type="submit" value="$__l_search" name="action"></td>
+                  </tr>
+                </table></td>
+            </tr>
+          </table>
+        </form>
+
+      </blockquote>
+      <form action="{FORM_ACTION_DEL}" method="POST">
+      <input type="hidden" name="newsarch" value="{SEL_ARCH}">
+        <table width="100%" border="1" cellspacing="0" cellpadding="0" bordercolor="#B9C4C9" style="border-collapse: collapse">
+          <tr> 
+            <td class="SpanClass1" width="20" align="left" bgcolor="#f7f6f4" height="18">&nbsp;</td>
+            <td align="left" valign="middle" bgcolor="#f7f6f4" class="SpanClass1">$__L_articlestatus 
+            </td>
+            <td align="left" valign="middle" bgcolor="#f7f6f4" class="SpanClass1">$__L_headline</td>
+            <td align="left" valign="middle" bgcolor="#f7f6f4" class="SpanClass1"> 
+              $__L_author</td>
+            <td align="left" valign="middle" bgcolor="#f7f6f4" class="SpanClass1"> 
+              $__L_category</td>
+            <td align="left" valign="middle" bgcolor="#f7f6f4" class="SpanClass1"> 
+              $__L_date</td>
+            <td align="left" valign="middle" bgcolor="#f7f6f4" class="SpanClass1">$__L_activationdate</td>
+            <td align="center" valign="middle" bgcolor="#f7f6f4" class="SpanClass1">$__L_numcomments</td>
+          </tr>
+          {LIST_NEWS} 
+          <tr bgcolor="#f7f6f4"> 
+            <td height="18" colspan="8" align="left" class="SpanClass1">&nbsp;</td>
+          </tr>
+        </table><br>
+        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <tr> 
+            <td height="24"><span class="spanclass1">{NAVLINKS}</span><br>
+            </td>
+          </tr>
+          <tr>
+            <td height="17"><input type="submit" name="Submit" value="$__l_delselected"></td>
+          </tr>
+        </table>
+      </form>
+</td>
+  </tr>
+</table>

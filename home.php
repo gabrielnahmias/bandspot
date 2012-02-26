@@ -1,0 +1,1 @@
+<?php @include URL_NEWS; ?>

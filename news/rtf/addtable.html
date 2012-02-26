@@ -1,0 +1,120 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>$__L_addtable</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link href="../inc/styles.css" rel="stylesheet" type="text/css">
+<script src="richedit.js"></script>
+<script language="JavaScript">
+function ToggleColorPalette(id)
+{
+ if (document.getElementById('colorpalette'+id).style.visibility=="hidden")
+ {
+   ShowColorPalette(id,'colorsel'+id,'other');
+ }else
+ {
+   HideColorPalette(id);
+ }
+ return false;
+}
+
+function GenerateTable()
+{
+ var style=''; 
+ var tablecolors='';
+
+ 
+ if (document.getElementById('ct1').value !='') tablecolors+='bgcolor="'+document.getElementById('ct1').value+'" ';
+ if (document.getElementById('ct2').value !='') tablecolors+='bordercolor="'+document.getElementById('ct2').value+'" '; 
+ 
+ if (document.getElementById('bordercollapse').checked == true) 
+ {
+   style=' style="border-collapse:collapse;"';
+ }
+ var table = '<table border="'+document.getElementById('tableborder').value+'" '+tablecolors+' cellpadding="'+document.getElementById('cellpad').value+'" cellspacing="'+document.getElementById('cellspace').value+'" align="'+document.getElementById('tablealignment').value+'" width="'+document.getElementById('tablewidth').value+'"'+style+'>\n';
+ for (var i = 0; i < document.getElementById('tablerows').value; i++) 
+ {
+	  table += '<tr>\n';
+	  for (var j = 0; j < document.getElementById('tablecols').value; j++)
+	   {
+	    table += '<td>&nbsp;</td>\n';
+	   }
+		table += '</tr>\n';
+  }
+table += '</table>\n';
+return table;
+}
+
+</script>
+
+</head>
+
+<body bgcolor="#EEEEEE">
+<h1>$__L_addtable</h1>
+<br>
+<iframe id="colorpalette1" src="rtf-colors.html"  height="180" width="210" border="0" style="position: absolute;visibility:hidden" scrolling="no"></iframe>
+<iframe id="colorpalette2" src="rtf-colors.html"  height="180" width="210" border="0" style="position: absolute;visibility:hidden" scrolling="no"></iframe>
+
+<table width="98%" border="1" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><table width="100%" border="0" cellpadding="1" cellspacing="1" bgcolor="#E2E7EB">
+        <tr> 
+          <th colspan="6" class="cat">&nbsp;</th>
+        </tr>
+        <tr> 
+          <td width="120" class="SpanClass1">$__l_tablerows</td>
+          <td width="144"><input name="tablerows" type="text" id="tablerows" value="4" class="smallbox"></td>
+          <td width="128" class="SpanClass1">&nbsp;$__l_tablecellspace</td>
+          <td colspan="3"><input name="cellspace" type="text" id="cellspace" value="0" class="smallbox"></td>
+        </tr>
+        <tr> 
+          <td class="SpanClass1">$__l_tablecols</td>
+          <td><input name="tablecols" type="text" id="tablecols" value="2" class="smallbox"></td>
+          <td class="SpanClass1">&nbsp;$__l_tablecellpad</td>
+          <td colspan="3"><input name="cellpad" type="text" id="cellpad" value="0" class="smallbox"></td>
+        </tr>
+
+      </table></td>
+  </tr>
+</table>
+<br>
+<table width="98%" border="1" cellspacing="0" cellpadding="0">
+  <tr> 
+    <td><table width="100%" border="0" cellpadding="1" cellspacing="1" bgcolor="#E2E7EB">
+        <tr> 
+          <th colspan="5" class="cat">&nbsp;</th>
+        </tr>
+        <tr> 
+          <td width="120" class="SpanClass1">$__l_tablewidth</td>
+          <td width="120"><input name="tablewidth" type="text" id="tablewidth" value="100" class="smallbox"></td>
+          <td width="120" class="SpanClass1">&nbsp;$__l_tablebgcolor&nbsp;</td>
+          <td width="26"><a href="#" class="fontbutton" onClick="return ToggleColorPalette('1');"><img src="../inc/img/font-color.gif" id="colorsel1" width="21" height="21" border="0"></a></td>
+          <td><input name="tablecolor" type="text" id="ct1" class="smallbox" align="left"></td>
+        </tr>
+        <tr> 
+          <td class="SpanClass1">$__l_tableborder</td>
+          <td><input name="tableborder" type="text" id="tableborder" value="1" class="smallbox"></td>
+          <td>&nbsp;<span class="SpanClass1">$__l_tablebrdcolor&nbsp;</span></td>
+          <td><a href="#" class="fontbutton" onClick="return ToggleColorPalette('2');"><img src="../inc/img/font-color.gif" id="colorsel2" width="21" height="21" border="0"></a></td>
+          <td><input name="bordercolor" type="text" id="ct2" class="smallbox" align="left"></td>
+        </tr>
+        <tr> 
+          <td class="SpanClass1">$__l_tablealignment&nbsp;</td>
+          <td><select id="tablealignment">
+              <option value="Default" selected>Default</option>
+              <option value="Left">Left</option>
+              <option value="Center">Center</option>
+              <option value="Right">Right</option>
+            </select></td>
+          <td class="SpanClass1">&nbsp;$__l_tablecollapse&nbsp;</td>
+          <td colspan="2"><input type="checkbox" id="bordercollapse" value="collapse" checked></td>
+        </tr>
+      </table></td>
+  </tr>
+</table>
+<div align="center"><br>
+  <input type="submit" name="Submit" value="Insert Table" onClick="doTable({CALLER_ID},GenerateTable());">
+</div>
+</body>
+</html>
+

@@ -1,0 +1,485 @@
+<?php
+
+$lng['nav_home']='Home';
+$lng['nav_addarticles']='Add Articles';
+$lng['nav_editarticles']='Edit Articles';
+$lng['nav_options']='Options';
+$lng['nav_help']='Help';
+
+$lng['page_home']='Home';
+$lng['page_addarticles']='Add News';
+$lng['page_editarticles']='Edit News';
+$lng['page_options']='Options';
+$lng['page_sysconfig']='System Configuration';
+$lng['page_usermanager']='User Manager';
+$lng['page_tpleditor']='Template Editor';
+$lng['page_imagemanager']='Image Manager';
+$lng['page_catmanager']='Category Manager';
+$lng['page_rankmanager']='Rank Manager';
+$lng['page_modcp']='Moderator Control Panel';
+$lng['page_synchronizer']='Synchronizer';
+$lng['page_backups']='Create/Restore Backups';
+$lng['page_login']='Login to your account...';
+$lng['page_resetpassword']='Reset Password';
+
+
+
+$lng['l_resetpassword']='Reset Password';
+$lng['l_forgottenpassword']='I forgot my password';
+$lng['l_newpass']='Set a new password:';
+$lng['l_emailreset']='Your Email Address:';
+$lng['l_userreset']='Your Username:';
+$lng['msg_resetlinksent']='A link that will allow you to reset your password has been sent to the specified email address.';
+$lng['msg_resetnoemail']='This email address is not used by any registered user of X-News.';
+$lng['msg_resetinvalid']='This link is no longer valid.';
+$lng['msg_resetdone']='You have successfully changed your password.';
+$lng['email_resetlink']="Elemovements News\n\n - Someone (probably you) demanded a password reset for the account {ACCOUNTNAME}. Please follow the link to reset your password {LINK}\n";
+$lng['email_sresetlink']='Elemovements News :: Password Information';
+$lng['L_integrationwizard']='Integration Wizard';
+$lng['L_inttypeofpage']='The purpose of your news page...';
+$lng['l_intshowactivenews']='Show active news';
+$lng['l_intshowarchive']='Show the news archive';
+$lng['l_intselcats']='Only show news from these categories:';
+$lng['l_intselauthors']='Only show news published by these authors:';
+$lng['l_intseltemplate']='Select a template for your news area:';
+$lng['l_intenablepagination']='Enable pagination:';
+
+$lng['msg_integrationwizard']='This wizard will help you integrate Elemovements News into your site by generating the appropriate PHP code.';
+$lng['msg_doneintegrationwizard']='The process has been completed. Copy the generated code into your PHP web page.';
+$lng['l_copytoclipboard']='Copy to Clipboard';
+$lng['mc_integrationcode']='Copy/Paste the code shown below into your news web page. The file extension of your news page MUST BE ".php"';
+
+$lng['L_backups']='Create/Restore Backups';
+$lng['L_createbackup']='Create backup:';
+$lng['l_backupname']='Backup name:';
+$lng['L_backupname']='Backup name';
+$lng['L_restorebackup']='Restore backup:';
+$lng['L_backuplocation']='Location';
+$lng['L_backuptime']='Saved on';
+$lng['L_-backupsize']='Size';
+$lng['msg_?restorebackup']='Are you sure you want to restore this backup? All your actual news files, comment files, rank database, user database and categories will be overwritten!';
+$lng['msg_backuprestored']='Your files have been restored to the exact state they were on {BACKUP_TIME}';
+$lng['msg_backupnotfound']='{BACKUP_NAME} no longer exists on disk. Your files have not been restored';
+$lng['msg_restoredfile']='Restored file: ';
+$lng['msg_unrestoredfile']='Not restored: ';
+$lng['msg_backuprestored']='Your news and comment files, user database, rank database and categories have been restored to their exact state as saved on {BACKUP_TIME}. <br /> Click <a href="index.php?a=options&page=backups">here</a> to get back';
+$lng['msg_backupsaved']='Your news, comments, users, ranks and user categories have been saved';
+$lng['L_backuprestored']='Restored';
+
+$lng['l_newest']='Newest';
+$lng['l_oldest']='Oldest';
+
+$lng['loggedinas']="Logged in as:";
+$lng['logout']="Log out";
+$lng['profile1']='Profile';
+$lng['profile2']='My Profile';
+$lng['permtest']='Testing files...';
+$lng['permtest_ok']='All files are fully accessible';
+$lng['permtest_fail']='Some required files are not fully accessible';
+
+$lng['L_status']='Here\'s our status...';
+$lng['L_environment']='Environment';
+$lng['l_allnewscount']='All News';
+$lng['l_dispnewscount']='Displayed News';
+$lng['l_dispcommentcount']='Displayed Comments';
+$lng['l_archivescount']='Archives';
+$lng['l_usercount']='Users';
+$lng['l_archivesize']='Size of archives';
+
+$lng['l_yourversion']='Your version:';
+$lng['l_latestversion']='Latest version';
+$lng['l_systime']='System Time:';
+$lng['l_modtime']='Adjusted Time:';
+$lng['l_nickname']='Nickname:';
+$lng['l_accountname']='Account name:';
+$lng['l_dispname']='Display Name:';
+$lng['l_password']='Password:';
+$lng['l_email']='Email:';
+$lng['l_publicemail']='Public Email:';
+$lng['l_avatar']='Avatar:';
+$lng['l_joined']='Joined:';
+$lng['l_position']='Position';
+$lng['l_accesslevel']='Access Level:';
+$lng['l_submit']='Submit';
+$lng['l_reclicense']='Script License:';
+$lng['l_recprolicense']='Professional';
+$lng['l_recfreelicense']='Free [&nbsp;<a href="http://xpression.hogsmeade-village.com/professional.php" target="_blank">Upgrade</a>&nbsp;]';
+$lng['l_postingas']='You are posting as: ';
+$lng['l_firstpublished']='  This article was first published by {NEWS_AUTHOR} on {NEWS_DATE}   ';
+$lng['l_lastedited']=' Last edited by {NEWS_MODAUTHOR} on {NEWS_MODDATE}';
+$lng['l_headline']='Headline:';
+$lng['l_icon-']='Icon:';
+$lng['l_category']='Category:';
+$lng['l_shortstory']='Short Story:';
+$lng['l_fullstory']='Full Story:';
+$lng['l_postarticle']='Post Article';
+$lng['l_emoticons']='Emoticons:';
+$lng['l_more']='More';
+$lng['l_uploadpic']='Upload a picture';
+$lng['l_saveicon']='Save icon on server';
+$lng['L_filternews']='Filter News';
+$lng['l_author']='Author:';
+$lng['l_archive']='News Archive:';
+$lng['l_category']='Category:';
+$lng['l_articlestatus']='Status:';
+$lng['l_activationdate']='Activation Date:';
+$lng['l_asactive']='Active';
+$lng['l_asinactive']='Inactive';
+$lng['l_advanced']='Advanced...';
+$lng['l_aspostponed']='Postponed';
+
+$lng['L_headline']='Headline';
+$lng['L_author']='Author';
+$lng['L_category']='Category';
+$lng['L_date']='Date';
+$lng['L_activationdate']='Activation Date';
+$lng['L_articlestatus']='Status';
+$lng['L_numcomments']='Comments';
+$lng['l_postactivation']='This article is active';
+$lng['l_artstats']='This article is: ';
+$lng['l_postpone']='Postpone this article';
+
+$lng['l_search']='Search';
+$lng['l_yes']='Yes';
+$lng['l_no']='No';
+$lng['l_delselected']='Delete Selected Items';
+
+
+$lng['L_sysconfig']='System Configuration';
+$lng['L_usermanager']='Add/Remove Users';
+$lng['L_templateeditor']='Template Editor';
+$lng['L_imagemanager']='My Uploaded Images';
+$lng['L_catmanager']='Manage Categories';
+$lng['L_rankmanager']='Rank Manager';
+
+$lng['L_general']='General';
+$lng['L_cfg_scriptsettings']='Script Settings';
+$lng['L_cfg_newspublishing']='News Publishing';
+$lng['L_cfg_newscomments']='News Comments';
+$lng['L_cfg_rssengine']='RSS Engine';
+$lng['L_cfg_imagemanager']='Image Manager';
+$lng['l_scripturl']='URL to X-News:';
+$lng['l_scriptpath']='File path:';
+$lng['l_newsurl']='URL to news page:';
+$lng['l_timeadjustment']='Time adjustment:';
+$lng['l_deflanguage']='Default language:';
+$lng['L_news-']='News';
+$lng['l_firstshownnews']='Show first:';
+$lng['l_newsperpage']='News per page:';
+$lng['l_sortnews']='Sort:';
+$lng['l_newstimeformat']='Time format:';
+$lng['l_allowhtmlnews']='Allow HTML:';
+$lng['l_allowbbcodenews']='Allow BBCode:';
+$lng['L_comments']='Comments';
+$lng['l_allowhtmlcomments']='Allow HTML:';
+$lng['l_allowbbcodecomments']='Allow BBCode:';
+$lng['l_enablecaptcha']='Enable image verification:';
+$lng['l_commentlength']='Message length:';
+$lng['L_newsicons']='News icons';
+$lng['l_cfgsaveicon']='Save icons on this server:';
+$lng['l_iconpath']='Path to icon folder:';
+$lng['l_iconurl']='URL to icon folder:';
+$lng['l_iconwlimit']='Limit width to:';
+$lng['l_iconhlimit']='Limit height to:';
+$lng['L_imagemanager']='Image Manager';
+$lng['l_imagepath']='Path to picture folder:';
+$lng['l_imageurl']='URL to picture folder:';
+$lng['l_imageviewer']='URL to picture viewer:';
+$lng['L_rsscfg']='RSS Settings';
+$lng['l_enablerss']='Enable RSS:';
+$lng['l_rsstitle']='RSS Title:';
+$lng['l_rssdesc']='RSS Description:';
+$lng['l_rsslink']='Link:';
+$lng['l_apply']='Apply';
+$lng['l_extrahelp']='More help';
+$lng['l_allowcomments']='Enable comments board:';
+
+$lng['L_regusers']='Registered users';
+$lng['L_dispname']='Display Name';
+$lng['L_accname']='Login Name';
+$lng['L_position']='Position';
+$lng['L_postednewscount']='Posted Articles';
+$lng['L_action']='Action';
+$lng['L_adduser']='Add a new user';
+$lng['l_adduser']='Add User';
+
+$lng['L_2templateeditor']='Manage Templates';
+$lng['L_default']='Default';
+$lng['L_name']='Name';
+$lng['L_actions']='Actions';
+$lng['l_tpledit']='Edit';
+$lng['l_tplsetdefault']='Set As Default';
+
+$lng['l_backupdir']='Backup directory:';
+
+$lng['page_editingtemplate']='Editing template {TPL_NAME}';
+$lng['l_tplnewsbody']='Article Body:';
+$lng['l_tplfullnewsbody']='Full Article Body:';
+$lng['l_tplcontentwrapper']='Content wrapper:';
+$lng['l_tplnewswrapper']='News wrapper:';
+$lng['l_tplcommentswrapper']='News comments wrapper:';
+$lng['l_tplcomment']='News comment:';
+$lng['l_tpladdcomment']='Add comments form:';
+$lng['l_tplarchwrapper']='Archives wrapper:';
+$lng['l_tplarchmonthseg']='Archives month segment:';
+$lng['l_tplarchyearseg']='Archives year segment:';
+$lng['l_tplad']='Advertisement Wrapper:';
+
+$lng['L_manageupimages']='Manage uploaded images';
+$lng['L_uploadedimages']='Uploaded images';
+$lng['L_upnewimage']='Upload a new image...';
+$lng['L_imgfilename']='File name';
+$lng['L_imgresolution']='Resolution';
+$lng['L_imgfilesize']='File size';
+$lng['L_imgupdate']='Uploaded on';
+$lng['L_imgupby']='Uploaded by';
+$lng['l_lookingin']='Looking in';
+
+$lng['L_catlist']='Categories';
+$lng['L_addnewcat']='Add a new category';
+$lng['l_-catname']='Category name:';
+$lng['l_-caticon']='Icon (optional):';
+$lng['l_btnaddcat']='Add';
+$lng['l_catnewname']='Rename Category:';
+$lng['L_catedit']='Edit Category';
+
+$lng['L_addrank2']='Add a new rank...';
+$lng['l_rankname']='Rank name:';
+$lng['L_rankname']='Rank name';
+$lng['L_ranks']='Ranks';
+$lng['L_rankpermissions']='Permissions';
+
+$lng['l_canpostcomments']='Can post comments:';
+$lng['l_caneditowncomments']='Can edit own comments:';
+$lng['l_caneditothercomments']='Can edit other comments:';
+$lng['l_canpostnews']='Can post news:';
+$lng['l_caneditownnews']='Can edit own news:';
+$lng['l_caneditothernews']='Can edit other news:';
+$lng['l_canuploadimages']='Can upload images:';
+$lng['l_candeleteownimages']='Can delete own images:';
+$lng['l_candeleteotherimages']='Can delete other images:';
+$lng['l_canadministrate']='Can administrate:';
+
+$lng['l_compostedby']='Posted by <strong>{ARTICLE_AUTHOR} [{ARTICLE_AUTHOR_NAME}]</strong>';
+$lng['l_compostedon']='Posted on <strong>{ARTICLE_DATE}</strong> at <strong>{ARTICLE_TIME}</strong>';
+$lng['l_newsstorage']='This article is stored in this file: ';
+$lng['l_articleid']='Article ID:';
+$lng['l_commentsnum']='There are currently <strong>{COMMENTS_NUM}</strong> comments recorded for this article';
+$lng['L_recordedcomments']='Recorded Comments';
+$lng['l_commentername']='Author:';
+$lng['l_commenterip']='IP:';
+$lng['l_commentdate']='Time:';
+$lng['l_commentid']='Comment ID:';
+
+
+
+$lng['l_displayrange']='Showing entries';
+
+$lng['msg_synchelp']='This wizard will help you synchronize this version of X-News with older versions or scripts';
+$lng['l_syncfrom']='Synchronize from:';
+$lng['L_synchronizer']='Synchronizer';
+$lng['l_-pathto']='Path to';
+$lng['l_syncnews']='Synchronize news:';
+$lng['l_synclicense']='Synchronize license files (registered users only):';
+$lng['l_synccomments']='Synchronize comments:';
+$lng['l_synccat']='Synchronize categories:';
+$lng['l_syncicons']='Synchronize icons:';
+$lng['l_syncpictures']='Synchronize pictures:';
+$lng['l_syncuserdb']='Synchronize the user database:';
+$lng['l_syncranks']='Synchronize user ranks:';
+$lng['err_syncnews']='Could not find a valid news directory at {SYNCDIR}';
+$lng['err_synccat']='Could not find a category file in {SYNCDIR}';
+$lng['err_syncrank']='Could not find a rank file in {SYNCDIR}';
+$lng['err_synclicense']='Could not find a license file in {SYNCDIR}';
+$lng['err_syncuserdb']='Could not find a valid user file in {SYNCDIR}';
+$lng['err_syncconfig']='Could not fint a valid configuration file in {SYNCDIR}. The location of the folders containing icons and pictures is unknown.';
+$lng['err_syncicons']='Could not find a icon directory at {SYNCDIR}';
+$lng['err_syncpictures']='Could not find a picture directory at {SYNCDIR}';
+$lng['msg_?syncconfirm']='All your current files from the new version will be overwritten. Are you sure you want to do this?';
+$lng['msg_synccomplete']='The synchronization completed.';
+
+$lng['l_savechanges']='Save Changes';
+$lng['l_cancel']='Cancel';
+$lng['l_sed']='Edit';
+$lng['l_sren']='Rename';
+$lng['l_sdl']='Del';
+$lng['l_sno']='No.';
+$lng['l_upload']='Upload';
+$lng['l_go']='Go';
+$lng['l_id']='ID';
+$lng['l_view']='View';
+
+$lng['l_imageurl']='Image URL:';
+$lng['l_imagetext']='Alternate Text:';
+$lng['l_imagealignment']='Image Alignment:';
+$lng['l_imagebordersize']='Border Size:';
+$lng['l_addimage']='Add Image';
+
+$lng['l_linkurl']='Page URL:';
+$lng['l_linkname']='Link Name:';
+$lng['l_linktarget']='Open mode:';
+$lng['l_linkself']='Opens in same window';
+$lng['l_linkblank']='Opens in new window';
+$lng['l_insertlink']='Insert Link';
+
+$lng['L_addtable']='Add HTML Table';
+$lng['l_tablerows']='# Rows:';
+$lng['l_tablecols']='# Cols.:';
+$lng['l_tableborder']='Border Size:';
+$lng['l_tablecellpad']='Padding:';
+$lng['l_tablecellspace']='Spacing:';
+$lng['l_tablewidth']='Table Width:';
+$lng['l_tablealignment']='Alignment';
+$lng['l_tablecollapse']='Collapse:';
+$lng['l_tablebgcolor']='Background Color';
+$lng['l_tablebrdcolor']='Border Color:';
+$lng['l_addtable']='Add Table';
+$lng['l_allowwysiwyg']='Enable WYSIWYG HTML Editor';
+
+$lng['l_listany']='Any';
+
+$lng['l_activatewysiwyg']='Activate the WYSIWYG Editor';
+$lng['l_activatebbeditor']='Activate the BB Code Editor';
+
+$lng['L_advertising']='Advertising';
+$lng['L_adsetup']='Setup Ads';
+$lng['L_adedit']='Edit Ad Units';
+$lng['L_adunitedit']='Edit Ad Unit';
+$lng['L_adunitcreate']='Create New Ad Unit';
+$lng['msg_advertising']='Elemovements News offers you the possibility of displaying your own Ads inside your news section. Ads can greatly help you monetize your web site from the content you post. If you are not yet a registered ad publisher, click <a href="http://xpression.hogsmeade-village.com/advertising.php" target="_blank">here</a> to learn about ad serving programs.    ';
+$lng['msg_adlimit']='Warning: Some ad serving programs restrict the number of ads you can post on a web page. For more information, read their TOS.';
+$lng['l_adsactivenews']='Display ads in the "Active News" section';
+$lng['l_adsarchive']='Display ads in the News Archive';
+$lng['l_adsafter']='Ad positions:';
+$lng['mc_adsafter']='Complete this field with the index numbers of the articles after which you wish to display ads. For example, if you type in 1 3 5 the script will display ads after the 1st, 3rd and 5th articles displayed to the reader.';
+$lng['L_adselector']='Choose your ad units and the way you want X-News to display them...';
+$lng['l_admodeselected']='Display this Ad unit:';
+$lng['l_admoderandom']='Display a random Ad unit';
+$lng['l_adcreate']='Create New';
+$lng['l_addelete']='Delete Ad';
+$lng['l_adedit']='Edit Ad';
+$lng['l_adcode']='HTML/JS Code:';
+$lng['L_adid']='Unit ID';
+$lng['L_adname']='Unit Name';
+$lng['L_addate']='Creation Date';
+$lng['l_adname']='Unit Name:';
+
+
+$lng['msg_adexists']='An Ad unit with the same name already exists. Please select another name for your Ad unit.';
+$lng['msg_adadded']='Your Ad was added to the system.';
+$lng['msg_addeleted']='The Ad was deleted.';
+$lng['msg_adedited']='The Ad was edited.';
+$lng['msg_adnotfound']='This Ad does not exist.';
+
+
+
+$lng['mc_xurl']='The URL to where this script is installed eg. http://hogsmeade-village.com/news/';
+$lng['mc_xpath']='This path to where Elemovements News is installed. eg. /home/[account_name]/public_html/news/';
+$lng['mc_newsurl']='The page that displays the news you post, news.php, can be included in another php page. If you are including news.php specify the url to the including file. ';
+$lng['mc_timeadjust']='This is measured in minutes. eg. 180 for 3hrs, -180 for -3hrs';
+$lng['mc_language']='Choose the language you want X-News to use';
+$lng['mc_activecount']='Tell the script how many news should be displayed by the active news page (news.php).';
+$lng['mc_backupdir']='The directory where you want to save X-News backups. MUST be writable';
+$lng['mc_sortmethod']='Specify the sorting method of your news';
+$lng['mc_newsperpage']='Specify the default number of news to be displayed on one page when pagination is enabled';
+$lng['mc_newstimef']='This allows you to set the time/date format.';
+$lng['mc_newshtml']='Do you want to allow HTML code to be used in articles?';
+$lng['mc_newsbbcode']='Is Bulletin Board Code enabled in news articles?';
+$lng['mc_editorwysiwyg']='Enables the graphical HTML editor';
+$lng['mc_commentsenabled']='This enables the comments board';
+$lng['mc_commentshtml']='Do you want to allow HTML code in comments?';
+$lng['mc_commentsbbcode']='Do you want to allow BBCode in comments?';
+$lng['mc_commentscaptcha']='Enable this option if you are having problems with spam in the comments section.';
+$lng['mc_commentslength']='This will block any comments larger than the specifyed value (in characters). Enter \\\'0\\\' to disable this feature.';
+$lng['mc_saveicons']='Do you want to save news icons on this server?';
+$lng['mc_iconpath']='The path to where you want X-News to save your icons. Make sure you have full writing permissions in this folder';
+$lng['mc_iconurl']='The URL to the folder mentioned above';
+$lng['mc_iconwlimit']='If you want X-News to automatically resize the downloaded icons...';
+$lng['mc_iconhlimit']='If you want X-News to automatically resize the downloaded icons...';
+$lng['mc_picturepath']='Set the path where you want to save images eg. /home/[account_name]/news/upimages/';
+$lng['mc_pictureurl']='The url to the folder mentioned above';
+$lng['mc_pictureviewerurl']='You can have the pictures you upload displayed by another script (a viewer). eg. http://example.com/pictures/viewer.php?src=';
+$lng['mc_enablerss']='Do you want this script to generate a RSS file each time you post/edit news?';
+$lng['mc_rsstitle']='Set the title of your RSS feed';
+$lng['mc_rssdesc']='Enter a description for your RSS feed';
+$lng['mc_rsslink']='The link that will be displayed in your feed';
+
+$lng['mp_addlink']='Add a hyperlink';
+$lng['mp_insertimage']='Insert an image that will apear in the body of the article';
+$lng['mp_-insertimage']='Insert a picture that will be displayed by another script';
+$lng['mp_insertbold']='Insert bolded text';
+$lng['mp_underline']='Insert underlined text';
+$lng['mp_italic']='Insert italic text';
+$lng['mp_strikedout']='Insert strikedout text';
+$lng['mp_selectfont-']='Select your font';
+$lng['mp_selectfontsize']='Select font size';
+$lng['mp_selectfontcolor']='Set font color';
+$lng['mp_alignleft']='Align left';
+$lng['mp_aligncenter']='Align center';
+$lng['mp_alignright']='Align right';
+$lng['msg_yourlastpost']='Your last article was posted {USER_LASTPOST}';
+$lng['msg_welcome']='Welcome back {USER_NAME}! $__msg_yourlastpost';
+$lng['msg_yourpostedarticles']='You have <strong>{USER_POSTS}</strong> news posted';
+$lng['msg_fullaccess']="Testing files... All files are fully accessible.";
+$lng['msg_notfullaccess']="Some required files are not fully accessible:";
+
+$lng['hmsg_updated']='Updated';
+$lng['msg_profileupdated']='Your profile has been updated. If you changed your password you will be asked to log in again.';
+$lng['msg_newsedited']='Your news article was edited.';
+$lng['hmsg_edited']='Edited';
+$lng['hmsg_error']='Error';
+$lng['msg_errnewspost1']='Your article must contain a title and a short story. Hit the \'Back\' button of your web browser.';
+$lng['hmsg_posted']='Posted';
+$lng['msg_newsposted']='Your article was posted.';
+$lng['msg_invalidactdate']='The activation date must be set in the future';
+$lng['hmsg_forbidden']='Forbidden';
+$lng['msg_forbidden']='You are not allowed to access this page';
+$lng['msg_errownerdelete']='You can\'t delete the owner';
+$lng['hmsg_deleted']='Deleted';
+$lng['hmsg_?delete']='Delete';
+$lng['hmsg_delete']=$lng['hmsg_?delete'];
+$lng['msg_picsdeleted']='The selected pictures were deleted. <a href="index.php?a=options&page=upimages">Go Back</a>';
+$lng['msg_?deletepics']='Are you sure you want to delete these pictures?';
+$lng['hmsg_?deletenews']='Delete News';
+$lng['msg_?deletenews']='Are you sure you want to delete these articles?';
+$lng['msg_newsdeleted']='The selected articles were deleted.';
+$lng['msg_readerror']='Error: Cannot read from ';
+$lng['msg_writeerror']='Error: Cannot write to ';
+$lng['msg_moderror']='Error: Error: Your are not allowed to perform this operation ';
+$lng['msg_errnewsdelete']='Some errors occurred when I tried to delete the selected items:';
+$lng['msg_?deleteuser']='Are you sure you want to delete {DELACC}\'s account? This process is irreversible.';
+$lng['msg_userdeleted']='The user was deleted. {DELACC} will no longer have access to this program.<br> <a href="index.php?a=options&page=profiles">Go Back</a>';
+$lng['hmsg_useradded']='User added';
+$lng['msg_useradded']='{ADDEDACC} has been successfully added to the database.';
+$lng['msg_warninguserpriv']='WARNING: {ADDEDACC} will have administrative permissions and will be able to access this Control Panel<BR>';
+$lng['msg_?deletecategory']='Are you sure you want to delete this category? Be sure you have moved its articles to another category before deleting.';
+$lng['msg_?deletepictures']='Are you sure you want to delete these pictures?';
+$lng['msg_updatedconfig']='The configuration file has been updated';
+$lng['msg_templateedited']='Your template has been successfully edited.<a href="index.php?a=options&page=templates">Go back.</a>';
+$lng['hmsg_deftplset']='Default Template Set';
+$lng['msg_deftplset']='{SETTPL} is now the default template.<a href="index.php?a=options&page=templates">Go back.</a>';
+$lng['msg_errrenamecatsame']='The name is the same. No updates have been done.';
+$lng['msg_erraddcatexists2']='There is already a category with the same name. Hit the back button of your web browser to try again.';
+$lng['msg_erraddcatexists']='There is already a category with the same name';
+$lng['msg_erronlycat']='This is your only category. You can\'t delete it';
+$lng['msg_nocat']='No category';
+$lng['msg_categoryrenamed']='Category renamed.';
+$lng['msg_ranksdeleted']='The selected ranks were deleted';
+$lng['msg_rankexists']='Rank already in database';
+$lng['msg_rankadded']='Rank added to database';
+$lng['msg_?deleteranks']='Are you sure you want to delete these ranks?';
+
+
+$lng['msg_setupcompleted']='Congratulations! You have successfully installed Elemovements News on your server. You may now <a href="index.php">log</a> in using the username and password you have set earlier. ';
+$lng['L_setupcompleted']='Setup Completed';
+$lng['msg_setupimagemanager']='Specify the path and url to where you want to store your pictures. ';
+$lng['msg_setupnewscomments']='Here you can change the way news comments are published and formatted. ';
+$lng['msg_setupnewspublishing']='Here you can change the way your news are published, shown and formatted.';
+$lng['msg_setuprssengine']='The RSS engine generates news feeds allowing you to syndicate your news articles.';
+$lng['msg_setupscriptsettings']='On this page you can set some general settings for your script such as the file path/url to where it is located, the default interface language, etc.';
+$lng['L_createadmin']='Create User account';
+$lng['msg_setupaccount']='Welcome! This wizard will help you setup Elemovements News v2.0.2 on your server. First of all, you will need to create an \'Administrator\' account.';
+$lng['msg_blankfields']='All fields are required here';
+$lng['l_back']='Back';
+$lng['l_next']='Next';
+?>

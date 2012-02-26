@@ -1,0 +1,46 @@
+<table width="100%" cellspacing="0" cellpadding="0">
+  <tr>
+    <td width="11%" rowspan="3" align="center" valign="top"><br /><br /><img src="inc/img/logo.jpg" width="100" height="100"></td>
+    <td colspan="2"><br /><h1>$__page_catmanager</h1>
+      <hr>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" align="center" class="SpanClass1"><br>{INFO}<br><br></td>
+  </tr>
+  <tr>
+    <td width="41%" height="60" align="center"> <form action="index.php?a=options&page=catmanager&action=delete" method="post">
+        <table width="90%" cellspacing="1" cellpadding="0" class="BodyFrame">
+          <tr>
+            <th colspan="4" class="cat">$__L_catlist</th>
+          </tr>
+          {CATLIST}
+          <tr>
+            <td colspan="4" align="center" class="footcell"><input type="submit" name="Submit2" value="$__l_delselected"></td>
+          </tr>
+        </table>
+      </form></td>
+    <td width="48%" align="center"> <form action="index.php?a=options&page=catmanager&action=doadd" method="post">
+        <table width="85%" cellspacing="0" cellpadding="0" class="BodyFrame">
+          <tr> 
+            <th colspan="2" class="cat">$__L_addnewcat</th>
+          </tr>
+          <tr> 
+            <td width="30%" height="25" align="right" bgcolor="#E1E4EC" class="SpanClass1"><strong>$__l_-catname</strong></td>
+            <td width="70%" bgcolor="#E1E4EC"><input name="catname" type="text" id="catname2" class="smallbox"></td>
+          </tr>
+          <tr> 
+            <td width="50%" height="25" align="right" bgcolor="#E1E4EC" class="SpanClass1"><strong>$__l_-caticon</strong></td>
+            <td bgcolor="#E1E4EC"><input name="icon" type="text" id="catname" class="mediumbox"></td>
+          </tr>
+          <tr>
+            <td width="50%" align="right" bgcolor="#E1E4EC" class="SpanClass1">&nbsp;</td>
+            <td bgcolor="#E1E4EC">{ICONSAVE}</td>
+          </tr>
+          <tr> 
+            <td colspan="2" align="center" class="footcell"><input type="submit" name="Submit" value="$__l_btnaddcat"></td>
+          </tr>
+        </table>
+      </form></td>
+  </tr>
+</table>

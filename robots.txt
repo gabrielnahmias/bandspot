@@ -1,0 +1,11 @@
+User-agent: *
+Disallow: /cgi-bin/
+Disallow: /conf/
+Disallow: /css/
+Disallow: /etc/
+Disallow: /inc/
+Disallow: /js/
+Disallow: /news/
+Disallow: /templates/
+Disallow: /templates_c/
+Allow: /

@@ -1,0 +1,42 @@
+<table width="95%" border="0" cellspacing="0" cellpadding="0" class="BodyFrame">
+<tr>
+<td>
+ <table width="100%" border="0" cellspacing="0" cellpadding="1">
+  <tr>
+   <th colspan="4" class="cat">$__L_uploadedimages</th>
+  </tr>
+  <tr bgcolor="#F2F2F9">
+    <form action="{VIEW_FORM_ACTION}" method="post">
+    <td height="28" colspan="4" bgcolor="#F2F2F9">
+     <span class="SpanClass2">$__l_lookingin <em><strong>{PIC_FOLDER_PATH}</strong></em></span>
+     <input name="thisdir" type="text" value="{THIS_DIR}">
+     <input type="submit" name="Submit" value="$__l_go">
+    </td>
+    </form>
+  </tr>
+  <tr>
+    <form action="{FORM_ACTION}" method="post">
+   <td>
+    <table width="100%" cellspacing="1" cellpadding="0" border="0" bgcolor="#D6D6EB">
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td class="SpanClass1"><b> $__L_imgfilename </b></td>
+                  <td class="SpanClass1"><b> $__L_imgresolution </b></td>
+                  <td class="SpanClass1"><b> $__L_imgfilesize </b></td>
+                  <td class="SpanClass1"><b> $__L_imgupdate </b></td>
+                  <td class="SpanClass1"><b> $__L_imgupby </b></td>
+                  <td class="SpanClass1">&nbsp;</td>
+                </tr>
+                {FILE_LIST}
+                <tr bgcolor="#F2F2F9">
+                  <td align="center" colspan="8"><input type="submit" value="$__l_delselected" {ONCLICK}></td>
+                </tr>
+              </table>
+   </td>
+    </form>
+  </tr>
+ </table>
+</td>
+</tr>
+</table>

@@ -1,0 +1,67 @@
+<link href="styles.css" rel="stylesheet" type="text/css"> 
+<table width="100%" cellspacing="0" cellpadding="0">
+  <tr>
+    <td width="17%" align="CENTER" valign="TOP" height="144" rowspan="2"><BR>
+      <BR>
+      <img src="inc/img/logo.jpg" width="100" height="100"> </td>
+    <td width="83%"><br>
+      <h1>$__profile1::{VNICK}</h1>
+      <hr></td>
+  </tr>
+  <tr>
+    <td align="CENTER">
+	<br>
+	 <form action="{FORM_ACTION}" method=POST>
+		  
+        <table width="80%" cellspacing="1" cellpadding="1" class="BodyFrame">
+          <tr> 
+            <th colspan="2" class="cat">&nbsp;</th>
+          </tr>
+          <tr> 
+            <td width="34%" align="RIGHT" class="row8"><span class="SpanClass1"><strong>$__l_nickname</strong></span></td>
+            <td width="66%" class="row8">{VNICK}</td>
+          </tr>
+          <tr> 
+            <td align="RIGHT"  class="row8"><span  class="SpanClass1"><strong>$__l_dispname</strong></span></td>
+            <td  class="row8"><input name="name" type="text" value="{VNAME}" id="name" class="smallbox"></td>
+          </tr>
+          <tr> 
+            <td align="RIGHT" class="row8"><span  class="SpanClass1"><strong>$__l_password</strong><strong></strong></span></td>
+            <td class="row8"><input name="password" type="password" id="password" class="smallbox"> 
+              <BR>
+              (leave blank for old password)</span> </td>
+          </tr>
+          <tr> 
+            <td align="RIGHT" class="row8"><span class="SpanClass1"><strong>$__l_email</strong></span></td>
+            <td class="row8"><input name="email1" type="text" value="{VEMAIL1}" id="email1" class="smallbox"></td>
+          </tr>
+          <tr> 
+            <td align="RIGHT" class="row8"><span  class="SpanClass1"><strong>$__l_publicemail</strong></span></td>
+            <td class="row8"><input name="email2" type="text" value="{VEMAIL2}" id="email2" class="smallbox"></td>
+          </tr>
+          <tr> 
+            <td align="RIGHT" class="row8"><span class="SpanClass1"><strong>$__l_avatar</strong></span></td>
+            <td class="row8"><input name="avatar" type="text" value="{VAVATAR}" id="nickname6" class="smallbox"></td>
+          </tr>
+          <!--BEGIN_WYSIWYG//-->
+		  <tr>
+            <td align="RIGHT" class="row8"><strong><span class="SpanClass1">$__l_allowwysiwyg</span></strong></td>
+            <td class="row8"><input name="usewysiwyg" type="checkbox" id="usewysiwyg" value="1" {VUSEWYSIWYG}></td>
+          </tr>
+		   <!--END_WYSIWYG//-->
+          <tr> 
+            <td align="RIGHT" class="row8"><span class="SpanClass1"><strong>$__l_joined</strong></span></td>
+            <td  class="row8">{VJOINED}</td>
+          </tr>
+          <tr> 
+            <td align="RIGHT" class="row8"><span class="SpanClass1"><strong>$__l_position</strong></span></td>
+            <td class="row8">{FORM_EXTRA_FIELDS}</td>
+          </tr>
+          <tr align="CENTER"> 
+            <td colspan="2" class="row8"><input type="submit" name="Submit" value="$__l_go"></td>
+          </tr>
+        </table>
+			</form>
+	</td>
+  </tr>
+</table>

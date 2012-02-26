@@ -1,0 +1,39 @@
+<form action="index.php?a=options&page=updatesysconfig&t=news_comments" method="POST">
+<table width="90%" border="0" cellspacing="1" cellpadding="1" class="BodyFrame">
+ <tr>
+            <th colspan="2" class="cat">$__L_comments</th>
+          </tr>
+          <tr>
+            <td class="row7" align="right" width="43%"><strong>$__l_allowcomments</strong></td>
+            <td class="row8" width="57%">
+            <input name="comments#enabled" type="checkbox" id="comments#html0" onmouseover="fShowHint('$__mc_commentsenabled');" value="ON" check_comments|html>
+              <span class="SpanClass1">$__l_yes</span></td>
+          </tr>
+          <tr>
+            <td class="row7" align="right" width="43%"><strong>$__l_allowhtmlcomments</strong></td>
+            <td class="row8" width="57%"><input name="comments#html" type="checkbox" id="comments#html" onmouseover="fShowHint('$__mc_commentshtml');" value="ON" check_comments|html>
+              <span class="SpanClass1">$__l_yes</span></td>
+          </tr>
+          <tr>
+            <td align="right" class="row7"><strong>$__l_allowbbcodecomments</strong></td>
+            <td class="row8"><input name="comments#bbcode" type="checkbox" value="ON" onmouseover="fShowHint('$__mc_commentsbbcode');" check_comments|bbcode>
+              <span class="SpanClass1">$__l_yes</span> </td>
+          </tr>
+          <tr>
+            <td align="right" class="row7"><strong>$__l_enablecaptcha</strong></td>
+            <td class="row8"><input name="comments#captcha" type="checkbox" value="ON" onmouseover="fShowHint('$__mc_commentscaptcha');" check_comments|captcha>
+              <span class="SpanClass1">$__l_yes</span> </td>
+          </tr>
+          <tr>
+            <td align="right" class="row7"><strong>$__l_commentlength</strong></td>
+            <td class="row8"><input name="comments#messagelength" type="text" class="custombox" id="comments|messagelength" onmouseover="fShowHint('$__mc_commentslength');" value="comments|messagelength" size="5"></td>
+          </tr>
+        </table>
+                 <br />
+      <table width="90%" cellspacing="1" cellpadding="0" height="7%" class="BodyFrame">
+
+          <tr>
+            <th height="64" colspan="2" class="cat"><input type="submit" name="Submit" value="$__l_apply"></th>
+          </tr>
+        </table>
+      </form>

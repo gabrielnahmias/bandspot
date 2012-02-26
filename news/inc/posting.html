@@ -1,0 +1,96 @@
+<link href="styles.css" rel="stylesheet" type="text/css">  <form action="{FORM_ACTION}" method="post" name="addnewsfrm">
+  <input type="hidden" value="{NEWS_ID}" name="newsid">
+  <input type="hidden" value="{NEWS_ARCH}" name="newsarch">
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr> 
+      <td width="12%" rowspan="11" align="CENTER" valign="TOP"><p>&nbsp;</p>
+        <p><img src="inc/img/icon_editnews1.gif" width="60" height="60"></p></td>
+      <td height="98" colspan="2"><br>
+<h1>{HEADER}</h1>
+        <p class="SpanClass2"><em>$__l_postingas{USER_NAME} [{USER_NICK}]</em></p>
+        <p>{EDIT_INFO} {PREVIEW}</p></td>
+      <input type="hidden" name="author" value="{USER_NICK}">
+    </tr>
+    <tr> 
+      <td height="3" class="SpanClass1">$__l_headline</td>
+      <td valign="middle"><input name="headline" type="text" id="headline" size="50" value="{NEWS_HEADLINE}" tabindex="1" class="largebox"> 
+      </td>
+    </tr>
+    <tr> 
+      <td height="22" class="SpanClass1">$__l_icon-</td>
+      <td valign="middle"><input name="icon" type="text" size="50" value="{NEWS_ICON}" tabindex="2" class="largebox"> 
+         {ICONSAVE}</td>
+    </tr>
+    <tr> 
+      <td class="SpanClass1">$__l_category</td>
+      <td><select name="cat" tabindex="3">
+         {CATLIST}
+        </select></td>
+    </tr>
+    <tr> 
+      <td rowspan="3" class="SpanClass1">$__l_shortstory</td>
+      <td><span id="hint"> 
+        <input name="hintbox1" type="text" class="HintBox" id="hintbox1" size="70">
+        </span></td>
+    </tr>
+    <tr> 
+      <td height="25"><a href="#" class="SpanClass1" OnClick="javascript:window.open('index.php?a=imagemanager&targetform=addnewsfrm&targetinput=shortstory', '', 'HEIGHT=600,resizable=yes,scrollbars=yes,WIDTH=600');return false;">[$__l_uploadpic]</a> <a class="SpanClass1" href="http://www.postimage.org" target="_blank">[Go to Postimage to Upload Picture]</a>&nbsp;<!--BEGIN_CHEDIT//-->{CHANGE_EDITOR}<!--END_CHEDIT//--></td>
+    </tr>
+    <tr> 
+      <td>{SHORTSTORY_EDITOR}</td>
+    </tr>
+    <tr> 
+      <td rowspan="4" class="SpanClass1">$__l_fullstory</td>
+      <td><span id="hint"> 
+        <input name="hintbox2" type="text" class="HintBox" id="hintbox2" size="70">
+        </span></td>
+    </tr>
+    <tr> 
+      <td height="25"><a href="#" class="SpanClass1" OnClick="javascript:window.open('index.php?a=imagemanager&targetform=addnewsfrm&targetinput=fullstory', '', 'HEIGHT=600,resizable=yes,scrollbars=yes,WIDTH=600');return false;">[$__l_uploadpic]</a></td>
+    </tr>
+    <tr>
+      <td>{FULLSTORY_EDITOR}</td>
+    </tr>
+    <tr> 
+      <td>
+	  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td>
+	<br>
+        <input name="Act2" type="button" id="Act2" value="$__l_advanced" onClick="if (document.getElementById('advancedopt').style.display=='none') document.getElementById('advancedopt').style.display=''; else document.getElementById('advancedopt').style.display='none';"><br>
+		<div id="advancedopt" style="display:none;"> <span class="spanclass1">$__l_artstats</span> 
+                <input name="active" type="radio" value="1" {CHECKED_ACTIVE}>
+                <span class="SpanClass1"><font color="#006600">$__l_asactive</font></span> 
+                <input type="radio" name="active" value="0" {CHECKED_INACTIVE}>
+                <span class="SpanClass1"><font color="#FF0000">$__l_asinactive</font></span><br>
+                <!--{BEGIN_POSTPONE_GR}//-->
+                <input name="postpone" type="checkbox" id="postpone" value="1" onClick="if (document.getElementById('postpone').checked) document.getElementById('actcontrols').style.display=''; else document.getElementById('actcontrols').style.display='none';" {CHECK_POSTPONED}>
+                <span class="SpanClass1">$__l_postpone</span><br>
+                <br>
+                <div id="actcontrols" style="display: {ACT_DISPLAY}"> &nbsp;&nbsp;&nbsp;<span class="SpanClass1">$__l_activationdate</span> 
+                  <input name="amonth" type="text" id="amonth" value="{ACT_MONTH}" size="3" maxlength="2">
+                /
+                <input name="aday" type="text" id="aday" value="{ACT_DAY}" size="3" maxlength="2">
+                /
+                <input name="ayear" type="text" id="ayear" value="{ACT_YEAR}" size="5" maxlength="4">
+                  - 
+                  <input name="ahour" type="text" id="ahour" value="{ACT_HOUR}" size="3" maxlength="2">
+                  :
+                  <input name="aminute" type="text" id="aminute" value="{ACT_MINUTE}" size="3" maxlength="2">
+                  :
+                  <input name="asecond" type="text" id="asecond" value="{ACT_SECOND}" size="3" maxlength="2">
+                </div>
+				<!--{END_POSTPONE_GR}//-->
+              </div>
+              <br>
+
+               <input name="Act" type="submit" id="Act" value="$__l_postarticle" onClick="{FORM_ONSUBMIT}" class="mediumbtn">
+	
+	</td>
+  </tr>
+</table>
+
+      </td>
+    </tr>
+  </table>
+</form>

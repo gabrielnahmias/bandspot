@@ -1,0 +1,33 @@
+<?php
+$lng['msg_commentsdisabled']='Optiunea adaugare comentarii a fost dezactivata';
+$lng['msg_forgotcomment']='Ati uitat sa introduceti mesajul';
+$lng['msg_wrongcaptcha']='Codul de confirmare este gresit sau a expirat';
+$lng['msg_longcomment']='Comentariul este prea lung';
+$lng['msg_forgotname']='Va rugam sa introduceti un nume';
+$lng['msg_commentposted']='Comentariul a fost postat. Clic <a href="{LINK}">aici ca sa va intoarceti.</a>';
+$lng['L_information']='Informatii';
+$lng['comments1']='comentarii';
+$lng['authorline']='{date} de {author}';
+$lng['comment-authorline']='de {author} @ {date}';
+$lng['l_by']='de';
+$lng['readmore']='Mai mult...';
+$lng['l_readmore']='Mai mult...';
+$lng['L_addcomment1']='Adaugati un comentariu...';
+$lng['L_addcomment2']='Comentariul dvs...';
+$lng['l_nickname']='nume:';
+$lng['l_email']='Adresa e-mail:';
+$lng['l_captchahelp1']='Daca nu puteti citi codul de confirmare dati refresh la pagina';
+$lng['l_captcha']='Cod confirmare:';
+$lng['l_more']='Mai mult...';
+$lng['l_postcomment']='Adauga comentariul meu';
+$lng['L_comments']='Comentarii';
+$lng['L_year']='An';
+$lng['logout']='[Iesire]';
+$lng['l_password']='Parola:';
+$lng['login']='[Autentificare (optional)]';
+$lng['L_login']='Autentificare';
+$lng['msg_loginwrong']='Utilizator/parola gresite';
+$lng['msg_loginok']='V-ati autentificat. <a href="{LINK}">Go Back</a>';
+$lng['msg_loggedout']='Ati iesit. <a href="{LINK}">Inapoi</a>';
+$lng['msg_requirelogin']='{REGNICK} este un nume inregistrat. Trebuie sa va autentificati inainte de a posta.';
+?>

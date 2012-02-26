@@ -1,0 +1,36 @@
+<?php
+$lng['msg_commentsdisabled']='The comments board has been disabled';
+$lng['msg_forgotcomment']='You forgot to type your message';
+$lng['msg_wrongcaptcha']='Wrong or expired confirmation code';
+$lng['msg_longcomment']='Your comment is too long';
+$lng['msg_forgotname']='Please enter a name';
+$lng['msg_commentposted']='Your comment was posted. Click <a href="{LINK}">here to get back.</a>';
+$lng['L_information']='Information';
+$lng['comments1']='comments';
+$lng['authorline']='<em>{date}</em> by <strong>{author}</strong>';
+$lng['comment-authorline']='by {author} @ {date}';
+$lng['l_by']='by';
+$lng['readmore']='Read More...';
+$lng['l_readmore']='Read More...';
+$lng['l_deletecomment']='Delete Comment';
+$lng['L_addcomment1']='Add your comment...';
+$lng['L_addcomment2']='Your comments...';
+$lng['l_nickname']='Nickname:';
+$lng['l_email']='Email address:';
+$lng['l_captchahelp1']='If you can\'t read this code, refresh this page';
+$lng['l_captcha']='Confirmation code:';
+$lng['l_more']='More...';
+$lng['l_postcomment']='Add My Comment';
+$lng['L_comments']='Comments';
+$lng['L_year']='Year';
+$lng['logout']='[Logout]';
+$lng['l_password']='Password:';
+$lng['login']='[Login (optional)]';
+$lng['L_login']='Login';
+$lng['msg_loginwrong']='Wrong username/password';
+$lng['msg_loginok']='You are now logged in. <a href="{LINK}">Go Back</a>';
+$lng['msg_loggedout']='You have been logged out. <a href="{LINK}">Go Back</a>';
+$lng['msg_requirelogin']='{REGNICK} is a registered name. You must login before posting your comment.';
+$lng['msg_requireadmin']='You must be logged in with the appropriate permissions to perform this operation.';
+$lng['msg_commentdeleted']='The comment has been deleted. <a href="{LINK}">Go Back</a>';
+?>

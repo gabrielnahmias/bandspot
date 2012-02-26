@@ -1,0 +1,33 @@
+<?php
+$lng['msg_commentsdisabled']='De reactie pagina is uitgeschakeld';
+$lng['msg_forgotcomment']='U bent uw bericht vergeten te typen';
+$lng['msg_wrongcaptcha']='Verkeerde of verlopen bevestigingscode';
+$lng['msg_longcomment']='Uw reactie is te lang';
+$lng['msg_forgotname']='Typ een naam';
+$lng['msg_commentposted']='Uw reactie is geplaatst. Klik <a href="{LINK}">hier om terug te gaan.</a>';
+$lng['L_information']='Informatie';
+$lng['comments1']='reactie\'s';
+$lng['authorline']='{date} door {author}';
+$lng['comment-authorline']='door {author} @ {date}';
+$lng['l_by']='door';
+$lng['l_readmore']='Lees meer...';
+$lng['readmore']='Lees meer...';
+$lng['L_addcomment1']='Voeg uw reactie toe...';
+$lng['L_addcomment2']='Uw reactie\'s...';
+$lng['l_nickname']='Nickname:';
+$lng['l_email']='E-mail adres:';
+$lng['l_captchahelp1']='Als u de code niet kan lezen moet u de pagina vernieuwen';
+$lng['l_captcha']='Bevestigings code:';
+$lng['l_more']='Meer...';
+$lng['l_postcomment']='Voeg mijn reactie toe';
+$lng['L_comments']='Reactie\'s';
+$lng['L_year']='Jaar';
+$lng['logout']='[Afmelden]';
+$lng['l_password']='Wachtwoord:';
+$lng['login']='[Logon (optional)]';
+$lng['L_login']='Logon';
+$lng['msg_loginwrong']='Falsches nickname/wachtwoord';
+$lng['msg_loginok']='Logon korrekt. <a href="{LINK}">Zurück</a>';
+$lng['msg_loggedout']='You have been logged out';
+$lng['msg_requirelogin']='{REGNICK} ist eine Registerbezeichnung';
+?>
