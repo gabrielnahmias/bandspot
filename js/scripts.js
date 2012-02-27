@@ -198,10 +198,6 @@ function loadContent(strURL, bPush, bReplace) {
 	
 	var $Box = $("#loaded");
 	
-	var sPath = (window.location.pathname == "/") ? "/home" : window.location.pathname;
-	
-	var sURL = "https://www.facebook.com/plugins/comments.php?api_key=" + oPHP.const.ID_FB_APP + "&channel_url=https://s-static.ak.fbcdn.net/connect/xd_proxy.php?version=3#cb=fdb358b477bc7c&origin=http://" + oPHP.const.URL + "/&relation=parent.parent&transport=postmessage&href=http://" + oPHP.const.URL + sPath + "&locale=en_US&numposts=" + oPHP.const.FB_COMMENTS_NUM + "&sdk=joey&width=" + oPHP.const.FB_COMMENTS_WIDTH;
-	
 	strCurrent = strURL;
 	
 	// Closes any picture open in Colorbox.
@@ -226,6 +222,8 @@ function loadContent(strURL, bPush, bReplace) {
 	
 	if (!bReplace) {
 		
+		// Load the page.
+		
 		$Box.slideUp(100);
 		
 		$.get(
@@ -244,14 +242,20 @@ function loadContent(strURL, bPush, bReplace) {
 			
 		);
 		
+		// Associate the Facebook comments box with the current page.
+		
+		if (!bI) {
+			
+			var oComments = document.querySelector("#comments .inner");
+			
+			oComments.innerHTML = '<div class="fb-comments" data-href="http://' + oPHP.const.URL + '/' + strCurrent + '" data-num-posts="' + oPHP.const.FB_COMMENTS_NUM + '" data-width="' + oPHP.const.FB_COMMENTS_WIDTH + '"></div>';
+			
+			FB.XFBML.parse(oComments);
+			
+		}
+		
 	}
 	
-	// Change the source of the Facebook comments box's iframe.
-	
-	if (!bI){
-		console.log($("iframe[src*='comments']"))
-		$("iframe[src*='comments']").attr("src", sURL);
-	}
 }
 
 function resizeTitles() {
