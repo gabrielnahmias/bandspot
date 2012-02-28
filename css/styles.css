@@ -175,6 +175,18 @@ div#header {
 	
 }
 
+div#fb-name {
+	
+	float: left;
+	
+	font-size: 11px;
+	
+	font-weight: bold;
+	
+	padding: 10px 15px 0 5px;
+	
+}
+
 div#footer {
 	
 	border-color: #000 #222 #222 #555;
@@ -348,7 +360,7 @@ div#slider {
 	
 }
 
-div#slider div.fluxslider ul.pagination li {
+div#slider div.elemovements-slider ul.pagination li {
 	
 	background: rgba(0,0,0,0.6);
 	
@@ -374,13 +386,21 @@ div#slider div.fluxslider ul.pagination li {
 	
 }
 
-div#slider div.fluxslider ul.pagination li.current{
+div#slider div.elemovements-slider ul.pagination li.current{
 
 	background: rgba(255, 255, 255, 0.2);
 
 }
 
 div#social .inner {
+	
+	/*
+	
+	I'm not sure whether this is best...
+	
+	text-align: center;
+	
+	*/
 	
 	width: 248px;
 	
@@ -1055,6 +1075,14 @@ iframe[name='download'] {
 	
 }
 
+img#fb-picture {
+    
+	float: left;
+	
+    margin: 3px;
+    
+}
+
 img.band {
 	
 	margin: 0 -2px;
@@ -1193,6 +1221,22 @@ ul.pagination {
 	
 }
 
+.fb-login-button {
+	
+    float: left;
+    
+	font-style: normal;
+    
+	margin-top: 7px;
+	
+}
+	
+	.fb-login-button a:hover {
+		
+		border: none !important;
+		
+	}
+
 .gray {
 	
 	color: #AAAAAA;
@@ -1232,8 +1276,6 @@ ul.pagination {
 }
 
 .icon {
-	
-	margin-left: 2px;
 	
 	opacity: 0.7;
 	
@@ -1291,21 +1333,53 @@ ul.pagination {
 	
 }
 
-.tagline {
+.toolbar {
     
 	background: #FFFFFF;
 	
     border-top: 1px solid #222222;
     
-	font-size: 18px;
-    
-	font-style: italic;
-    
-	font-weight: bold;
-    
-	padding: 5px 30px;
-    
-	text-align: right;
+}
+	
+	.toolbar .tagline {
+			
+		font-size: 18px;
+		
+		font-style: italic;
+		
+		font-weight: bold;
+		
+		padding: 5px 30px;
+		
+		text-align: right;
+		
+	}
+
+.twtr-doc {
+	
+	border: 1px solid #333333;
+	
+	border-radius: 5px;
+	
+	-moz-border-radius: 5px;
+	
+	-webkit-border-radius: 5px;
+	
+	-o-border-radius: 5px;
+	
+	-ms-border-radius: 5px;
+	
+	-khtml-border-radius: 5px;
+	
+	margin-bottom: 10px;
+	
+}
+
+.twtr-widget a:hover {
+	
+	/* This is getting annoying... might wanna go with text-decoration: underline for hovers. */
+	
+	border: none;
 	
 }
 

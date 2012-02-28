@@ -73,7 +73,7 @@ window.flux = {
 		this.playing = false;
 
 
-		this.container = $('<div class="fluxslider"></div>').appendTo(this.element);
+		this.container = $('<div class="elemovements-slider"></div>').appendTo(this.element);
 		
 		this.surface = $('<div class="surface" style="position: relative"></div>').appendTo(this.container);
 		

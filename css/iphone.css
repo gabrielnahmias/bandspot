@@ -87,7 +87,7 @@ body.landscape .container_16 {
 
 body.landscape .icon {
 	
-	margin-left: 32px;
+	margin-left: 27px;
 	
 }
 
@@ -158,6 +158,13 @@ body.portrait div#social .inner {
     
 }
 
+body.potrait img.band,
+img.band {
+	
+	height: 118px;
+	
+}
+
 body.portrait .container_12,
 body.portrait .container_16 {
 	
@@ -167,7 +174,7 @@ body.portrait .container_16 {
 
 body.portrait .icon {
 	
-	margin-left: 8px;
+	margin-left: 6px;
 	
 }
 
@@ -253,12 +260,6 @@ div.wrapper {
 	
 }
 
-img.band {
-	
-	height: 118px;
-	
-}
-
 img.profile {
 	
 	width: 100px;
@@ -316,7 +317,7 @@ img.profile {
 	
 }
 
-.tagline {
+.toolbar .tagline {
 	
 	font-size: 14px;
 	
@@ -344,4 +345,14 @@ img.profile {
 	
 	width: 216px;
 	
+}
+
+.twtr-widget {
+	
+	margin-left: 16px;
+	
+}
+
+body.landscape .twtr-doc {
+width:3000px	
 }

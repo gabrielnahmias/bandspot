@@ -45,6 +45,10 @@ define("TEXT_BIO",
 
 );
 
+// You might want to think of a way to make use of some more divs and jQuery's unwrap() function to implement the titles
+// such as for the news archive: instead of having a redundant definition, merely change the "title" div's text to "News Archive"
+// then wrap() the "Latest" link, etc.
+
 define("TEXT_DIVIDER", " - ");
 define("TEXT_MIN_F", "min/?f=" . ( ( $_SERVER['HTTP_HOST'] == "localhost" ) ? parse_url( $_SERVER['REQUEST_URI'] , PHP_URL_PATH) : "" ) );
 define("TEXT_NEWS_TITLE", 'Latest News <span class="links">Latest · <a class="archive" href="archive">Archive</a> · <a href="news/" target="_blank">Login</a></span>');
@@ -59,6 +63,7 @@ define("URL_MS", "http://www.myspace.com/elemovements");
 define("URL_NEWS", "news/news.php");
 define("URL_RN", "http://www.reverbnation.com/2083759");
 define("URL_TOUR_RSS", "http://www.reverbnation.com/rss/artist_shows_rss/elemovements");
+define("URL_TW", "http://www.twitter.com/elemovements");
 define("URL_YT", "http://www.youtube.com/user/kbodonne");
 
 // I have to define this down here because URL_TOUR_RSS isn't defined before the TEXT_ definitions.

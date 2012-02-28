@@ -39,29 +39,9 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js" type="text/javascript"></script>
 <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js" type="text/javascript"></script>
 
-<?php if ($bI): ?>
-
-<script language="javascript" src="js/buzz.js" type="text/javascript"></script>
-<script language="javascript" src="js/scripts.js" type="text/javascript"></script>
-<script language="javascript" src="js/orientation.js" type="text/javascript"></script>
-
-<?php endif; ?>
-
 <script language="javascript" src="<?=TEXT_MIN_F?>js/buzz.js,js/easing.js,<?php if (!$bI): ?>js/flux.js,js/waypoints.min.js<?php else: ?>js/orientation.js<?php endif; ?>,<?=( ($bI) ? "cb/colorbox" : "hs/highslide" ) ?>.js,<?=( ($bWK && !$bI) ? "js/zepto.min.js," : "" )?>js/scripts.js" type="text/javascript"></script>
 
-<script language="javascript" type="text/javascript">
-
-var _gaq = _gaq || [];
-_gaq.push(['_setAccount', 'UA-27838426-1']);
-_gaq.push(['_trackPageview']);
-
-( function() {
-	var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-	ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-	var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-} )();
-
-</script>
+<script language="javascript" src="js/ga.js" type="text/javascript"></script>
 
 </head>
 
@@ -72,17 +52,7 @@ _gaq.push(['_trackPageview']);
         
         <div id="fb-root"></div>
         
-        <script>
-		
-		(function(d, s, id) {
-		  var js, fjs = d.getElementsByTagName(s)[0];
-		  if (d.getElementById(id)) return;
-		  js = d.createElement(s); js.id = id;
-		  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=<?=ID_FB_APP?>";
-		  fjs.parentNode.insertBefore(js, fjs);
-		}(document, 'script', 'facebook-jssdk'));
-        
-        </script>
+        <script language="javascript" src="js/fb.js" type="text/javascript"></script>
         
         <div class="warning dialog">
             
@@ -107,9 +77,19 @@ _gaq.push(['_trackPageview']);
                 
                 <div class="clear"></div>
                 
-                <div class="tagline">
+                <div class="toolbar">
                     
-                    Debut Album Coming this Winter!
+                    <?php if (!$bI): ?>
+                    
+                    <img id="fb-picture" src="img/spacer.png" />
+                    
+                    <div id="fb-name"></div>
+                    
+                    <div class="fb-login-button" autologoutlink="true" data-show-faces="false" data-width="200" data-max-rows="1" onlogin="fbInfo()"></div>
+                    
+                    <?php endif; ?>
+                    
+                    <div class="tagline">Debut Album Coming this Winter!</div>
                     
                 </div>
                 

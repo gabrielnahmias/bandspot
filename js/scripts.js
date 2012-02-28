@@ -5,6 +5,7 @@ var oPHP = json("inc/json.php");
 var bI = ( navigator.platform.indexOf("iPhone") != -1 );
 var bIE = $.browser.msie;
 var bLoaded = false;
+var bFirstParse = true;
 
 var strCurrent = ( ( extractPage() == "" ) ? "home" : extractPage() );
 var strPG = "pg";
@@ -121,6 +122,88 @@ function extractPage() {
 	else
 		return strFirst;
 		
+}
+
+function fbInfo() {
+	
+	// Figure out how to make this work even if someone logs into the comments box.
+	
+	/*
+	
+	FB.Event.subscribe('auth.statusChange', function(response) {
+	  alert('logged in!');
+	});
+	
+	*/
+	
+	var $El;
+	
+	if ( fbLoggedIn() ) {
+		
+		var sURL;
+		
+		// Change the logout button's text.
+		
+		$(".fb-login-button .fb_button_text").text("Logout");
+		
+		FB.api('/me', function(response) {
+			
+			var sName = response.first_name;
+			
+			$El = $("#fb-name");
+			
+			sURL = response.link;
+			
+			$("#fb-name").text("Hello, " + sName + "!");
+			
+		} );
+		
+		FB.api('/me/picture', function(response) {
+			
+			$El = $("#fb-picture");
+			
+			$El.attr("src", response);
+			$El.css("width", "30px");
+			$El.wrap('<a href="' + sURL + '" target="_blank"></a>');
+			
+		} );
+		
+	} else {
+		
+		$("#fb-name").text("");
+		
+		$("#fb-picture").attr("src", "img/spacer.png");
+		$("#fb-picture").css("width", "0");
+		
+	}
+	
+}
+
+function fbLoggedIn() {
+	
+	var bLoggedIn = false;
+	
+	FB.getLoginStatus( function(response) {
+		
+		if (response.status === 'connected') {
+			
+			// var uid = response.authResponse.userID;
+			// var accessToken = response.authResponse.accessToken;
+			
+			bLoggedIn = true;
+			
+		}/* else if (response.status === 'not_authorized') {
+			
+			console.log('not authorized');
+			
+		}*/ else
+			
+			bLoggedIn = false;
+		
+	} );
+	
+	return bLoggedIn;
+	
 }
 
 function getCookie(strName) {
@@ -242,11 +325,15 @@ function loadContent(strURL, bPush, bReplace) {
 			
 		);
 		
-		// Associate the Facebook comments box with the current page.
+		// Reload the Facebook comments box for the current page.
+		
+		// TODO: figure out how to make this not launch initially when the page is loaded,
+		// considering it already loads.  I think it's working right because bReplace is set
+		// to true in the footer... wtf?
 		
 		if (!bI) {
 			
-			var oComments = document.querySelector("#comments .inner");
+			oComments = $(".fb-comments").parent().get(0);
 			
 			oComments.innerHTML = '<div class="fb-comments" data-href="http://' + oPHP.const.URL + '/' + strCurrent + '" data-num-posts="' + oPHP.const.FB_COMMENTS_NUM + '" data-width="' + oPHP.const.FB_COMMENTS_WIDTH + '"></div>';
 			
@@ -264,7 +351,7 @@ function resizeTitles() {
 		
 		var iLength = $(this).text().length;
 		
-		if ( iLength > 35 && iLength < 43 )
+		if ( iLength > 33 && iLength < 43 )
 			$(this).css('font-size', '13px');
 		else if ( iLength >= 43 )
 			$(this).css('font-size', '10px');
@@ -391,6 +478,12 @@ function ucwords(str) {
 		
 	}
 	
+	window.onload = function() {
+		
+		fbInfo();
+		
+	}
+	
 	$(document).ready( function() {
 		
 		( function() {
@@ -505,11 +598,11 @@ function ucwords(str) {
 		} );
 		
 		$("#logo").click( function(e) {
-				
-				sndYeah.play();
-				
-				sleep(2000);
-				
+			
+			sndYeah.play();
+			
+			sleep(2000);
+			
 		} );
 			
 		$("#nav a").click( function(event) {
