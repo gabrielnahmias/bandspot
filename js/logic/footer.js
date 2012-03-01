@@ -40,7 +40,7 @@ var $Archive = $("#archive-popout");
 				
 				$Title.html(oPHP.const.TEXT_ARCHIVE_TITLE);
 				
-				$Body.html(strData).slideDown(1000, "easeOutBounce");		// This had strData + strBack... I don't know why.
+				$Body.html(strData + ( ( window.location.pathname.replace("/", "") == "archive" ) ? strBack : "" ) ).slideDown(1000, "easeOutBounce");		// This had strData + strBack... I don't know why.
 				
 			}
 			
