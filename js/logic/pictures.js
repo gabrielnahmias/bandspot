@@ -72,7 +72,7 @@ $("#pictures .album-container a").click( function(event) {
 			
 			$Title.html( oPHP.vars.titles[strCurrent].replace(" ", oPHP.const.TEXT_DIVIDER + strName + ' ') );
 			
-			$("a.fblink").attr("href", strFBLink);
+			$("a.fblink").attr("href", strFBLink).glow();
 			
 		}
 		
@@ -105,6 +105,8 @@ $("#pictures a.back").click( function(event) {
 			$Title.html( oPHP.vars.titles[strCurrent] );
 			
 			$Body.html(strData).slideDown(1000, "easeOutBounce");
+			
+			$("a.fblink").glow();
 			
 		}
 		

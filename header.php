@@ -39,7 +39,7 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js" type="text/javascript"></script>
 <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js" type="text/javascript"></script>
 
-<script language="javascript" src="<?=TEXT_MIN_F?>js/buzz.js,js/easing.js,<?php if (!$bI): ?>js/flux.js,js/waypoints.min.js<?php else: ?>js/orientation.js<?php endif; ?>,<?=( ($bI) ? "cb/colorbox" : "hs/highslide" ) ?>.js,<?=( ($bWK && !$bI) ? "js/zepto.min.js," : "" )?>js/scripts.js" type="text/javascript"></script>
+<script language="javascript" src="<?=TEXT_MIN_F?>js/buzz.js,js/easing.js,<?php if (!$bI): ?>js/flux.js,js/waypoints.min.js<?php else: ?>js/orientation.js<?php endif; ?>,<?=( ($bI) ? "cb/colorbox" : "hs/highslide" ) ?>.js,<?=( ($bWK && !$bI) ? "js/zepto.min.js," : "" )?>js/scripts.js,js/textshadow.js" type="text/javascript"></script>
 
 <script language="javascript" src="js/ga.js" type="text/javascript"></script>
 

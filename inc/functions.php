@@ -4,6 +4,11 @@ function box($sName) {
 	
 	global $aTitles, $oSmarty;
 	
+	$sFile = "$sName.php";
+	
+	if ( file_exists($sFile) )
+		include $sFile;
+	
 ?>
 
 

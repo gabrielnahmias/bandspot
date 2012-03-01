@@ -7,7 +7,7 @@ var bIE = $.browser.msie;
 var bLoaded = false;
 var bFirstParse = true;
 
-var strCurrent = ( ( extractPage() == "" ) ? "home" : extractPage() );
+var strCurrent = ( ( extractPage() == "" || extractPage() == "index.php" ) ? "home" : extractPage() );
 var strPG = "pg";
 var strPrefix = "/?" + strPG + "=";
 
@@ -115,7 +115,7 @@ function extractPage() {
 	
 	// return window.location.search.replace(/(.+)=(.+)&(.+)/, '$2');
 	
-	var strFirst = window.location.pathname.replace("/", "");
+	var strFirst = window.location.pathname.replace("/", "").split("&")[0];
 	
 	if (strFirst == "index.php")
 		return window.location.search.split("&")[0].replace("?pg=", "");
@@ -154,7 +154,7 @@ function fbInfo() {
 			
 			sURL = response.link;
 			
-			$("#fb-name").text("Hello, " + sName + "!");
+			$El.html("Yo, <em><strong>" + sName + "</strong>!</em>");
 			
 		} );
 		
@@ -281,7 +281,7 @@ function loadContent(strURL, bPush, bReplace) {
 	
 	var $Box = $("#loaded");
 	
-	strCurrent = strURL;
+	strCurrent = strURL.split("&")[0];
 	
 	// Closes any picture open in Colorbox.
 	
@@ -292,7 +292,7 @@ function loadContent(strURL, bPush, bReplace) {
 		
 		if (bPush) {
 			
-			var objState = { page: strURL };
+			var objState = { page: strCurrent };
 			
 			if (bReplace)
 				history.replaceState(objState, "", "");
@@ -317,7 +317,7 @@ function loadContent(strURL, bPush, bReplace) {
 			
 			function(strData) {
 				
-				document.title = oPHP.const.NAME + oPHP.const.TEXT_DIVIDER + ucwords(strURL);
+				document.title = oPHP.const.NAME + oPHP.const.TEXT_DIVIDER + ucwords(strCurrent);
 				
 				$Box.html(strData).slideDown(1000, "easeOutBounce");
 				
@@ -326,10 +326,6 @@ function loadContent(strURL, bPush, bReplace) {
 		);
 		
 		// Reload the Facebook comments box for the current page.
-		
-		// TODO: figure out how to make this not launch initially when the page is loaded,
-		// considering it already loads.  I think it's working right because bReplace is set
-		// to true in the footer... wtf?
 		
 		if (!bI) {
 			
@@ -456,6 +452,21 @@ function ucwords(str) {
 	
 }
 
+( function ($) {
+	
+	$.fn.glow = function () {
+		
+		return this.each(function () {
+			
+			jQuery(this).animate( {textShadow: "#ffffff 0 0 10px "} , 1000 )
+		   				.animate( {textShadow: "#000000 0 0 0"} , 500 )
+			
+		} );
+		
+	};
+	
+} )(jQuery);
+
 ( function() {
 	
 	var $Warning = $("div.dialog.warning");
@@ -481,6 +492,14 @@ function ucwords(str) {
 	window.onload = function() {
 		
 		fbInfo();
+		
+		FB.Event.subscribe('auth.statusChange', function(response) {
+			
+			//fbInfo();
+			
+			console.log("Event fired.");
+			
+		} );
 		
 	}
 	

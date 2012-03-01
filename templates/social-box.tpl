@@ -20,7 +20,7 @@ new TWTR.Widget({
     }
   },
   features: {
-    scrollbar: false,
+    scrollbar: true,
     loop: false,
     live: true,
     behavior: 'all'
