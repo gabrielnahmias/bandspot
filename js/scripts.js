@@ -7,7 +7,7 @@ var bIE = $.browser.msie;
 var bLoaded = false;
 var bFirstParse = true;
 
-var strCurrent = ( ( extractPage() == "" || extractPage() == "index.php" ) ? "home" : extractPage() );
+var strCurrent = ( ( extractPage() == "" ) ? "home" : extractPage() );
 var strPG = "pg";
 var strPrefix = "/?" + strPG + "=";
 
@@ -128,15 +128,13 @@ function fbInfo() {
 	
 	// Figure out how to make this work even if someone logs into the comments box.
 	
-	/*
-	
-	FB.Event.subscribe('auth.statusChange', function(response) {
-	  alert('logged in!');
-	});
-	
-	*/
-	
 	var $El;
+	
+	$(".fb-load").animate( {
+		
+		opacity: 1
+		
+	} );
 	
 	if ( fbLoggedIn() ) {
 		
@@ -144,7 +142,7 @@ function fbInfo() {
 		
 		// Change the logout button's text.
 		
-		$(".fb-login-button .fb_button_text").text("Logout");
+		$(".fb-login-button .fb_button_text").text("Log Out");
 		
 		FB.api('/me', function(response) {
 			
@@ -162,7 +160,16 @@ function fbInfo() {
 			
 			$El = $("#fb-picture");
 			
-			$El.attr("src", response);
+			$El.one("load", function() {
+				
+				$(".fb-load").animate( {
+					
+					opacity: 0
+					
+				} );
+				
+			} ).attr("src", response);
+			
 			$El.css("width", "30px");
 			$El.wrap('<a href="' + sURL + '" target="_blank"></a>');
 			
@@ -170,10 +177,20 @@ function fbInfo() {
 		
 	} else {
 		
+		$El = $("#fb-picture");
+		
 		$("#fb-name").text("");
 		
-		$("#fb-picture").attr("src", "img/spacer.png");
-		$("#fb-picture").css("width", "0");
+		$El.one("load", function() {
+			
+			$(".fb-load").animate( {
+				
+				opacity: 0
+				
+			} );
+			
+		} ).attr("src", "img/spacer.png")
+		   .css("width", "0");
 		
 	}
 	
@@ -493,11 +510,26 @@ function ucwords(str) {
 		
 		fbInfo();
 		
-		FB.Event.subscribe('auth.statusChange', function(response) {
+		// I'm trying to tell Facebook they have a problem somewhere in the interactivity of their widgets.
+		// The URL of the bug report is http://developers.facebook.com/bugs/260258890721446 but this girl
+		// seems to think I'm wrong.  The next bit is a bit of debugging for this.
+		
+		FB.Event.subscribe('auth.authResponseChange', function(response) {
 			
 			//fbInfo();
 			
-			console.log("Event fired.");
+			var sPreposition;
+			
+			console.log("Event fired.  Response object:");
+			
+			console.log(response);
+			
+			if (response.status == "connected")
+				sPreposition = "into";
+			else
+				sPreposition = "out of";
+			
+			console.info("You are currently logged " + sPreposition + " Facebook for the site.");
 			
 		} );
 		

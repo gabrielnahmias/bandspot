@@ -52,7 +52,7 @@ if ( empty($action) ) {
 			
 			$sTitle = "";
 			
-			$sURL = "index.php?pg=pictures&action=list_pics&aid=" . $values['aid'] . "&size=" . $values['size'] . "&name=" . $values['name'];
+			$sURL = "pictures&action=list_pics&aid=" . $values['aid'] . "&size=" . $values['size'] . "&name=" . $values['name'];
 		
 			// If there's no punctuation on the description, add a period.
 			

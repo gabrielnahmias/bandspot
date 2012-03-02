@@ -58,7 +58,7 @@
         
     <div class="nav">
         
-        <a class="back" href="index.php?pg=pictures">{$smarty.const.TEXT_BACK}</a>
+        <a class="back" href="pictures">{$smarty.const.TEXT_BACK}</a>
         
     </div>
     

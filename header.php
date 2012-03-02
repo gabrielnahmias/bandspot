@@ -87,6 +87,12 @@
                     
                     <div class="fb-login-button" autologoutlink="true" data-show-faces="false" data-width="200" data-max-rows="1" onlogin="fbInfo()"></div>
                     
+                    <div class="fb-load">
+                    	
+                    	<img src="img/fb-load.gif" />
+                    	
+                    </div>
+                    
                     <?php endif; ?>
                     
                     <div class="tagline">Debut Album Coming this Winter!</div>

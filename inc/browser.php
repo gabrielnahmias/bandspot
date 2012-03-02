@@ -176,6 +176,12 @@ class Browser {
 				$bd['version'] = $val[1];
 			}
 		
+		// test for Chrome
+		}elseif(preg_match("/chrome/i", $agent)){
+			
+			$bd['browser'] = "Chrome";
+			$bd['version'] = "";
+			
 		// test for Safari
 		}elseif(preg_match("/safari/i", $agent)){
 			$bd['browser'] = "Safari";

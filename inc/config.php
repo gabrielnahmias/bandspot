@@ -26,6 +26,25 @@ define("FB_COMMENTS_WIDTH", 619);
 
 define("FILE_SMARTY", "smarty/Smarty.class.php");
 
+require_once(FILE_SMARTY);
+require_once("browser.php");
+
+$oBr = new Browser;
+$oSmarty = new Smarty;
+
+// This part provides a link to show how to enable JavaScript for popular browsers.
+
+if ($oBr->Name == "Firefox")
+	$sJSGuideURL = "http://support.mozilla.org/en-US/kb/JavaScript";
+elseif ($oBr->Name == "Chrome")
+	$sJSGuideURL = "http://support.google.com/bin/answer.py?hl=en&answer=23852";
+elseif ($oBr->Name == "Safari")
+	$sJSGuideURL = "http://docs.info.apple.com/article.html?path=Safari/3.0/en/9279.html";
+elseif ($oBr->Name == "MSIE")
+	$sJSGuideURL = "http://technet.microsoft.com/en-us/library/dd309766%28v=ws.10%29.aspx";
+else
+	$sJSGuideURL = NULL;
+
 define("ID_FB", 156848747719647);
 define("ID_FB_ADMINS", "100000142903767,6512161,100003578410731");
 define("ID_FB_APP", 333026093402769);
@@ -53,7 +72,7 @@ define("TEXT_DIVIDER", " - ");
 define("TEXT_MIN_F", "min/?f=" . ( ( $_SERVER['HTTP_HOST'] == "localhost" ) ? parse_url( $_SERVER['REQUEST_URI'] , PHP_URL_PATH) : "" ) );
 define("TEXT_NEWS_TITLE", 'Latest News <span class="links">Latest · <a class="archive" href="archive">Archive</a> · <a href="news/" target="_blank">Login</a></span>');
 define("TEXT_NO_DATES", 'There are no upcoming tour dates.');
-define("TEXT_NO_JS", '<noscript><h6>Turn on JavaScript to enable this feature.</h6></noscript>');
+define("TEXT_NO_JS", '<noscript><h6>' . ( ($sJSGuideURL != NULL) ? '<a href="' . $sJSGuideURL . '" target="_blank">' : '' ) .  'Turn on JavaScript' . ( ($sJSGuideURL != NULL) ? '</a>' : '' ) .  ' to enable this feature.</h6></noscript>');
 define("TEXT_NO_MUSIC", 'Elemovements is currently in the process of mixing and finishing their debut studio release.  Until it\'s finished check out some rough cuts from their sessions on ');
 define("TEXT_NO_MUSIC_ADD_DESK", 'the player to the left');
 define("TEXT_NO_MUSIC_ADD_IPHONE", 'ReverbNation');
@@ -69,6 +88,9 @@ define("URL_YT", "http://www.youtube.com/user/kbodonne");
 // I have to define this down here because URL_TOUR_RSS isn't defined before the TEXT_ definitions.
 
 define("TEXT_TOUR_TITLE", 'Tour Schedule <span class="links"><a href="' . URL_TOUR_RSS . '" target="_blank">RSS</a></span>');
+
+// Logic needs to be added here (wtf is up with $_GET['action']?) to compensate for the non-JS site when you want
+// to view the individual album on Facebook.
 
 define("TEXT_FB", '<span class="links"><a class="fblink" href="' . URL_FB . '?sk=photos" target="_blank">View on Facebook</a></span>');
 
@@ -126,12 +148,6 @@ $aTitles["player-box"] = "Music Player";
 $aTitles["schedule-box"] = "Tour Schedule";
 $aTitles["social-box"] = "Social";
 $aTitles["tour"] = TEXT_TOUR_TITLE;
-
-require_once(FILE_SMARTY);
-require_once("browser.php");
-
-$oBr = new Browser;
-$oSmarty = new Smarty;
 
 $bI = ( isset( $_GET['d'] ) ) ? false : ($oBr->Platform == "iPhone"); // iPhone or not? Later on, add functionality for all mobile devices.
 $bWK = ( strpos($oBr->UserAgent, "WebKit") );	// Is the current browser based on WebKit?

@@ -1235,6 +1235,17 @@ ul.pagination {
 		
 	}
 
+
+.fb-load {
+	
+	float: left;
+	
+	margin: 10px 0 0 10px;
+	
+	opacity: 0;
+	
+}
+
 .gray {
 	
 	color: #AAAAAA;
