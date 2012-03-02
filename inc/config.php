@@ -165,7 +165,7 @@ $sRequest = $_SERVER['REQUEST_URI'];
 
 $sCurrURL = "http://{$_SERVER['HTTP_HOST']}";
 
-if ( $sRequest != '/' && strpos($sRequest, "home") == -1 )
+if ( $sRequest != '/' && stripos($sRequest, "home") === false )
 	$sCurrURL .= strtok( strtok( $_SERVER['REQUEST_URI'] , "?") , "&");
 
 $oSmarty->setCaching(false);

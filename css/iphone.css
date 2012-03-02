@@ -196,6 +196,12 @@ div#nav.bar a {
 	
 }
 
+div.album-container {
+	
+	width: auto;
+	
+}
+
 div.album-container img {
 	
 	width: 110px;

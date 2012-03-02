@@ -470,6 +470,8 @@ div.album-container {
 	
 	margin: 0 5px 10px;
 	
+	width: 141px;
+	
 }
 
 div.album-container div.name a:hover {
@@ -483,6 +485,8 @@ div.album-container div.name a:hover {
 div.album-container img {
 	
 	height: 86px;
+	
+	width: 130px;
 	
 }
 

@@ -46,7 +46,7 @@ if ( empty($action) ) {
 		foreach( $fqlResult2 as $keys2 => $values2)
 			$album_cover = $values2['src'];
 		
-		if ( $values['type'] != "profile" ) {
+		if ( $values['type'] != "profile" && stripos( $values['name'] , "cover photos" ) === false ) {
 			
 			$iTotal += $values['size'];
 			
