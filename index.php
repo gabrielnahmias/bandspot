@@ -84,5 +84,5 @@ endif;
 
 if (!$bNHF && !$bNB)
 	require "footer.php";
-
+	
 ?>

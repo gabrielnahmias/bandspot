@@ -1,2 +1,4 @@
 if (bI)
 	resizeTitles();
+
+adminLinks();

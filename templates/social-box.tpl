@@ -1,6 +1,9 @@
 {if !$bI}
+
 <script charset="utf-8" src="http://widgets.twimg.com/j/2/widget.js"></script>
+
 <script>
+
 new TWTR.Widget({
   version: 2,
   type: 'profile',
@@ -25,8 +28,10 @@ new TWTR.Widget({
     live: true,
     behavior: 'all'
   }
-}).render().setUser('Elemovements').start();
+}).render().setUser('{str_replace("http://twitter.com/#!/", "", $smarty.const.URL_TW)}').start();
+
 </script>
+
 {/if}
 
 <a href="{$smarty.const.URL_FB}" target="_blank" title="Facebook"><img class="icon" src="./img/icons/fb.png" /></a>
@@ -36,6 +41,11 @@ new TWTR.Widget({
 <a href="{$smarty.const.URL_YT}" target="_blank" title="YouTube"><img class="icon" src="./img/icons/yt.png" /></a>
 
 {if !$bI}
-<div class="buttons center"><div class="fb-like" data-href="http://www.facebook.com/elemovements" data-layout="button_count" data-send="false" data-width="110" data-show-faces="false" data-font="arial"></div>
-<g:plusone size="small"></g:plusone></div>
+<div class="buttons center">
+	
+    <div class="fb-like" data-href="{$sCurrURL}" data-layout="{$smarty.const.FB_LIKE_LAYOUT}" data-send="{$smarty.const.FB_LIKE_SEND}" data-width="{$smarty.const.FB_LIKE_WIDTH}" data-show-faces="{$smarty.const.FB_LIKE_FACES}" data-font="{$smarty.const.FB_LIKE_FONT}"></div>
+    
+	<g:plusone size="small"></g:plusone>
+    
+</div>
 {/if}

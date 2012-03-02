@@ -42,6 +42,8 @@ var $Archive = $("#archive-popout");
 				
 				$Body.html(strData + ( ( window.location.pathname.replace("/", "") == "archive" ) ? strBack : "" ) ).slideDown(1000, "easeOutBounce");		// This had strData + strBack... I don't know why.
 				
+				adminLinks();
+				
 			}
 			
 		);

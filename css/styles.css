@@ -9,7 +9,7 @@ a:focus {
 }
 
 a:hover,
-div.dialog a:hover { border: 1px dotted #F96B02; border-width: 0 0 1px; }
+div.dialog a:hover { text-decoration: underline; /* border: 1px dotted #F96B02; border-width: 0 0 1px;*/ }
 
 a.back {
 	
@@ -18,11 +18,11 @@ a.back {
 }
 
 a.back:hover {
-	
+	/*
 	border: 1px dotted #F96B02 !important;
 	
 	border-width: 0 0 1px !important;
-	
+	*/
 }
 
 a, img.band {
@@ -180,9 +180,9 @@ div#fb-name {
 	float: left;
 	
 	font-size: 11px;
-	
+	/*
 	padding: 12px 15px 0 5px;
-	
+	*/
 }
 
 div#footer {
@@ -473,11 +473,11 @@ div.album-container {
 }
 
 div.album-container div.name a:hover {
-	
+	/*
 	 border: 1px dotted #F96B02 !important;
 	 
 	 border-width: 0 0 1px !important;
-	
+	*/
 }
 
 div.album-container img {
@@ -669,7 +669,7 @@ div.box-1 > .title {
 		padding: 2px 5px 0 0;
 		
 	}
-
+	
 div.box-1 .body {
 	
 	background: #FFFFFF;

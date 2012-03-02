@@ -23,6 +23,11 @@ define("DIR_SLIDER", DIR_IMG . "/slider");
 
 define("FB_COMMENTS_NUM", 5);
 define("FB_COMMENTS_WIDTH", 619);
+define("FB_LIKE_FACES", "false");
+define("FB_LIKE_FONT", "arial");
+define("FB_LIKE_LAYOUT", "button_count");
+define("FB_LIKE_SEND", "false");
+define("FB_LIKE_WIDTH", 80);
 
 define("FILE_SMARTY", "smarty/Smarty.class.php");
 
@@ -51,7 +56,7 @@ define("ID_FB_APP", 333026093402769);
 define("ID_FB_SEC", "cbd780cbf109fa395d2e96148f8937cc");
 
 define("TEXT_ARCHIVE", "Click on the links to the right to load content.");
-define("TEXT_ARCHIVE_TITLE", 'News Archive <span class="links"><a class="latest" href="#">Latest</a> · <a class="archive" href="archive">Archive</a> · <a href="news/" target="_blank">Login</a></span>');
+define("TEXT_ARCHIVE_TITLE", 'News Archive <span class="links"><a class="latest" href="#">Latest</a> · <a class="archive" href="archive">Archive</a></span>');
 define("TEXT_BACK", "« Back");
 
 define("TEXT_BIO",
@@ -66,11 +71,12 @@ define("TEXT_BIO",
 
 // You might want to think of a way to make use of some more divs and jQuery's unwrap() function to implement the titles
 // such as for the news archive: instead of having a redundant definition, merely change the "title" div's text to "News Archive"
-// then wrap() the "Latest" link, etc.
+// then wrap() the "Latest" link, etc.  It's getting really redundant.  The only issue is that for the non-JS based site a lot of
+// the links won't work.
 
 define("TEXT_DIVIDER", " - ");
 define("TEXT_MIN_F", "min/?f=" . ( ( $_SERVER['HTTP_HOST'] == "localhost" ) ? parse_url( $_SERVER['REQUEST_URI'] , PHP_URL_PATH) : "" ) );
-define("TEXT_NEWS_TITLE", 'Latest News <span class="links">Latest · <a class="archive" href="archive">Archive</a> · <a href="news/" target="_blank">Login</a></span>');
+define("TEXT_NEWS_TITLE", 'Latest News <span class="links">Latest · <a class="archive" href="archive">Archive</a></span>');
 define("TEXT_NO_DATES", 'There are no upcoming tour dates.');
 define("TEXT_NO_JS", '<noscript><h6>' . ( ($sJSGuideURL != NULL) ? '<a href="' . $sJSGuideURL . '" target="_blank">' : '' ) .  'Turn on JavaScript' . ( ($sJSGuideURL != NULL) ? '</a>' : '' ) .  ' to enable this feature.</h6></noscript>');
 define("TEXT_NO_MUSIC", 'Elemovements is currently in the process of mixing and finishing their debut studio release.  Until it\'s finished check out some rough cuts from their sessions on ');
@@ -82,7 +88,7 @@ define("URL_MS", "http://www.myspace.com/elemovements");
 define("URL_NEWS", "news/news.php");
 define("URL_RN", "http://www.reverbnation.com/2083759");
 define("URL_TOUR_RSS", "http://www.reverbnation.com/rss/artist_shows_rss/elemovements");
-define("URL_TW", "http://www.twitter.com/elemovements");
+define("URL_TW", "http://twitter.com/#!/elemovements");
 define("URL_YT", "http://www.youtube.com/user/kbodonne");
 
 // I have to define this down here because URL_TOUR_RSS isn't defined before the TEXT_ definitions.
@@ -152,6 +158,17 @@ $aTitles["tour"] = TEXT_TOUR_TITLE;
 $bI = ( isset( $_GET['d'] ) ) ? false : ($oBr->Platform == "iPhone"); // iPhone or not? Later on, add functionality for all mobile devices.
 $bWK = ( strpos($oBr->UserAgent, "WebKit") );	// Is the current browser based on WebKit?
 
+
+// Put the current URL in a variable.
+
+$sRequest = $_SERVER['REQUEST_URI'];
+
+$sCurrURL = "http://{$_SERVER['HTTP_HOST']}";
+
+if ( $sRequest != '/' && strpos($sRequest, "home") == -1 )
+	$sCurrURL .= strtok( strtok( $_SERVER['REQUEST_URI'] , "?") , "&");
+
 $oSmarty->setCaching(false);
 
 $oSmarty->assign("bI", $bI);
+$oSmarty->assign("sCurrURL", $sCurrURL);

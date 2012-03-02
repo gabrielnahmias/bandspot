@@ -2,11 +2,13 @@ var $Archive = $("div#archive-popout");
 
 var oPHP = json("inc/json.php");
 
+var bGlown = false;
 var bI = ( navigator.platform.indexOf("iPhone") != -1 );
 var bIE = $.browser.msie;
 var bLoaded = false;
 var bFirstParse = true;
 
+// Make strCurrent come from PHP? oPHP.vars.sCurrent...?
 var strCurrent = ( ( extractPage() == "" ) ? "home" : extractPage() );
 var strPG = "pg";
 var strPrefix = "/?" + strPG + "=";
@@ -74,6 +76,20 @@ var oArchive = {
 	
 }
 
+window.fbAsyncInit = function() {
+	
+	FB.init( {
+		
+		appId      : oPHP.const.ID_FB_APP,
+		status     : true, 
+		cookie     : true,
+		xfbml      : true,
+		oauth      : true,
+		
+	} );
+  
+}
+
 String.prototype.trim = function() {
 	
 	return this.replace(/^\s+|\s+$/g, '');
@@ -87,6 +103,41 @@ function addEvent(strType, func) {
 	else if (window.attachEvent)
 		window.attachEvent("on" + strType, func);
 
+}
+
+function adminLinks() {
+	
+	if ( (strCurrent == "home" || strCurrent == "archive") && !$(".links .admin").length ) {
+		
+		var sID;
+		
+		FB.getLoginStatus( function() {
+			
+			sID = response.authResponse.userID;
+			
+			if ( oPHP.const.ID_FB_ADMINS.indexOf(sID) != -1 ) {
+				
+				// One of the Facebook admins is using the page, so display some links for them.
+				
+				var $Links = $('<span class="admin"> · <a href="news/" target="_blank">Login</a> · <a href="https://www.google.com/analytics/web/?pli=1#report/visitors-overview/a27838426w53292149p54112166/" target="_blank"><img class="analytics" src="img/graph.png" title="Access Google Analytics" /></a></span>');
+				
+				// For some reason the beginning · doesn't get registered when encapsulated in a jQuery object... weird.
+				
+				$(".box-1 .title .links").append($Links);
+				
+				if (!bGlown) {
+					
+					$Links.glow();
+					
+					bGlown = true;
+					
+				}
+				
+			}
+			
+		} );
+		
+	}
 }
 
 function adjustClassHeight(strClass, intAdjust) {
@@ -130,6 +181,8 @@ function fbInfo() {
 	
 	var $El;
 	
+	// MAKE THESE ANIMATION TECHNIQUES AN EXTENSION SO IT'S NOT SO REDUNDANT.
+	
 	$(".fb-load").animate( {
 		
 		opacity: 1
@@ -152,7 +205,7 @@ function fbInfo() {
 			
 			sURL = response.link;
 			
-			$El.html("Yo, <em><strong>" + sName + "</strong>!</em>");
+			$El.html("Yo, <em><strong>" + sName + "</strong>!</em>").css("padding", "12px 15px 0 5px");
 			
 		} );
 		
@@ -173,15 +226,19 @@ function fbInfo() {
 			$El.css("width", "30px");
 			$El.wrap('<a href="' + sURL + '" target="_blank"></a>');
 			
+			adminLinks();
+			
 		} );
 		
 	} else {
 		
 		$El = $("#fb-picture");
 		
-		$("#fb-name").text("");
+		$("#fb-name").text("").css("padding", "0");
 		
 		$El.one("load", function() {
+				
+			console.log('Image replacement with spacer fired.  Ceasing load animation.')
 			
 			$(".fb-load").animate( {
 				
@@ -191,6 +248,20 @@ function fbInfo() {
 			
 		} ).attr("src", "img/spacer.png")
 		   .css("width", "0");
+		
+		$(".links .admin").remove();
+		
+	}
+	
+	if ( navigator.userAgent.indexOf("WebKit") != -1 ) {
+		
+		// Why is this necessary for Chrome, etc...?
+		
+		$(".fb-load").animate( {
+			
+			opacity: 0
+			
+		} );
 		
 	}
 	
@@ -342,15 +413,18 @@ function loadContent(strURL, bPush, bReplace) {
 			
 		);
 		
-		// Reload the Facebook comments box for the current page.
+		// Reload the Facebook widgets for the current page.
 		
 		if (!bI) {
 			
-			oComments = $(".fb-comments").parent().get(0);
+			var oComments = $(".fb-comments").get(0);
+			var oLike = $(".fb-like").get(0);
 			
-			oComments.innerHTML = '<div class="fb-comments" data-href="http://' + oPHP.const.URL + '/' + strCurrent + '" data-num-posts="' + oPHP.const.FB_COMMENTS_NUM + '" data-width="' + oPHP.const.FB_COMMENTS_WIDTH + '"></div>';
+			oComments.innerHTML = '<div class="fb-comments" data-href="http://' + window.location.host + '/' + strCurrent + '" data-num-posts="' + oPHP.const.FB_COMMENTS_NUM + '" data-width="' + oPHP.const.FB_COMMENTS_WIDTH + '"></div>';
+			oLike.innerHTML = '<div class="fb-like" data-href="http://' + window.location.host + '/' + (strCurrent == "home" ? "" : strCurrent ) + '" data-layout="' + oPHP.const.FB_LIKE_LAYOUT + '" data-send="' + oPHP.const.FB_LIKE_SEND + '" data-width="' + oPHP.const.FB_LIKE_WIDTH + '" data-show-faces="' + oPHP.const.FB_LIKE_FACES + '" data-font="' + oPHP.const.FB_LIKE_FONT + '"></div>';
 			
 			FB.XFBML.parse(oComments);
+			FB.XFBML.parse(oLike);
 			
 		}
 		
@@ -471,11 +545,11 @@ function ucwords(str) {
 
 ( function ($) {
 	
-	$.fn.glow = function () {
+	$.fn.glow = function (iTime) {
 		
 		return this.each(function () {
 			
-			jQuery(this).animate( {textShadow: "#ffffff 0 0 10px "} , 1000 )
+			jQuery(this).animate( {textShadow: "#ffffff 0 0 10px "} , ( (iTime) ? iTime : 1000 ) )
 		   				.animate( {textShadow: "#000000 0 0 0"} , 500 )
 			
 		} );
