@@ -208,27 +208,27 @@ function fbInfo() {
 			sURL = response.link;
 			
 			$El.html("Yo, <em><strong>" + sName + "</strong>!</em>").css("padding", "12px 15px 0 5px");
-			
-		} );
-		
-		FB.api('/me/picture', function(response) {
-			
-			$El = $("#fb-picture");
-			
-			$El.one("load", function() {
-				
-				$(".fb-load").animate( {
 					
-					opacity: 0
-					
-				} );
+			FB.api('/me/picture', function(response) {
 				
-			} ).attr("src", response);
-			
-			$El.css("width", "30px");
-			$El.wrap('<a href="' + sURL + '" target="_blank"></a>');
-			
-			adminLinks();
+				$El = $("#fb-picture");
+				
+				$El.one("load", function() {
+					
+					$(".fb-load").animate( {
+						
+						opacity: 0
+						
+					} );
+					
+				} ).attr("src", response);
+				
+				$El.css("width", "30px")
+				   .wrap('<a href="' + sURL + '" target="_blank"></a>');
+				
+				adminLinks();
+				
+			} );
 			
 		} );
 		
