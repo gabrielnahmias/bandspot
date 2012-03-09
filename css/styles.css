@@ -400,7 +400,7 @@ div#social .inner {
 	
 	*/
 	
-	width: 248px;
+	width: 246px;
 	
 }
 
@@ -1290,9 +1290,23 @@ ul.pagination {
 
 .icon {
 	
+	transition: opacity 0.5s linear;
+	
+	-moz-transition: opacity 0.5s linear;
+	
+	-o-transition: opacity 0.5s linear;
+	
+	-webkit-transition: opacity 0.5s linear;
+	
 	opacity: 0.7;
 	
 }
+	
+	.icon:hover {
+		
+		opacity: 1;
+		
+	}
 
 .italic {
 	

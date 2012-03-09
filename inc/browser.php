@@ -23,6 +23,8 @@ function css_add($css_dir = "css") {
 		$css_file = 'safari';
 	elseif ($br->Name =='OmniWeb')
 		$css_file = 'omniweb';
+	else
+		return;
 	
 	$file_name = "$css_dir/$css_file.css";
 	

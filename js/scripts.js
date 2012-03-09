@@ -76,6 +76,8 @@ var oArchive = {
 	
 }
 
+// Once you have an iPhone again >:(, it would be a good idea to eliminate the Facebook-related errors.
+
 window.fbAsyncInit = function() {
 	
 	FB.init( {
@@ -704,23 +706,29 @@ function ucwords(str) {
 		
 		} );
 		
-		$(".icon").hover( function() {
+		if (!Modernizr.csstransitions) {
 			
-			$(this).animate( {
-				
-				opacity: 1
-		
-			} )
-		
-		} ).mouseleave( function() {
+			// Fall back to jQuery's animate() if CSS transitions are not supported.
 			
-			$(this).animate( {
+			$(".icon").hover( function() {
 				
-				opacity: 0.7
+				$(this).animate( {
+					
+					opacity: 1
+			
+				} )
+			
+			} ).mouseleave( function() {
 				
-			} )
-		
-		} );
+				$(this).animate( {
+					
+					opacity: 0.7
+					
+				} )
+			
+			} );
+			
+		}
 		
 		$("#logo").click( function(e) {
 			

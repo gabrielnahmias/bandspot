@@ -1,1 +1,1 @@
-<embed src="http://cache.reverbnation.com/widgets/swf/40/pro_widget.swf?id=artist_{$smarty.const.WIDGET_ARTIST_ID}&posted_by=&skin_id=PWAS1008&font_color={$smarty.const.WIDGET_FONT_COLOR}&auto_play={$smarty.const.WIDGET_AUTOPLAY}&shuffle={$smarty.const.WIDGET_SHUFFLE}" type="application/x-shockwave-flash" allowscriptaccess="always" allowNetworking="all" allowfullscreen="true" wmode="transparent" quality="best" width="100%" height="100%"></embed>
+{$smarty.const.WIDGET_HTML_PLAYER}

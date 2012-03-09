@@ -15,7 +15,7 @@
 <?php endif; ?> 
 
 <meta name="description" content="<?=$aMeta[$pg]?>" />
-<meta name="keywords" content="band,music,jam,memphis,oxford,ms,mississippi,memphis,tn,tennessee,live,perforamance,concert,tour schedule,player,info,information,elemovements,elements,movements,<?=$pg?>" />
+<meta name="keywords" content="<?php foreach ($aKeywords as $i => $sWord) print $sWord . ( ( $i + 1 != count($aKeywords) ) ? "," : "" ); ?>,<?=$pg?>" />
 <meta name="author" content="Gabriel Nahmias" />
 <meta name="robots" content="index, follow" />
 
@@ -39,7 +39,7 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js" type="text/javascript"></script>
 <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js" type="text/javascript"></script>
 
-<script language="javascript" src="<?=TEXT_MIN_F?>js/buzz.js,js/easing.js,<?php if (!$bI): ?>js/flux.js,js/waypoints.min.js<?php else: ?>js/orientation.js<?php endif; ?>,<?=( ($bI) ? "cb/colorbox" : "hs/highslide" ) ?>.js,<?=( ($bWK && !$bI) ? "js/zepto.min.js," : "" )?>js/scripts.js,js/textshadow.js" type="text/javascript"></script>
+<script language="javascript" src="<?=TEXT_MIN_F?>js/buzz.js,js/easing.js,<?php if (!$bI): ?>js/flux.js,js/waypoints.min.js<?php else: ?>js/orientation.js<?php endif; ?>,<?=( ($bI) ? "cb/colorbox" : "hs/highslide" ) ?>.js,js/modernizr.js,js/scripts.js,js/textshadow.js<?=( ($bWK && !$bI) ? ",js/zepto.min.js" : "" )?>" type="text/javascript"></script>
 
 <script language="javascript" src="js/ga.js" type="text/javascript"></script>
 
@@ -59,8 +59,8 @@
             <?=( ($oBr->Name == "MSIE") ? "You're using Internet Explorer?  This page will not look as good as it could.<br />" . nbsp(3) : "" )?>
             
             The image slider on this page requires a browser that supports CSS3 transitions in order to display its cool effects.
-            You should try the latest version of <a href="http://www.firefox.com" target="_blank">Firefox</a> or
-            <a href="https://www.google.com/chrome/" target="_blank">Chrome</a>.
+            You should try the latest version of <a href="http://www.firefox.com" target="_blank" title="Mozilla Firefox">Firefox</a> or
+            <a href="https://www.google.com/chrome/" target="_blank" title="Google Chrome">Chrome</a>.
             
         </div>
         <?php endif;?>

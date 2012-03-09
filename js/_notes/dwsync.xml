@@ -2,7 +2,7 @@
 <dwsync>
 <file name="flux.js" server="ftp.terrasoft.x10.mx/public_html/etc/el/" local="129748993455124651" remote="129749029200000000" />
 <file name="zepto.min.js" server="ftp.terrasoft.x10.mx/public_html/etc/el/" local="129629033000000000" remote="129679131000000000" />
-<file name="scripts.js" server="ftp.terrasoft.x10.mx/public_html/etc/el/" local="129751863320592511" remote="129751899000000000" />
+<file name="scripts.js" server="ftp.terrasoft.x10.mx/public_html/etc/el/" local="129757783550309823" remote="129757819200000000" />
 <file name="easing.js" server="ftp.terrasoft.x10.mx/public_html/etc/el/" local="129740822951530110" remote="129740862000000000" />
 <file name="buzz.js" server="ftp.terrasoft.x10.mx/public_html/etc/el/" local="129740822955050312" remote="129740862000000000" />
 <file name="waypoints.min.js" server="ftp.terrasoft.x10.mx/public_html/etc/el/" local="129740822947629887" remote="129740862000000000" />
@@ -11,4 +11,5 @@
 <file name="fb.js" server="ftp.terrasoft.x10.mx/public_html/etc/el/" local="129751516046325788" remote="129751551600000000" />
 <file name="ga.js" server="ftp.terrasoft.x10.mx/public_html/etc/el/" local="129748935024902633" remote="129748971000000000" />
 <file name="textshadow.js" server="ftp.terrasoft.x10.mx/public_html/etc/el/" local="129520176160000000" remote="129750390000000000" />
+<file name="modernizr.js" server="ftp.terrasoft.x10.mx/public_html/etc/el/" local="129757776379489676" remote="129757812000000000" />
 </dwsync>

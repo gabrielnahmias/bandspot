@@ -91,6 +91,28 @@ body.landscape .icon {
 	
 }
 
+body.landscape .quote {
+	
+	background: url("../img/quotes_370.png");
+	
+	font-size: 14px;
+	
+	height: 93px;
+	
+	margin: 10px auto 45px;
+	
+	width: 370px;
+	
+}
+
+body.landscape .quote .text {
+	
+	padding: 10px 100px 0 35px;
+	
+	width: 310px;
+	
+}
+
 body.portrait div#logo,
 div#logo {
 	
@@ -175,6 +197,20 @@ body.portrait .container_16 {
 body.portrait .icon {
 	
 	margin-left: 6px;
+	
+}
+
+body.portrait .quote {
+	
+	background: url("../img/quotes_266.png");
+	
+	font-size: 11px;
+	
+	height: 67px;
+	
+	margin: 10px auto 30px;
+	
+	width: 266px;
 	
 }
 

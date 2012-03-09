@@ -56,7 +56,7 @@ define("ID_FB_APP", 333026093402769);
 define("ID_FB_SEC", "cbd780cbf109fa395d2e96148f8937cc");
 
 define("TEXT_ARCHIVE", "Click on the links to the right to load content.");
-define("TEXT_ARCHIVE_TITLE", 'News Archive <span class="links"><a class="latest" href="#">Latest</a> · <a class="archive" href="archive">Archive</a></span>');
+define("TEXT_ARCHIVE_TITLE", 'News Archive <span class="links"><a class="latest" href="#" title="View the Latest News">Latest</a> · <a class="archive" href="archive" title="View the News Archive">Archive</a></span>');
 define("TEXT_BACK", "« Back");
 
 define("TEXT_BIO",
@@ -76,10 +76,10 @@ define("TEXT_BIO",
 
 define("TEXT_DIVIDER", " - ");
 define("TEXT_MIN_F", "min/?f=" . ( ( $_SERVER['HTTP_HOST'] == "localhost" ) ? parse_url( $_SERVER['REQUEST_URI'] , PHP_URL_PATH) : "" ) );
-define("TEXT_NEWS_TITLE", 'Latest News <span class="links">Latest · <a class="archive" href="archive">Archive</a></span>');
+define("TEXT_NEWS_TITLE", 'Latest News <span class="links">Latest · <a class="archive" href="archive" title="View the News Archive">Archive</a>');
 define("TEXT_NO_DATES", 'There are no upcoming tour dates.');
-define("TEXT_NO_JS", '<noscript><h6>' . ( ($sJSGuideURL != NULL) ? '<a href="' . $sJSGuideURL . '" target="_blank">' : '' ) .  'Turn on JavaScript' . ( ($sJSGuideURL != NULL) ? '</a>' : '' ) .  ' to enable this feature.</h6></noscript>');
-define("TEXT_NO_MUSIC", 'Elemovements is currently in the process of mixing and finishing their debut studio release.  Until it\'s finished check out some rough cuts from their sessions on ');
+define("TEXT_NO_JS", '<noscript><h6>' . ( ($sJSGuideURL != NULL) ? '<a href="' . $sJSGuideURL . '" target="_blank" title="View a Guide for Your Browser on How to Enable JavaScript">' : '' ) .  'Turn on JavaScript' . ( ($sJSGuideURL != NULL) ? '</a>' : '' ) .  ' to enable this feature.</h6></noscript>');
+define("TEXT_NO_MUSIC", NAME . ' is currently in the process of mixing and finishing their debut studio release.  Until it\'s finished check out some rough cuts from their sessions on ');
 define("TEXT_NO_MUSIC_ADD_DESK", 'the player to the left');
 define("TEXT_NO_MUSIC_ADD_IPHONE", 'ReverbNation');
 
@@ -98,13 +98,25 @@ define("TEXT_TOUR_TITLE", 'Tour Schedule <span class="links"><a href="' . URL_TO
 // Logic needs to be added here (wtf is up with $_GET['action']?) to compensate for the non-JS site when you want
 // to view the individual album on Facebook.
 
-define("TEXT_FB", '<span class="links"><a class="fblink" href="' . URL_FB . '?sk=photos" target="_blank">View on Facebook</a></span>');
+define("TEXT_FB", '<span class="links"><a class="fblink" href="' . URL_FB . '?sk=photos" target="_blank" title="Visit this Page on Facebook">View on Facebook</a></span>');
 
 define("WIDGET_ARTIST_ID", 2083759);
 define("WIDGET_AUTOPLAY", "true");
 define("WIDGET_FONT_COLOR", "222222");
 define("WIDGET_MAP", "true");
 define("WIDGET_SHUFFLE", "false");
+
+// I know this next part is a bit ridiculous but it's less redundant than the previous alternative.
+
+define("WIDGET_SRC_TEMPLATE", 'http://cache.reverbnation.com/widgets/swf/{NUMBER}/pro_widget.swf?id=artist_' . WIDGET_ARTIST_ID . '&posted_by=&skin_id={SKIN}&font_color=' . WIDGET_FONT_COLOR . '&auto_play=' . WIDGET_AUTOPLAY . '&shuffle=' . WIDGET_SHUFFLE . '&show_map=' . WIDGET_MAP);
+
+define( "WIDGET_SRC_PLAYER", str_replace( array("{NUMBER}", "{SKIN}", '&show_map=' . WIDGET_MAP), array("40", "PWAS1008", ""), WIDGET_SRC_TEMPLATE) );
+define( "WIDGET_SRC_SCHEDULE", str_replace( array("{NUMBER}", "{SKIN}", '&auto_play=' . WIDGET_AUTOPLAY . '&shuffle=' . WIDGET_SHUFFLE), array("42", "PWSS3008", ""), WIDGET_SRC_TEMPLATE) );
+
+define("WIDGET_HTML_TEMPLATE", '<embed src="{SRC}" type="application/x-shockwave-flash" allowscriptaccess="always" allowNetworking="all" allowfullscreen="true" wmode="transparent" quality="best" width="100%" height="100%"></embed>');
+
+define("WIDGET_HTML_PLAYER", str_replace( "{SRC}", WIDGET_SRC_PLAYER, WIDGET_HTML_TEMPLATE));
+define("WIDGET_HTML_SCHEDULE", str_replace( "{SRC}", WIDGET_SRC_SCHEDULE, WIDGET_HTML_TEMPLATE));
 
 $aBios = array(
 					
@@ -140,6 +152,12 @@ $aMeta["music"] = "Learn more about " . NAME . "' albums and download some of th
 $aMeta["pictures"] = "See all of " . NAME . "' pictures streamed straight from their Facebook page.";
 $aMeta["tour"] = "Make sure you know when and where " . NAME . " will be playing next!";
 
+// Simply, the keywords... 
+
+// As a sidenote, I am not sure why this is the route I chose.  Truthfully, a string would be a little easier, seeing as how they're would be no logic involved with it other than displaying it.  I just like the way arrays look for lists and it does handle the commas, so whatever.
+
+$aKeywords = array(NAME, "band", "music", "jam", "memphis", "oxford", "ms", "mississippi", "memphis", "tn", "tennessee", "live", "perforamance", "concert", "tour schedule", "player", "info", "information", "elements", "movements");
+
 // These are the titles for the content boxes.
 
 $aTitles["404"] = "Not Good";
@@ -165,8 +183,12 @@ $sRequest = $_SERVER['REQUEST_URI'];
 
 $sCurrURL = "http://{$_SERVER['HTTP_HOST']}";
 
-if ( $sRequest != '/' && stripos($sRequest, "home") === false )
+if ( $sRequest != '/' )
 	$sCurrURL .= strtok( strtok( $_SERVER['REQUEST_URI'] , "?") , "&");
+else
+	$sCurrURL .= "/home";
+
+//print "sCurrURL: $sCurrURL";
 
 $oSmarty->setCaching(false);
 
