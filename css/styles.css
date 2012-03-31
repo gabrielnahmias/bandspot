@@ -109,7 +109,30 @@ div#archive-popout {
 		margin-bottom: 10px;
 		
 	}
+
+div#biography div.back {
 	
+	right: 5px;
+	
+	top: -25px;
+	
+}
+
+div#biography .body div.add,
+div#biography .body div.friends {
+	
+	bottom: 10px;
+    
+	display: none;
+	
+	float: none !important;
+	
+	position: absolute;
+    
+	right: 10px;
+	
+}
+
 div#biography div.nav,
 div#pictures div.nav {
 	
@@ -138,6 +161,18 @@ div#biography .solo {
 }
 
 div#biography .solo img.profile {
+	
+	border-radius: 90px;
+	
+	-moz-border-radius: 90px;
+	
+	-webkit-border-radius: 90px;
+	
+	-o-border-radius: 90px;
+	
+	-ms-border-radius: 90px;
+	
+	-khtml-border-radius: 90px;
 	
 	float: left;
 	
@@ -275,6 +310,14 @@ div#nav.bar a:hover {
 	
 }
 
+div#home div.back {
+	
+    right: 10px;
+    
+	top: 6px;
+	
+}
+
 div#home .inner > span.title {
 	
 	background-color: #F9F9F9;
@@ -316,6 +359,14 @@ div#page-wrapper {
 	padding: 10px 0;
 	
 	position: relative;
+	
+}
+
+div#pictures div.back {
+	
+	right: 10px;
+	
+	top: 11px;
 	
 }
 
@@ -409,6 +460,32 @@ div#schedule .inner {
 	height: 300px;
 	
 }
+
+div.add {
+	
+	background: url('../img/add.jpg') no-repeat;
+	
+	float: right;
+	
+	height: 24px;
+	
+	margin-left: 10px;
+	
+	width: 90px;
+	
+}
+	
+	div.add:active {
+		
+		background-position: 0 -24px;
+		
+	}
+	
+	div.add:hover {
+		
+		cursor: pointer;
+		
+	}
 
 div.album {
 	
@@ -507,6 +584,14 @@ div.album-info {
 	width: 100%;
 	
 }
+	
+	div.album-info .right {
+		
+		float: right;
+		
+		width: 506px;
+		
+	}
 
 div.album-title h3 {
 	
@@ -550,7 +635,7 @@ div.article {
 		
 	}
 	
-	div.article img {
+	div.article img.left {
 		
 		float: left;
 		
@@ -569,6 +654,38 @@ div.article {
 div.author {
 	
 	float: right;
+	
+}
+
+div.back {
+	
+	background: url("../img/back.png") no-repeat;
+	
+	display: none;
+	
+	height: 22px;
+	
+	position: absolute;
+	
+	width: 69px;
+	
+}
+	
+	div.back:active {
+		
+		background-position: 0 -44px;
+		
+	}
+	
+	div.back:hover {
+		
+		background-position: 0 -22px;
+		
+	}
+
+div.biography {
+	
+	padding: 0 3px 20px 0;
 	
 }
 
@@ -670,7 +787,7 @@ div.box-1 > .title {
 		
 		font-size: 10px;
 		
-		padding: 2px 5px 0 0;
+		padding: 2px 0 0;
 		
 	}
 	
@@ -703,6 +820,8 @@ div.box-1 .body {
 	margin-bottom: 10px;
 	
 	padding: 10px;
+	
+	position: relative;
 	
 	text-align: justify;
 	
@@ -756,6 +875,12 @@ div.buttons {
 	
 }
 
+	div.buttons > * {
+		
+		margin: 0 20px;
+		
+	}
+
 div.clear {
 	
 	clear: both;
@@ -774,9 +899,9 @@ div.cover {
 	
 }
 	
-	div.cover img {
+	div.cover > img {
 		
-		border: 2px solid #A31800;
+		border: 1px solid #333333;
 		
 		border-radius: 5px;
 		
@@ -794,9 +919,98 @@ div.cover {
 		
 	}
 
+div.description {
+	
+    background: url("../img/info.png") no-repeat 5px 5px #ffeec8;
+	
+	border-color: #ffae00 !important;
+	
+	font-size: 12px;
+	
+    font-style: italic;
+	
+	margin-bottom: 5px !important;
+	
+    padding: 6px 6px 6px 30px;
+	
+    width: 464px !important;
+	
+}
+	/*
+	div.description > .inner {
+		
+		background: #FFFFFF;
+		
+		border-radius: 10px;
+		
+		-khtml-border-radius: 10px;
+		
+		-ms-border-radius: 10px;
+		
+		-moz-border-radius: 10px;
+		
+		-o-border-radius: 10px;
+		
+		-webkit-border-radius: 10px;
+		
+		padding: 5px;
+		
+	}*/
+
+div.description,
+table.tracklist {
+	
+	border: 2px solid #2d426f;
+	
+	border-radius: 7px;
+			
+	-khtml-border-radius: 7px;
+	
+	-ms-border-radius: 7px;
+	
+	-moz-border-radius: 7px;
+	
+	-o-border-radius: 7px;
+	
+	-webkit-border-radius: 7px;
+	
+	display: inline-block;
+	
+	margin: 3px 0 0;
+	
+	vertical-align: top;
+	
+	width: 100%;
+	
+}
+
 div.dialog {
 	
 	display: none;
+	
+}
+
+div.friends {
+	
+	background: url('../img/friends.jpg') no-repeat;
+	
+	float: right;
+	
+	height: 24px;
+	
+	margin-left: 10px;
+	
+	width: 75px;
+	
+}
+
+div.gallery-container {
+
+	position: relative;
+	
+	overflow: auto;
+	
+	width: 592px;
 	
 }
 
@@ -811,7 +1025,7 @@ div.more {
 div.picture {
 	
 	border: none;
-		
+	
 	width: 128px;
 	
 }
@@ -821,6 +1035,35 @@ div.picture img {
 	border: 2px solid #CCCCCC;
 	
 }
+
+div.play,
+div.stop {
+	
+	height: 16px;
+	
+	margin-top: 1px;
+	
+	width: 16px;
+	
+}
+
+div.play {
+	
+	background: url("../img/play.png") no-repeat;
+	
+}
+	
+	div.play:active {
+		
+		background-position: 0 -32px !important;
+		
+	}
+	
+	div.play:hover {
+		
+		background-position: 0 -16px;
+		
+	}
 
 div.section {
 	
@@ -839,6 +1082,24 @@ div.section-title {
 	margin: 0 0 10px;
 	
 }
+
+div.stop {
+	
+	background: url("../img/stop.png") no-repeat;
+	
+}
+	
+	div.stop:active {
+		
+		background-position: 0 -32px !important;
+		
+	}
+	
+	div.stop:hover {
+		
+		background-position: 0 -16px;
+		
+	}
 
 div.table {
 	
@@ -868,130 +1129,6 @@ div.table {
 		padding-right: 20px;
 		
 	}
-
-div.track {
-	
-	padding: 2px;
-	
-}
-	
-	div.track:first-child {
-		
-		border-radius: 5px 5px 0 0;
-				
-		-khtml-border-radius: 5px 5px 0 0;
-		
-		-ms-border-radius: 5px 5px 0 0;
-		
-		-moz-border-radius: 5px 5px 0 0;
-		
-		-o-border-radius: 5px 5px 0 0;
-		
-		-webkit-border-radius: 5px 5px 0 0;
-		
-	}
-	
-	div.track:last-child {
-		
-		border-radius: 0 0 5px 5px;
-				
-		-khtml-border-radius: 0 0 5px 5px;
-		
-		-ms-border-radius: 0 0 5px 5px;
-		
-		-moz-border-radius: 0 0 5px 5px;
-		
-		-o-border-radius: 0 0 5px 5px;
-		
-		-webkit-border-radius: 0 0 5px 5px;
-		
-	}
-	
-	div.track:nth-child(odd) {
-		
-		background-color: #FF654A;
-		
-		color: #FFFFFF;
-		
-	}
-	
-	div.track:nth-child(even) {
-		
-		background-color: #FCDCD7;
-		
-	}
-	
-	div.track div.number {
-		
-		background-color: #FFFFFF;
-		
-		border: 1px solid #111111;
-		
-		border-radius: 20px;
-				
-		-khtml-border-radius: 20px;
-		
-		-ms-border-radius: 20px;
-		
-		-moz-border-radius: 20px;
-		
-		-o-border-radius: 20px;
-		
-		-webkit-border-radius: 20px;
-		
-		color: #111111;
-		
-		display: inline-block;
-		
-		font-size: 9px;
-		
-		height: 12px;
-		
-		margin-right: 10px;
-		
-		text-align: center;
-		
-		width: 12px;
-		
-	}
-
-div.tracklist {
-	
-	border: 2px solid #A31800;
-	
-	border-radius: 7px;
-			
-	-khtml-border-radius: 7px;
-	
-	-ms-border-radius: 7px;
-	
-	-moz-border-radius: 7px;
-	
-	-o-border-radius: 7px;
-	
-	-webkit-border-radius: 7px;
-	
-	display: inline-block;
-	
-	margin: 3px 0 0;
-	
-	vertical-align: top;
-	
-	width: 500px;
-	
-}
-	
-	div.tracklist a {
-		
-		color: #003287 !important;
-		
-	}
-	
-	div.tracklist a:hover {
-		
-		border-color: #003287 !important;
-		
-	}	
 
 div.ui-dialog {
 	
@@ -1135,6 +1272,209 @@ span.pagination {
 		
 	}
 
+table.tracklist {
+	
+	margin-bottom: 10px;
+	
+}
+	
+	table.tracklist a {
+		
+		color: #003287 !important;
+		
+	}
+	
+	table.tracklist a:hover {
+		
+		border-color: #003287 !important;
+		
+	}
+	
+/*	table.tracklist td,
+	*/table.tracklist th {
+		
+		padding-right: 10px;
+		
+	}
+	
+/*	table.tracklist td.downloads {
+		
+		width: 23% !important;
+		
+	}*/
+	
+	table.tracklist th.downloads {
+		
+		text-align:
+		
+	}
+	
+/*	table.tracklist td.title {
+		
+		width: 77% !important;
+		
+	}*/
+	
+	table.tracklist td:not(.title),
+	table.tracklist th:not(.title) {
+		
+		text-align: center;
+		
+	}
+
+td, th {
+	
+	padding: 4px 0;
+	
+}
+
+th {
+	
+	border: 1px solid #2d426f !important;
+	
+	border-width: 0 0 1px !important;
+	
+	font-weight: bold !important;
+	
+	padding-bottom: 2px !important;
+	
+	padding-top: 2px !important;
+	
+}
+
+th.track {
+	
+	padding-left: 6px;
+	
+}
+
+tr.track {
+	
+	padding: 2px;
+	
+}
+	
+	table.tracklist tr:first-child {
+		
+		background-color: #2D426F;
+		
+		border-radius: 5px 5px 0 0;
+		
+		-khtml-border-radius: 5px 5px 0 0;
+		
+		-ms-border-radius: 5px 5px 0 0;
+		
+		-moz-border-radius: 5px 5px 0 0;
+		
+		-o-border-radius: 5px 5px 0 0;
+		
+		-webkit-border-radius: 5px 5px 0 0;
+		
+		color: #FFFFFF;
+		
+	}
+	
+	/*table.tracklist tr:last-child {
+		
+		background: transparent !important;
+		
+	}
+	
+	table.tracklist tr:last-child td:first-child {
+		
+		border-radius: 0 0 0 5px;
+				
+		-khtml-border-radius: 0 0 0 5px;
+		
+		-ms-border-radius: 0 0 0 5px;
+		
+		-moz-border-radius: 0 0 0 5px;
+		
+		-o-border-radius: 0 0 0 5px;
+		
+		-webkit-border-radius: 0 0 0 5px;
+		
+	}
+	
+	table.tracklist tr:last-child td:last-child {
+		
+		border-radius: 0 0 5px 0;
+				
+		-khtml-border-radius: 0 0 5px 0;
+		
+		-ms-border-radius: 0 0 5px 0;
+		
+		-moz-border-radius: 0 0 5px 0;
+		
+		-o-border-radius: 0 0 5px 0;
+		
+		-webkit-border-radius: 0 0 5px 0;
+		
+	}
+	*/
+	
+	tr.track:nth-child(odd) {
+		
+		background-color: #96b2cd;
+		
+		color: #FFFFFF;
+		
+	}
+	
+	tr.track:nth-child(even) {
+		
+		background-color: #e8f0f8;
+		
+	}
+	
+	tr.track div.number {
+		
+		background-color: #FFFFFF;
+		
+		border: 1px solid #111111;
+		
+		border-radius: 20px;
+				
+		-khtml-border-radius: 20px;
+		
+		-ms-border-radius: 20px;
+		
+		-moz-border-radius: 20px;
+		
+		-o-border-radius: 20px;
+		
+		-webkit-border-radius: 20px;
+		
+		color: #111111;
+		
+		display: inline-block;
+		
+		font-size: 9px;
+		
+		height: 12px;
+		
+		margin: 0 10px 0 3px;
+		
+		text-align: center;
+		
+		width: 12px;
+		
+	}
+
+ul.gallery {
+
+	display: block;
+
+	width: 1500px;	
+
+	padding: 15px 0 0 15px;
+
+	margin: 0;
+
+	list-style: none;
+	
+}
+
 ul.pagination {
 	
 	padding-top: 5px;
@@ -1223,6 +1563,12 @@ ul.pagination {
 	
 }
 
+.fb-like {
+	
+	width: 45px;
+	
+}
+
 .fb-login-button {
 	
     float: left;
@@ -1239,7 +1585,6 @@ ul.pagination {
 		
 	}
 
-
 .fb-load {
 	
 	float: left;
@@ -1248,6 +1593,52 @@ ul.pagination {
 	
 	opacity: 0;
 	
+}
+
+.gallery li {
+
+	display: block;
+
+	float: left;	
+
+	padding: 0 4px;
+	
+}
+
+.gallery a {
+
+	display: block;
+
+	text-decoration: none;
+
+}
+
+.gallery span {
+
+	display: none;
+
+	margin-top: 3px;
+	
+	text-align: center;
+
+	font-size: 12px;	
+
+	color: #fff;
+
+}
+
+.gallery a:hover span {
+
+	display: block;
+
+}
+
+.gallery img {
+	
+    -webkit-border-radius: 3px;
+
+    -moz-border-radius: 3px;
+
 }
 
 .gray {
@@ -1279,6 +1670,30 @@ ul.pagination {
 .highslide-credits {
 	
 	display: none;
+	
+}
+
+.highslide-gallery {
+    
+	background: #E6E6E6;
+    
+	border: 3px solid #333333;
+    
+	border-radius: 5px;
+	
+	-moz-border-radius: 5px;
+	
+	-webkit-border-radius: 5px;
+	
+	-o-border-radius: 5px;
+	
+	-ms-border-radius: 5px;
+	
+	-khtml-border-radius: 5px;
+    
+	overflow: auto;
+    
+	padding: 10px;
 	
 }
 
@@ -1404,7 +1819,8 @@ ul.pagination {
 
 .twtr-widget a:hover {
 	
-	/* This is getting annoying... might wanna go with text-decoration: underline for hovers. */
+	/* This is getting annoying... might wanna go with text-decoration: underline for hovers...
+	   And I did. */
 	
 	border: none;
 	

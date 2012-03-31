@@ -1,5 +1,26 @@
 <?php
 
+function array_key_exists_r($needle, $haystack) {
+	
+	$result = array_key_exists($needle, $haystack);
+	
+	if ($result)
+		return $result;
+	
+	foreach ($haystack as $v) {
+		
+		if ( is_array($v) || is_object($v) )
+			$result = array_key_exists_r($needle, $v);
+	
+		if ($result)
+			return $result;
+		
+	}
+	
+	return $result;
+	
+}
+
 function box($sName) {
 	
 	global $aTitles, $oSmarty;
@@ -63,6 +84,30 @@ function tabs($intNumber) {
 		$sText .= "\t";
 		
 	return $sText;
+	
+}
+
+function urlPath() {
+	
+	if ( !isset($sSelf) )
+		$sSelf = $_SERVER['PHP_SELF'];
+	
+	$aFilename = explode("/", $sSelf);
+	
+	array_pop($aFilename);
+	
+	$aFilename = array_filter($aFilename);
+	
+	unset( $aFilename[ array_search("index.php", $aFilename) ] );
+	
+	$aFilename = array_values($aFilename);
+	
+	$sFilename2 = "";
+	
+	for( $i = 0; $i < ( count($aFilename) ); ++$i )
+		$sFilename2 .= $aFilename[$i]. '/';
+	
+	return $sFilename2;
 	
 }
 

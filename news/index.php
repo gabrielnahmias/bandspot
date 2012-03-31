@@ -242,7 +242,7 @@ if ($action=='addnews')
 
    $wrapper=ShowBBEditor('2','{FULLSTORY_EDITOR}','fullstory',$wrapper);
    $wrapper=str_replace('{INPUTTEXT}','',$wrapper);
-   $wrapper=str_replace('{FORM_ONSUBMIT}','OnNewsSubmit(1);OnNewsSubmit(2);',$wrapper);
+   $wrapper=str_replace('{FORM_ONSUBMIT}',"OnNewsSubmit(1);OnNewsSubmit(2);if ('$action' == 'addnews') { SocialPost(); return false; }",$wrapper);
    if ($script['editor']['wysiwyg']=='ON')
    {
     $wrapper=str_replace('{CHANGE_EDITOR}','<a href="#" onClick="window.open(\'index.php?a=cheditor&amp;e=wysiwyg\', \'\', \'HEIGHT=100,resizable=yes,scrollbars=no,WIDTH=100\');return false;" class="SpanClass1">[ $__l_activatewysiwyg ]</a>',$wrapper);
@@ -270,6 +270,15 @@ if ($action=='addnews')
   $wrapper=str_replace('{ACT_SECOND}',date("s",EncodeTime('')),$wrapper);
   $wrapper=str_replace('{CHECKED_ACTIVE}','checked',$wrapper);
   $wrapper=str_replace('{CHECKED_INACTIVE}','',$wrapper);
+  $wrapper=str_replace('{NEWS_ARCH}',$newsarch,$wrapper);
+  $wrapper=str_replace('{NEWS_ID}',$newsid,$wrapper);
+  
+  $sArch = date("mY", EncodeTime('') );
+  $sFile = "news/news-$sArch.php";
+  $sID = count( file($sFile) );
+  
+  $wrapper=str_replace('{VARS}',"newsarch=$sArch&newsid=$sID",$wrapper); // This is for the Facebook link.
+  
   $catlist=GetCatList();
   $catcode='';
   foreach ($catlist as $i=>$cat)
@@ -391,7 +400,7 @@ if ($action=='editnewsfrm')
    $wrapper=str_replace('{INPUTTEXT}',$article['short_story'],$wrapper);
    $wrapper=ShowBBEditor('2','{FULLSTORY_EDITOR}','fullstory',$wrapper);
    $wrapper=str_replace('{INPUTTEXT}',$article['full_story'],$wrapper);
-   $wrapper=str_replace('{FORM_ONSUBMIT}','OnNewsSubmit(1);OnNewsSubmit(2);',$wrapper);
+   $wrapper=str_replace('{FORM_ONSUBMIT}',"OnNewsSubmit(1);OnNewsSubmit(2);if ('$action' == 'addnews') { SocialPost(); return false; }",$wrapper);
    if ($script['editor']['wysiwyg']=='ON')
    {
     $wrapper=str_replace('{CHANGE_EDITOR}','<a href="#" onClick="window.open(\'index.php?a=cheditor&amp;e=wysiwyg\', \'\', \'HEIGHT=100,resizable=yes,scrollbars=no,WIDTH=100\');return false;" class="SpanClass1">[ $__l_activatewysiwyg ]</a>',$wrapper);

@@ -10,7 +10,7 @@ These are the preferred methods of contact for the purposes listed:
     
     <div class="row">
         
-        <div class="left">Webmaster:</div> <div class="right"><a href="mailto:gabriel@terrasoftlabs.com">gabriel@terrasoftlabs.com</a></div>
+        <div class="left">Webmaster:</div> <div class="right"><a href="mailto:gabriel@terrasoftlabs.com">gabriel@terrasoftlabs.com</a> {$smarty.const.TEXT_ADD_BUTTON}</div>
         
     </div>
     

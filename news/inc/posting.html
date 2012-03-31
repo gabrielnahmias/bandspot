@@ -1,4 +1,12 @@
-<link href="styles.css" rel="stylesheet" type="text/css">  <form action="{FORM_ACTION}" method="post" name="addnewsfrm">
+<link href="styles.css" rel="stylesheet" type="text/css" />
+<link href="//ajax.googleapis.com/ajax/libs/jqueryui/1/themes/redmond/jquery-ui.css" rel="stylesheet" type="text/css" />
+
+<script language="javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js" type="text/javascript"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js" type="text/javascript"></script>
+
+<div id="fb"></div>
+
+  <form action="{FORM_ACTION}" method="post" name="addnewsfrm">
   <input type="hidden" value="{NEWS_ID}" name="newsid">
   <input type="hidden" value="{NEWS_ARCH}" name="newsarch">
   <table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -41,9 +49,16 @@
     </tr>
     <tr> 
       <td rowspan="4" class="SpanClass1">$__l_fullstory</td>
-      <td><span id="hint"> 
+      <td>
+      	<div id="note" style="color: #AA0000; font: 12px Verdana, Geneva, sans-serif; margin: 10px 0;">
+        </div>
+        
+        <script language="javascript" type="text/javascript">if (sAction == "addnews") document.getElementById("note").innerHTML = "<strong>NOTE:</strong> the above text will be used for the post to your Facebook page.";</script>
+        
+        <span id="hint"> 
         <input name="hintbox2" type="text" class="HintBox" id="hintbox2" size="70">
-        </span></td>
+        </span>
+       </td>
     </tr>
     <tr> 
       <td height="25"><a href="#" class="SpanClass1" OnClick="javascript:window.open('index.php?a=imagemanager&targetform=addnewsfrm&targetinput=fullstory', '', 'HEIGHT=600,resizable=yes,scrollbars=yes,WIDTH=600');return false;">[$__l_uploadpic]</a></td>
@@ -83,9 +98,16 @@
 				<!--{END_POSTPONE_GR}//-->
               </div>
               <br>
-
+               <input id="vars" type="hidden" value="{VARS}" />
+               
                <input name="Act" type="submit" id="Act" value="$__l_postarticle" onClick="{FORM_ONSUBMIT}" class="mediumbtn">
-	
+                
+                <div class="fb-load">
+                    
+                    <img src="../img/fb-load.gif" />
+                    
+                </div>
+                
 	</td>
   </tr>
 </table>

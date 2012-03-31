@@ -1,3 +1,5 @@
+{* TODO: I need to make sure that all these changes look good on the iPhone, too.  Use dad's! *}
+
 {if isset($aAlbums)}
 	
     <div>
@@ -31,29 +33,33 @@
 	{/foreach}
 
 {elseif isset($aPics)}
-	
+    
     <div class="section-title">{$sAlbum}</div> <span class="gray italic">({count($aPics)} pictures)</span>
     
-        <div{if !$bI} class="highslide-gallery"{/if} id="gallery">
-        
-    {foreach $aPics as $aPic}
-        
-            <div class="picture">
+        <div{if !$bI} class="highslide-gallery gallery-container"{/if}>
             
-                <a href="{$aPic.src}" {if $bI}rel="gallery"{else}class="highslide" onclick='{if isset($aPic.caption)}objOpts["captionText"] = "{$aPic.caption}"; {/if}return hs.expand(this, objOpts)' {/if}title="{$aPic.caption}">
-                	
-                	<img src="{$aPic.thumb}" />
-                    
-                </a>
-                 
-            </div>
-        
-    {foreachelse}
-    	
-        No pics.
-        
-    {/foreach}
-	
+            <ul class="gallery">
+            
+            {foreach $aPics as $aPic}
+            	                
+                <li class="picture">
+                
+                    <a href="{$aPic.src}" {if $bI}rel="gallery"{else}class="highslide" onclick='{if isset($aPic.caption)}objOpts["captionText"] = "{$aPic.caption}"; {/if}return hs.expand(this, objOpts)' {/if}title="{$aPic.caption}">
+                        
+                        <img src="{$aPic.thumb}" />
+                        
+                    </a>
+                     
+                </li>
+                
+            {foreachelse}
+                
+                No pics.
+                
+            {/foreach}
+            
+            </ul>
+            
         </div>
         
     <div class="nav">

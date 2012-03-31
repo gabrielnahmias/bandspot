@@ -1,17 +1,8 @@
 <?php
 
-@require 'inc/facebook.php';
-
+require_once "inc/fb.php";
 require_once "inc/config.php";
 require_once "inc/functions.php";
-
-$facebook = new Facebook( array(
-	
-	'appId'  => ID_FB_APP,
-	'secret' => ID_FB_SEC,
-	'cookie' => true
-	
-) );
 
 isset( $_REQUEST['action'] ) ? $action = $_REQUEST['action'] : $action = "";
 	
@@ -29,7 +20,7 @@ if ( empty($action) ) {
 	 'callback'  => ''
 	);
 	
-	$fqlResult = $facebook->api($param);
+	$fqlResult = $oFB->api($param);
 	
 	foreach( $fqlResult as $keys => $values ) {
 		
@@ -41,7 +32,7 @@ if ( empty($action) ) {
 		 'callback'  => ''
 		);
 		
-		$fqlResult2 = $facebook->api($param2);
+		$fqlResult2 = $oFB->api($param2);
 		
 		foreach( $fqlResult2 as $keys2 => $values2)
 			$album_cover = $values2['src'];
@@ -93,7 +84,8 @@ if ($action == 'list_pics') {
 	
 	isset( $_GET['name'] ) ? $album_name = stripslashes( $_GET['name'] ) : $album_name = "";
 	
-	$fql = "SELECT pid, src, src_small, src_big, caption FROM photo WHERE aid = '" . $_REQUEST['aid'] ."'  ORDER BY created DESC";
+	$fql = "SELECT pid, link, src, src_small, src_big, caption FROM photo WHERE aid = '" . $_REQUEST['aid'] ."'  ORDER BY created DESC";
+	$fql2 = "SELECT link FROM album WHERE aid = '" . $_REQUEST['aid'] ."'";
 	
 	$param = array(
 	 'method'    => 'fql.query',
@@ -101,7 +93,18 @@ if ($action == 'list_pics') {
 	 'callback'  => ''
 	);
 	
-	$fqlResult = $facebook->api($param);
+	$param2 = array(
+	 'method'    => 'fql.query',
+	 'query'     => $fql2,
+	 'callback'  => ''
+	);
+	
+	$fqlResult = $oFB->api($param);
+	$fqlResult2 = $oFB->api($param2);
+	
+	$sFBURL = $fqlResult2[0]['link'];
+	
+//	$aPics['fb-href'] = $sFBURL;
 	
 	foreach ($fqlResult as $keys => $values) {
 		

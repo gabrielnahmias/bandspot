@@ -2,7 +2,8 @@ var $Body = $("#biography .inner");
 var $Load = $(".load");
 var $Main = $("#biography .main");
 var $Solo = $("#biography .solo");
-var $Title = $("#biography .title");
+var $Title = $("#biography .title")
+var $Add = $Solo.find("#friend-button");
 
 $("#biography img.band").click( function() {
     
@@ -12,6 +13,8 @@ $("#biography img.band").click( function() {
 		
 	} );
 	
+	var bFriends = false;
+	
     var sFirst = $(this).attr("title");
     
     var aInfo = oPHP.vars.bios[sFirst].split("|");
@@ -20,7 +23,9 @@ $("#biography img.band").click( function() {
     
     var sName = sFirst + " " + sLast;
     
-    var sBio = aInfo[1];
+    var sFBID = aInfo[1];
+	
+    var sBio = aInfo[2];
     
     var sImage = oPHP.const.DIR_BAND + "/profiles/" + sFirst.toLowerCase() + ".jpg";
     
@@ -28,13 +33,25 @@ $("#biography img.band").click( function() {
 		
 		$Main.hide();
 		
+		friendButton($Add, sFBID);
+		
 		$Solo.find("img.profile").one("load", function() {
+			
+			$(this).attr("title", $(this).attr("title").replace("<NAME>", possessive(sFirst) ) );
 			
 			$Solo.find("div.biography").html("<strong>" + sName + "</strong> - " + sBio);
 			
+			$Solo.find("img.profile").wrap('<a href="' + oPHP.const.FB_URL + '/profile.php?id=' + sFBID + '" target="_blank"></a>');
+			
 			$Solo.show(0, "", function() {
 				
-				$Body.slideDown(1000, "easeOutBounce");
+				$Body.slideDown(1000, "easeOutBounce", function() {
+					
+					$Solo.find("div.back").show("slide", { direction: "right" }, function() { } );
+					
+					$Add.slideDown();
+					
+				} );
 				
 				$Title.text(sName + "'s Biography");
 				
@@ -62,19 +79,25 @@ $("#biography a.back").click( function() {
 		
 	} );
 	
-    $Body.slideUp(100, "", function() {
+	$Solo.find("div.back").hide("slide", { direction: "right" }, function() { } );
+	
+	$Add.hide("slide", { direction: "right" }, function() {
 		
-		$Solo.hide();
-		
-		$Main.show(0, "", function() {
+		$Body.slideUp(100, "", function() {
 			
-			$Body.slideDown(1000, "easeOutBounce");
+			$Solo.hide();
 			
-			$Title.text( oPHP.vars.titles['biography'] );
-			
-			$Load.animate( {
+			$Main.show(0, "", function() {
 				
-				opacity: 0
+				$Body.slideDown(1000, "easeOutBounce");
+				
+				$Title.text( oPHP.vars.titles['biography'] );
+				
+				$Load.animate( {
+					
+					opacity: 0
+					
+				} );
 				
 			} );
 			

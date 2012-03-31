@@ -1,3 +1,11 @@
+/** 
+ * Name:    Highslide JS
+ * Version: 4.1.13 (2011-10-06)
+ * Config:  default -dragging +events +unobtrusive +imagemap +slideshow +positioning +transitions +viewport +thumbstrip +inline +ajax +iframe +flash
+ * Author:  Torstein HÃ¸nsi
+ * Support: www.highslide.com/support
+ * License: www.highslide.com/#license
+ */
 if (!hs) { var hs = {
 // Language strings
 lang : {
@@ -63,7 +71,6 @@ anchor : 'auto', // where the image expands from
 align : 'auto', // position in the client (overrides anchor)
 targetX: null, // the id of a target element
 targetY: null,
-dragByHeading: true,
 minWidth: 200,
 minHeight: 200,
 allowSizeReduction: true, // allow the image to reduce to fit client size. If false, this overrides minWidth and minHeight
@@ -150,7 +157,6 @@ overrides : [
 	'headingEval',
 	'headingOverlay',
 	'creditsPosition',
-	'dragByHeading',
 	'autoplay',
 	'numberPosition',
 	'transitions',
@@ -336,7 +342,6 @@ expand : function(a, params, custom, type) {
 				return false;
 			}
 		}
-		hs.hasHtmlExpanders = true;
 	}	
 	try {	
 		new hs.Expander(a, params, custom, type);
@@ -712,19 +717,7 @@ mouseClickHandler : function(e)
 		var match = el.className.match(/highslide-(image|move|resize)/);
 		if (match) {
 			hs.dragArgs = { 
-				exp: exp , 
-				type: match[1], 
-				left: exp.x.pos, 
-				width: exp.x.size, 
-				top: exp.y.pos, 
-				height: exp.y.size, 
-				clickX: e.clientX, 
-				clickY: e.clientY
-			};
-			
-			
-			//hs.addEventListener(document, 'mousemove', hs.dragHandler);
-			if (e.preventDefault) e.preventDefault(); // FF
+				exp: exp };
 			
 			if (/highslide-(image|html)-blur/.test(exp.content.className)) {
 				exp.focus();
@@ -734,68 +727,20 @@ mouseClickHandler : function(e)
 		}
 		else if (/highslide-html/.test(el.className) && hs.focusKey != exp.key) {
 			exp.focus();
-			exp.doShowHide('hidden');
 		}
 	} else if (e.type == 'mouseup') {
 		
-		hs.removeEventListener(document, 'mousemove', hs.dragHandler);
-		
 		if (hs.dragArgs) {
-			if (hs.styleRestoreCursor && hs.dragArgs.type == 'image') 
-				hs.dragArgs.exp.content.style.cursor = hs.styleRestoreCursor;
-			var hasDragged = hs.dragArgs.hasDragged;
 			
-			if (!hasDragged &&!hs.hasFocused && !/(move|resize)/.test(hs.dragArgs.type)) {
+			if (!hs.hasFocused && !/(move|resize)/.test(hs.dragArgs.type)) {
 				if (hs.fireEvent(exp, 'onImageClick'))
 				exp.close();
-			} 
-			else if (hasDragged || (!hasDragged && hs.hasHtmlExpanders)) {
-				hs.dragArgs.exp.doShowHide('hidden');
 			}
-			
-			if (hs.dragArgs.exp.releaseMask) 
-				hs.dragArgs.exp.releaseMask.style.display = 'none';
-			
-			if (hasDragged) hs.fireEvent(hs.dragArgs.exp, 'onDrop', hs.dragArgs);
 			hs.hasFocused = false;
 			hs.dragArgs = null;
 		
 		} else if (/highslide-image-blur/.test(el.className)) {
 			el.style.cursor = hs.styleRestoreCursor;		
-		}
-	}
-	return false;
-},
-
-dragHandler : function(e)
-{
-	if (!hs.dragArgs) return true;
-	if (!e) e = window.event;
-	var a = hs.dragArgs, exp = a.exp;
-	if (exp.iframe) {		
-		if (!exp.releaseMask) exp.releaseMask = hs.createElement('div', null, 
-			{ position: 'absolute', width: exp.x.size+'px', height: exp.y.size+'px', 
-				left: exp.x.cb+'px', top: exp.y.cb+'px', zIndex: 4,	background: (hs.ieLt9 ? 'white' : 'none'), 
-				opacity: 0.01 }, 
-			exp.wrapper, true);
-		if (exp.releaseMask.style.display == 'none')
-			exp.releaseMask.style.display = '';
-	}
-	
-	a.dX = e.clientX - a.clickX;
-	a.dY = e.clientY - a.clickY;	
-	
-	var distance = Math.sqrt(Math.pow(a.dX, 2) + Math.pow(a.dY, 2));
-	if (!a.hasDragged) a.hasDragged = (a.type != 'image' && distance > 0)
-		|| (distance > (hs.dragSensitivity || 5));
-	
-	if (a.hasDragged && e.clientX > 5 && e.clientY > 5) {
-		if (!hs.fireEvent(exp, 'onDrag', a)) return false;
-		
-		if (a.type == 'resize') exp.resize(a);
-		else {
-			exp.moveTo(a.left + a.dX, a.top + a.dY);
-			if (a.type == 'image') exp.content.style.cursor = 'move';
 		}
 	}
 	return false;
@@ -2111,7 +2056,6 @@ crossfade : function (up, to, from) {
 		wrapper = this.wrapper,
 		content = this.content,
 		overlayBox = this.overlayBox;
-	hs.removeEventListener(document, 'mousemove', hs.dragHandler);
 	
 	hs.setStyles(content, { 
 		width: (x.imgSize || x.size) +'px', 
@@ -2745,7 +2689,6 @@ getOverlays : function() {
 	this.getNumber();
 	if (this.caption) hs.fireEvent(this, 'onAfterGetCaption');
 	if (this.heading) hs.fireEvent(this, 'onAfterGetHeading');
-	if (this.heading && this.dragByHeading) this.heading.className += ' highslide-move';
 	if (hs.showCredits) this.writeCredits();
 	for (var i = 0; i < hs.overlays.length; i++) {
 		var o = hs.overlays[i], tId = o.thumbnailId, sg = o.slideshowGroup;

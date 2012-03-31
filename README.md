@@ -12,6 +12,7 @@ What does it do?
 * Allows **iPhone** users to have a similar experience to some of the Flash-based widgets through RSS parsing and mobile downloads (currently configured to read through a folder formatted in a specific way).
 * Minifies all scripts and stylesheets and appropriately sorts out the ones necessary for the certain platform (mobile or not).
 * Is very concurrent and includes a Facebook login feature that displays their avatar and name.
+* Reads the "msc" directory in a very specific format as an incredibly easy to set up discography generator complete with download links in a variety of formats and preview buttons.  Read the top of **music.php** to get better acquainted with the aforementioned setup.
 * Has default ability to be very extensible and fun to enhance.
 
 How to use it

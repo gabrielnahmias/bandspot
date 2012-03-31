@@ -61,13 +61,13 @@ if (empty($action))
       {
       foreach ($news as $j=>$article)
        {
-         $xout.=SkinNewsArticle($article,$newstpl,$xsection);
-         $num++;
-         if (IsAdPosition($num,'active')) $xout.=PrintAd($template,'active');
-         if ($num==$script['news']['show_first'])
-         {
-          break;
-         }
+		 $xout.=SkinNewsArticle($article,$newstpl,$xsection);
+		 $num++;
+		 if (IsAdPosition($num,'active')) $xout.=PrintAd($template,'active');
+		 if ($num==$script['news']['show_first'])
+		 {
+		  break;
+		 }
        }
       }
       if ($num==$script['news']['show_first'])
@@ -184,9 +184,15 @@ else if ($action=='fullnews')
   $newsid=$_GET['newsid'];
   $newsarch=$_GET['newsarch'];
   $article=FullNews($newsarch,$newsid,'');
-  $tpl=file_get_contents($script['paths']['file']."templates/$template/full-news-article.html");
-  $c=SkinFullNewsArticle($article,$tpl,$xsection);
-  $xout.=$c;
+  
+  if ( !isset($article['short_story'] ) )
+  	  print TEXT_NO_STORY;
+  else {
+	  $tpl=file_get_contents($script['paths']['file']."templates/$template/full-news-article.html");
+	  $c=SkinFullNewsArticle($article,$tpl,$xsection);
+	  $xout.=$c;
+  }
+  
 }
 
 if ($script['rss']['enabled']=="YES")

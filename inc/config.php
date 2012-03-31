@@ -1,10 +1,12 @@
 <?php
 
+require_once "functions.php";
+
 // I wish I could use const x = y; format but unfortunately const is unable
 // to have any kind of expression in it, it seems.
 
+define("DOMAIN", "http://" . "el.x10.mx");// $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] );
 define("NAME", "Elemovements");
-define("URL", "el.x10.mx");
 
 define("DATE_FMT", "F j<\s\u\p><\u>S</\u></\s\u\p>, Y \a\\t g:i A");
 
@@ -23,13 +25,18 @@ define("DIR_SLIDER", DIR_IMG . "/slider");
 
 define("FB_COMMENTS_NUM", 5);
 define("FB_COMMENTS_WIDTH", 619);
+define("FB_DOMAIN", "elemovements");
 define("FB_LIKE_FACES", "false");
 define("FB_LIKE_FONT", "arial");
-define("FB_LIKE_LAYOUT", "button_count");
+define("FB_LIKE_LAYOUT", "box_count");
 define("FB_LIKE_SEND", "false");
-define("FB_LIKE_WIDTH", 80);
+define("FB_LIKE_WIDTH", 35);
+define("FB_PERMS", "publish_actions, publish_stream, manage_pages, user_location, read_requests");
+define("FB_URL", "http://www.facebook.com/");
 
 define("FILE_SMARTY", "smarty/Smarty.class.php");
+
+define("GOOG_PLUS_SIZE", "tall");
 
 require_once(FILE_SMARTY);
 require_once("browser.php");
@@ -40,7 +47,7 @@ $oSmarty = new Smarty;
 // This part provides a link to show how to enable JavaScript for popular browsers.
 
 if ($oBr->Name == "Firefox")
-	$sJSGuideURL = "http://support.mozilla.org/en-US/kb/JavaScript";
+	$sJSGuideURL = "http://support.mozilla.org/en-US/kb/JavaScript#w_enabling-and-disabling-javascript";
 elseif ($oBr->Name == "Chrome")
 	$sJSGuideURL = "http://support.google.com/bin/answer.py?hl=en&answer=23852";
 elseif ($oBr->Name == "Safari")
@@ -50,14 +57,15 @@ elseif ($oBr->Name == "MSIE")
 else
 	$sJSGuideURL = NULL;
 
-define("ID_FB", 156848747719647);
+define("ID_FB", "156848747719647");
 define("ID_FB_ADMINS", "100000142903767,6512161,100003578410731");
-define("ID_FB_APP", 333026093402769);
+define("ID_FB_APP", "333026093402769");
 define("ID_FB_SEC", "cbd780cbf109fa395d2e96148f8937cc");
 
+define("TEXT_ADD_BUTTON", '<div class="add" id="friend-button" title="Add <NAME> as a Friend on Facebook"></div>');
 define("TEXT_ARCHIVE", "Click on the links to the right to load content.");
 define("TEXT_ARCHIVE_TITLE", 'News Archive <span class="links"><a class="latest" href="#" title="View the Latest News">Latest</a> · <a class="archive" href="archive" title="View the News Archive">Archive</a></span>');
-define("TEXT_BACK", "« Back");
+define("TEXT_BACK", "<div class='back'></div>");
 
 define("TEXT_BIO",
 
@@ -75,20 +83,21 @@ define("TEXT_BIO",
 // the links won't work.
 
 define("TEXT_DIVIDER", " - ");
-define("TEXT_MIN_F", "min/?f=" . ( ( $_SERVER['HTTP_HOST'] == "localhost" ) ? parse_url( $_SERVER['REQUEST_URI'] , PHP_URL_PATH) : "" ) );
+define("TEXT_MIN_F", DOMAIN . "/min/?f=");
 define("TEXT_NEWS_TITLE", 'Latest News <span class="links">Latest · <a class="archive" href="archive" title="View the News Archive">Archive</a>');
 define("TEXT_NO_DATES", 'There are no upcoming tour dates.');
 define("TEXT_NO_JS", '<noscript><h6>' . ( ($sJSGuideURL != NULL) ? '<a href="' . $sJSGuideURL . '" target="_blank" title="View a Guide for Your Browser on How to Enable JavaScript">' : '' ) .  'Turn on JavaScript' . ( ($sJSGuideURL != NULL) ? '</a>' : '' ) .  ' to enable this feature.</h6></noscript>');
 define("TEXT_NO_MUSIC", NAME . ' is currently in the process of mixing and finishing their debut studio release.  Until it\'s finished check out some rough cuts from their sessions on ');
 define("TEXT_NO_MUSIC_ADD_DESK", 'the player to the left');
 define("TEXT_NO_MUSIC_ADD_IPHONE", 'ReverbNation');
+define("TEXT_NO_STORY", "This story does not exist. You are being redirected home.<script>setTimeout(\"$('#nav a[href=home]').click()\", 3000)</script>");
 
-define("URL_FB", "http://www.facebook.com/elemovements");
+define("URL_FB", FB_URL . FB_DOMAIN);
 define("URL_MS", "http://www.myspace.com/elemovements");
 define("URL_NEWS", "news/news.php");
 define("URL_RN", "http://www.reverbnation.com/2083759");
 define("URL_TOUR_RSS", "http://www.reverbnation.com/rss/artist_shows_rss/elemovements");
-define("URL_TW", "http://twitter.com/#!/elemovements");
+define("URL_TW", "http://twitter.com/elemovements");
 define("URL_YT", "http://www.youtube.com/user/kbodonne");
 
 // I have to define this down here because URL_TOUR_RSS isn't defined before the TEXT_ definitions.
@@ -101,7 +110,7 @@ define("TEXT_TOUR_TITLE", 'Tour Schedule <span class="links"><a href="' . URL_TO
 define("TEXT_FB", '<span class="links"><a class="fblink" href="' . URL_FB . '?sk=photos" target="_blank" title="Visit this Page on Facebook">View on Facebook</a></span>');
 
 define("WIDGET_ARTIST_ID", 2083759);
-define("WIDGET_AUTOPLAY", "true");
+define("WIDGET_AUTOPLAY", "false");
 define("WIDGET_FONT_COLOR", "222222");
 define("WIDGET_MAP", "true");
 define("WIDGET_SHUFFLE", "false");
@@ -120,15 +129,15 @@ define("WIDGET_HTML_SCHEDULE", str_replace( "{SRC}", WIDGET_SRC_SCHEDULE, WIDGET
 
 $aBios = array(
 					
-					"Barrett" => "O'Donnell|After learning the basics of guitar at an early age from his father Kevin, a session player in the St. Louis area in the 70's and 80's, Barrett picked up the bass in college for the first time.  Playing with groups including Hot Tub Ricky (Tedo Stone), Slightly to the Middle, and Gonzo and the Clean Sneak, Barrett continues to advance his musical knowledge and collaborate with musicians.",
+					"Barrett" => "O'Donnell|6512161|After learning the basics of guitar at an early age from his father Kevin, a session player in the St. Louis area in the 70's and 80's, Barrett picked up the bass in college for the first time.  Playing with groups including Hot Tub Ricky (Tedo Stone), Slightly to the Middle, and Gonzo and the Clean Sneak, Barrett continues to advance his musical knowledge and collaborate with musicians.",
 					
-					"Fred" => "Dunlap III|Fred is the hardest working musician in North Mississippi.  Fred is currently completing his Masters Degree in Percussion Performance from the University of Mississippi. Fred plays with the Ole Miss Jazz Ensemble, African Drum Ensemble, Steel Drum Ensemble and Orchestra. Not to mention his performances with club groups including; Garry Burnside, Bill Perry Trio, Pitchecanfunkus Erectus, The Guruvs just to name a few.",
+					"Fred" => "Dunlap III|Kr8zyStix|Fred is the hardest working musician in North Mississippi.  Fred is currently completing his Masters Degree in Percussion Performance from the University of Mississippi. Fred plays with the Ole Miss Jazz Ensemble, African Drum Ensemble, Steel Drum Ensemble and Orchestra. Not to mention his performances with club groups including; Garry Burnside, Bill Perry Trio, Pitchecanfunkus Erectus, The Guruvs just to name a few.",
 					
-					"Jason" => "Ball|Jason's young music career has already taken him across the globe.  After helping found the electronic-rock group Zoogma in 2007, Jason enrolled in the Berkley College of Music in Boston.  There Jason collaborated with many artists including Kristen Ford and the experimental-jazz group Gigantic Ant.  Jason has since moved back to Oxford, MS with his wife and continues to study and teach music in the area.  He also plays with the Legit Jazz Quintet, and Casey Lipe.",
+					"Jason" => "Ball|jballmusic|Jason's young music career has already taken him across the globe.  After helping found the electronic-rock group Zoogma in 2007, Jason enrolled in the Berkley College of Music in Boston.  There Jason collaborated with many artists including Kristen Ford and the experimental-jazz group Gigantic Ant.  Jason has since moved back to Oxford, MS with his wife and continues to study and teach music in the area.  He also plays with the Legit Jazz Quintet, and Casey Lipe.",
 					
-					"Steven" => "McCain|Steve is a well versed musician in Mississippi.  Playing with a slew of musicians too numerous to name, Steve has crafted a sound and ear that meshes with any style. Steve, a slap bass master, has sat in with almost every group that plays in North Mississippi and continues to collaborate with musicians of all genres.",
+					"Steven" => "McCain|steven.mccain1|Steve is a well versed musician in Mississippi.  Playing with a slew of musicians too numerous to name, Steve has crafted a sound and ear that meshes with any style. Steve, a slap bass master, has sat in with almost every group that plays in North Mississippi and continues to collaborate with musicians of all genres.",
 					
-					"Thaddeus" => "O'Donnell|Thad’s encyclopedic knowledge of classic rock continues to impress his cohorts and audiences.  Thad’s first band, the short lived experimental-funk group, The Wave Function, allowed Thad to expand his skills at an early age: just 15. After playing with many different groups and a vast variety of styles, Thad continues to impress both young and old with a sound that incorporates styles of the rock of ages past with a vision of the new wave of music.",
+					"Thaddeus" => "O'Donnell|1045496003|Thad’s encyclopedic knowledge of classic rock continues to impress his cohorts and audiences.  Thad’s first band, the short lived experimental-funk group, The Wave Function, allowed Thad to expand his skills at an early age: just 15. After playing with many different groups and a vast variety of styles, Thad continues to impress both young and old with a sound that incorporates styles of the rock of ages past with a vision of the new wave of music.",
 					
 		 );
 
@@ -136,14 +145,16 @@ $aBios = array(
 
 $sCurrDir = basename( getcwd() );
 
-//if ( $sCurrDir == DIR_BASE )
+if ( $sCurrDir == DIR_BASE )
 	$aLinks = file(DIR_ETC . "/links.conf");
 
 $aMeta = array();
+$aOG = array();
 $aTitles = array();
 
 // Meta descriptions
 
+$aMeta["404"] = "Oh, no!  Something went wrong!";
 $aMeta["archive"] = "Archives of all of " . NAME . "' news.";
 $aMeta["biography"] = "Check out " . NAME . "' complete history and the members' individual biographies!";
 $aMeta["contact"] = "Get all the contact information for " . NAME . " so you can book them or get in touch.";
@@ -151,6 +162,60 @@ $aMeta["home"] = "Rooted in Funk-Jazz and Rock, the experimental nature of Elemo
 $aMeta["music"] = "Learn more about " . NAME . "' albums and download some of their tracks in a variety of formats.";
 $aMeta["pictures"] = "See all of " . NAME . "' pictures streamed straight from their Facebook page.";
 $aMeta["tour"] = "Make sure you know when and where " . NAME . " will be playing next!";
+
+// These is all related to the Open Graph.
+
+if ( isset( $_GET['xnewsaction'] ) && $_GET['xnewsaction'] == "fullnews" ) {
+	
+	$sArch = $_GET['newsarch'];
+	$sID = $_GET['newsid'];
+	$sFile = "news/news/news-$sArch.php";
+	
+	if ( file_exists($sFile) ) {
+		
+		$sDateFmt = "Y-m-d";
+		
+		$sLink = DOMAIN . "/news/" . substr($sArch, -4) . "/" . substr($sArch, 0, 2) . "/$sID/";
+		
+		$aLines = file($sFile);
+		
+		$aInfo = explode("|", $aLines[$sID] );
+		
+		$iTime = @$aInfo[2];
+		
+		$sTime = date($sDateFmt, $iTime);
+		$sMod = @date($sDateFmt, $aInfo[11] );
+		$sExp = date($sDateFmt, strtotime( date($sDateFmt, $iTime) . " +1 month" ) );
+		
+		$sAuthor = @ucwords( $aInfo[4] );
+		
+		$sAuthorLink = FB_URL . "/";
+		
+		if ($sAuthor == "Gabriel")
+			$sAuthorLink .= "profile.php?id=gnahmias";
+		else
+			$sAuthorLink = URL_FB;
+		
+		$sTitle = $aInfo[5];
+		
+		$aOG['published'] = $sTime;
+		$aOG['modified'] = $sMod;
+		$aOG['expires'] = $sExp;
+		$aOG['author'] = $sAuthorLink;
+		$aOG['description'] = "";		// I'm not sure the repercussions of this...
+		$aOG['title'] = $sTitle;
+		$aOG['type'] = "article";
+		$aOG['url'] = $sLink;
+		$aOG['picture'] = "news.png";
+		
+	}
+	
+} else {
+	
+	$aOG['type'] = "band";
+	$aOG['picture'] = "graphicon.png";
+	
+}
 
 // Simply, the keywords... 
 
@@ -176,19 +241,29 @@ $aTitles["tour"] = TEXT_TOUR_TITLE;
 $bI = ( isset( $_GET['d'] ) ) ? false : ($oBr->Platform == "iPhone"); // iPhone or not? Later on, add functionality for all mobile devices.
 $bWK = ( strpos($oBr->UserAgent, "WebKit") );	// Is the current browser based on WebKit?
 
-
 // Put the current URL in a variable.
 
 $sRequest = $_SERVER['REQUEST_URI'];
 
 $sCurrURL = "http://{$_SERVER['HTTP_HOST']}";
 
-if ( $sRequest != '/' )
-	$sCurrURL .= strtok( strtok( $_SERVER['REQUEST_URI'] , "?") , "&");
-else
-	$sCurrURL .= "/home";
+if ( $sRequest != '/' ) {
+	
+	$sCurrURL .= strtok( strtok($sRequest, "?") , "&");
+	
+} else {
+	
+	$sEnd = urlPath();
+	
+	$sCurrURL .= ( ( $sEnd[ strlen($sEnd) - 1 ] != "/" ) ? "$sEnd/" : $sEnd ) . "home";
+	
+}
 
-//print "sCurrURL: $sCurrURL";
+// TODO: Move all the variables I can from index.php here.
+
+$sPath = urlPath();
+
+$sJS = $sPath . DIR_JS . "/";
 
 $oSmarty->setCaching(false);
 

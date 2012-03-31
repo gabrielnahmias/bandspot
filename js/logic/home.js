@@ -1,4 +1,4 @@
-if (bI)
+if (oVars.bI)
 	resizeTitles();
 
 adminLinks();

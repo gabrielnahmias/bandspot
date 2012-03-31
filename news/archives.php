@@ -136,9 +136,15 @@ else if ($action=='fullnews')
   $newsarch=SafeFileRequest($newsarch);
   $newsid=SafeFileRequest($newsid);
   $article=FullNews($newsarch,$newsid,'');
-  $tpl=file_get_contents($script['paths']['file']."templates/$template/full-news-article.html");
-  $c=SkinFullNewsArticle($article,$tpl);
-  $xout.=$c;
+  
+  if ( !isset($article['short_story'] ) )
+  	  print TEXT_NO_STORY;
+  else {
+	  $tpl=file_get_contents($script['paths']['file']."templates/$template/full-news-article.html");
+	  $c=SkinFullNewsArticle($article,$tpl);
+	  $xout.=$c;
+  }
+  
 }
 
 else if ($action=='getcomments')

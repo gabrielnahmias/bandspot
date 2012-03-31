@@ -21,7 +21,7 @@ if ( !isset($pg) )
 	$pg = "home";
 
 $sFile = "$pg.php";
-$sJSFile = DIR_JS_LOGIC . "/$pg.js";
+$sJSFile = $sJS . "logic/$pg.js";
 $sTPLFile = DIR_TEMPLATES . "/$pg.tpl";
 
 if ( !file_exists($sFile) && !file_exists($sTPLFile) ) {
@@ -64,8 +64,8 @@ if (!$bNB):
 										
 										if ( file_exists($sTPLFile) )
 											$oSmarty->display($sTPLFile);
-											
-										if ( file_exists($sJSFile) )
+										
+										if ( file_exists( str_replace( urlPath() , "", $sJSFile ) ) )
 											print "<script language=\"javascript\" src=\"" . TEXT_MIN_F . "$sJSFile\" type=\"text/javascript\"></script>";
 										
 										if (!$bNB):

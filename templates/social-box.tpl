@@ -28,7 +28,7 @@ new TWTR.Widget({
     live: true,
     behavior: 'all'
   }
-}).render().setUser('{str_replace("http://twitter.com/#!/", "", $smarty.const.URL_TW)}').start();
+}).render().setUser('{str_replace("http://twitter.com/", "", $smarty.const.URL_TW)}').start();
 
 </script>
 
@@ -43,9 +43,24 @@ new TWTR.Widget({
 {if !$bI}
 <div class="buttons center">
 	
-    <div class="fb-like" data-href="{$sCurrURL}" data-layout="{$smarty.const.FB_LIKE_LAYOUT}" data-send="{$smarty.const.FB_LIKE_SEND}" data-width="{$smarty.const.FB_LIKE_WIDTH}" data-show-faces="{$smarty.const.FB_LIKE_FACES}" data-font="{$smarty.const.FB_LIKE_FONT}"></div>
+    <div class="fb-like" data-href="{$sCurrURL}" data-href="{$sCurrURL}" data-layout="{$smarty.const.FB_LIKE_LAYOUT}" data-send="{$smarty.const.FB_LIKE_SEND}" data-width="{$smarty.const.FB_LIKE_WIDTH}" data-show-faces="{$smarty.const.FB_LIKE_FACES}" data-font="{$smarty.const.FB_LIKE_FONT}"></div>
     
-	<g:plusone size="small"></g:plusone>
+	<div class="g-plusone" data-href="{$sCurrURL}" data-size="{$smarty.const.GOOG_PLUS_SIZE}"></div>
+    
+	<a href="https://twitter.com/share" class="twitter-share-button" data-url="https://dev.twitter.com/pages/tweet_button" data-via="your_screen_name" data-lang="en" data-related="anywhereTheJavascriptAPI" data-count="vertical">Tweet</a>
+    
+	<script>
+	!function(d, s, id) {
+		var js,
+		fjs = d.getElementsByTagName(s)[0];
+		if (!d.getElementById(id)) {
+			js = d.createElement(s);
+			js.id = id;
+			js.src = "//platform.twitter.com/widgets.js";
+			fjs.parentNode.insertBefore(js, fjs);
+		}
+	} (document, "script", "twitter-wjs");
+	</script>
     
 </div>
 {/if}

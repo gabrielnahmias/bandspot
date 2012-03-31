@@ -1,4 +1,4 @@
-.InstallInfo{
+InstallInfo{
  color: green;
  font-size: 12px;
  font-family: Verdana;
@@ -431,6 +431,15 @@ label {
 	font-weight: normal;
 	color: #333333;
 }
+.fb-load {
+	
+	display: inline;
+	
+	margin-left: 10px;
+	
+	opacity: 0;
+	
+}
 .footcell {
 	background-image: url(img/footcell.jpg);
 	background-repeat: repeat-x;
@@ -597,4 +606,24 @@ input[type=select].multiplesel,select.multiplesel
 	height: 100px;
 	width: 200px;
  
+}
+
+.bold {
+	
+	font-weight: bold;
+	
+}
+
+.cerulean {
+	
+	color: #3296FA;
+	
+}
+
+.ui-widget {
+
+	font-size: 12px !important;
+	
+	word-wrap: break-word;			/* This is here for Chrome.  It has scrollbars by default for the dialogs. */
+	
 }

@@ -10,11 +10,13 @@
 	display: none;
 }
 .highslide {
-	outline: none;
+	outline: 0 none;
 	text-decoration: none;
 }
 .highslide img {
-/*	border: 2px solid silver;*/
+    border: 3px solid silver;
+    height: 100px;
+    width: 100px;
 }
 .highslide:hover img {
 	border-color: gray;
@@ -33,7 +35,7 @@
 	border-color: white;
 }
 .highslide-wrapper, .highslide-outline {
-	background: white;
+	background: transparent;
 }
 .highslide-outline{
 	opacity: 0;
@@ -143,11 +145,11 @@ a.highslide-credits:hover i {
 	display: block;
 	position: relative;
 	float: left;
-	width: 106px;
+/*	width: 106px;
 	height: 106px;
 	border: 1px solid silver;
 	background: #ededed;
-	margin: 2px;
+*/	margin: 2px;
 	padding: 0;
 	line-height: 0;
 	overflow: hidden;

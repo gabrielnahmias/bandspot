@@ -1,28 +1,37 @@
-var $Archive = $("div#archive-popout");
+var oPHP = json("/inc/json.php");
 
-var oPHP = json("inc/json.php");
+if (!window.oVars)
+	window.oVars = {};
 
-var bGlown = false;
-var bI = ( navigator.platform.indexOf("iPhone") != -1 );
-var bIE = $.browser.msie;
-var bLoaded = false;
-var bFirstParse = true;
+// TODO: move all functions into a namespace as well! Should I put all jQuery references inside
+// an object, too...?
 
-// Make strCurrent come from PHP? oPHP.vars.sCurrent...?
-var strCurrent = ( ( extractPage() == "" ) ? "home" : extractPage() );
-var strPG = "pg";
-var strPrefix = "/?" + strPG + "=";
-
-var oNB = { nb: "true" };
-var oNHF = { nhf: "true" };
+window.oVars = {
+	
+	bGlown: false,
+	bI: ( navigator.platform.indexOf("iPhone") != -1 ),
+	bIE: $.browser.msie,
+	bLoaded: false,
+	bFirstParse: true,
+	
+	sArchive: "div#archive-popout",
+	sCurrent: ( ( extractPage() == "" ) ? "home" : extractPage() ),
+	sDomain: "http://" + window.location.host,
+	sPG: "pg",
+	sPrefix: function() { return "?" + this.sPG + "="; },
+	
+	oNB: { nb: "true" },
+	oNHF: { nhf: "true" }
+	
+};
 
 var oArchive = {
 	
 	bOpen: false,
 	
-	strClosed: "0px",
+	sClosed: "0px",
 	
-	strOpen: "-115px",
+	sOpen: "-115px",
 	
 	isOpen: function() {
 		
@@ -32,15 +41,15 @@ var oArchive = {
 	
 	toggle: function() {
 		
-		var strRight = $Archive.css("right");
+		var sRight = $(oVars.sArchive).css("right");
 		
-		$Archive.removeClass("sticky");
+		$(oVars.sArchive).removeClass("sticky");
 		
 		if (!this.bOpen) {
 			
-			$Archive.css("visibility", "visible").animate(
+			$(oVars.sArchive).css("visibility", "visible").animate(
 				
-				{ right: this.strOpen },
+				{ right: this.sOpen },
 				
 				500,
 				
@@ -48,10 +57,8 @@ var oArchive = {
 				
 				function() {
 					
-					// $("a.archive").css("cssText", "border-color: #66B0D4 !important; color: #66B0D4 !important;");
-					
-					$Archive.css("padding-left", "6px");
-					$Archive.css("z-index", 0);
+					$(oVars.sArchive).css("padding-left", "6px")
+									 .css("z-index", 0);
 					
 				}
 			
@@ -63,11 +70,9 @@ var oArchive = {
 			
 		} else {
 			
-			// $("a.archive").css("cssText", "");
-			
-			$Archive.css("visibility", "hidden").css("padding-left", "20px");
-			$Archive.css("right", this.strClosed);
-			$Archive.css("z-index", -1);
+			$(oVars.sArchive).css("visibility", "hidden").css("padding-left", "20px");
+			$(oVars.sArchive).css("right", this.sClosed);
+			$(oVars.sArchive).css("z-index", -1);
 			
 			this.bOpen = false;
 			
@@ -83,6 +88,7 @@ window.fbAsyncInit = function() {
 	FB.init( {
 		
 		appId      : oPHP.const.ID_FB_APP,
+		channelUrl : oPHP.const.DOMAIN + "/channel.php",
 		status     : true, 
 		cookie     : true,
 		xfbml      : true,
@@ -98,18 +104,32 @@ String.prototype.trim = function() {
 	
 }
 
-function addEvent(strType, func) {
+function addEvent(sType, func) {
 	
 	if (window.addEventListener)
-		window.addEventListener(strType, func, false); 
+		window.addEventListener(sType, func, false); 
 	else if (window.attachEvent)
-		window.attachEvent("on" + strType, func);
+		window.attachEvent("on" + sType, func);
 
+}
+
+function addFriend(sID) {
+	
+	FB.ui( {
+		
+		method: 'friends',
+		
+		id: sID
+		
+	} );
+	
 }
 
 function adminLinks() {
 	
-	if ( (strCurrent == "home" || strCurrent == "archive") && !$(".links .admin").length ) {
+	//(sCurrent == "home" || sCurrent == "archive")
+	
+	if ( $("#home").length && !$(".links .admin").length && typeof FB !== 'undefined' ) {
 		
 		var sID;
 		
@@ -125,13 +145,16 @@ function adminLinks() {
 				
 				// For some reason the beginning · doesn't get registered when encapsulated in a jQuery object... weird.
 				
-				$(".box-1 .title .links").append($Links);
+				// Make sure this thing doesn't get added twice like it has before. 
 				
-				if (!bGlown) {
+				if ( !$(".links .admin").length )
+					$(".box-1 .title .links").append($Links);
+				
+				if (!oVars.bGlown) {
 					
 					$Links.glow();
 					
-					bGlown = true;
+					oVars.bGlown = true;
 					
 				}
 				
@@ -140,13 +163,14 @@ function adminLinks() {
 		} );
 		
 	}
+	
 }
 
-function adjustClassHeight(strClass, intAdjust) {
+function adjustClassHeight(sClass, intAdjust) {
 	
 	if (intAdjust === undefined) intAdjust = 0;
 	
-	var tmp_list = document.getElementsByClassName(strClass);
+	var tmp_list = document.getElementsByClassName(sClass);
 	
 	if (tmp_list.length != 0) {
 		
@@ -168,12 +192,12 @@ function extractPage() {
 	
 	// return window.location.search.replace(/(.+)=(.+)&(.+)/, '$2');
 	
-	var strFirst = window.location.pathname.replace("/", "").split("&")[0];
+	var sFirst = window.location.pathname.replace("/", "").split("&")[0];
 	
-	if (strFirst == "index.php")
+	if (sFirst == "index.php")
 		return window.location.search.split("&")[0].replace("?pg=", "");
 	else
-		return strFirst;
+		return sFirst;
 		
 }
 
@@ -223,7 +247,7 @@ function fbInfo() {
 					
 				} ).attr("src", response);
 				
-				$El.css("width", "30px")
+				$El.css("width", "31px")
 				   .wrap('<a href="' + sURL + '" target="_blank"></a>');
 				
 				adminLinks();
@@ -296,19 +320,82 @@ function fbLoggedIn() {
 	
 }
 
-function getCookie(strName) {
+function friendButton($El, sID) {
 	
-	var i, strCName, y, arrCookies = document.cookie.split(";");
+	// TODO: make it so that it detects whether there is a friend request pending.
+	
+	var sName;
+	
+	FB.api(sID, function(response) {
+		
+		sName = response.first_name;
+		
+		if ( !friends(sID) )
+			
+			$El.attr("onclick", "addFriend('" + sID + "');")
+				.attr("title", $El.attr("title").replace("<NAME>", sName) )
+				.removeClass("friends")
+				.addClass("add");
+			
+		else
+			
+			$El.attr("onclick", "")
+				.attr("title", "You two are already Facebook friends!")
+				.removeClass("add")
+				.addClass("friends");
+		
+	} );
+		
+}
+
+function friends(sID) {
+	
+	var bFriends = false;
+	
+	$.ajax( {
+		
+		async: false,
+		
+		url: "https://graph.facebook.com/me/friends/" + sID,
+		
+		dataType: 'json',
+		
+		data: {
+			
+			access_token: FB.getAccessToken()
+			
+		},
+		
+		success: function(response) {
+			
+			if (response.data[0]) {
+				
+				if (response.data[0].name)
+					bFriends = true;
+				
+			}
+			
+		} 
+		
+	} );
+	
+	return bFriends;
+	
+}
+
+function getCookie(sName) {
+	
+	var i, sCName, y, arrCookies = document.cookie.split(";");
 	
 	for (i = 0; i < arrCookies.length; i++) {
 		
-		strCName = arrCookies[i].substr(0, arrCookies[i].indexOf("=") );
-		strValue = arrCookies[i].substr( arrCookies[i].indexOf("=") + 1 );
+		sCName = arrCookies[i].substr(0, arrCookies[i].indexOf("=") );
+		sValue = arrCookies[i].substr( arrCookies[i].indexOf("=") + 1 );
 		
-		strCName = strCName.replace(/^\s+|\s+$/g, "");
+		sCName = sCName.replace(/^\s+|\s+$/g, "");
 		
-		if (strCName == strName)
-			return unescape(strValue);
+		if (sCName == sName)
+			return unescape(sValue);
 			
 	}
 	
@@ -320,16 +407,16 @@ function getElemHeight(D) {
 	
 }
 
-function getURLVars(strVars) {
+function getURLVars(sVars) {
 	
 	var arrVars = {};
 	
 	var objVar;
 	
-	if (strVars == null)
-		objVar = window.location.href;
+	if (sVars == null)
+		objVar = window.location.search;
 	else
-		objVar = strVars;
+		objVar = sVars;
 	
 	var parts = objVar.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m, key, value) {
 		
@@ -367,27 +454,27 @@ function json(sURL) {
 
 };
 
-function loadContent(strURL, bPush, bReplace) {
+function loadContent(sURL, bPush, bReplace) {
 	
 	var $Box = $("#loaded");
 	
-	strCurrent = strURL.split("&")[0];
+	sCurrent = sURL.split("&")[0];
 	
 	// Closes any picture open in Colorbox.
 	
-	if (strCurrent != "pictures" && bI)
+	if (sCurrent != "pictures" && oVars.bI)
 		$.colorbox.close();
 	
-	if (!bIE) {
+	if (!oVars.bIE) {
 		
 		if (bPush) {
 			
-			var objState = { page: strCurrent };
+			var objState = { page: sCurrent };
 			
 			if (bReplace)
 				history.replaceState(objState, "", "");
 			else
-				history.pushState(objState, "", strURL);
+				history.pushState(objState, "", sURL);
 			
 		} else {}
 		
@@ -401,15 +488,15 @@ function loadContent(strURL, bPush, bReplace) {
 		
 		$.get(
 			
-			"index.php" + strPrefix + strURL,
+			"index.php" + oVars.sPrefix() + sURL,
 			
-			oNHF,
+			oVars.oNHF,
 			
-			function(strData) {
+			function(sData) {
 				
-				document.title = oPHP.const.NAME + oPHP.const.TEXT_DIVIDER + ucwords(strCurrent);
+				document.title = oPHP.const.NAME + oPHP.const.TEXT_DIVIDER + ucwords(sCurrent);
 				
-				$Box.html(strData).slideDown(1000, "easeOutBounce");
+				$Box.html(sData).slideDown(1000, "easeOutBounce");
 				
 			}
 			
@@ -417,20 +504,40 @@ function loadContent(strURL, bPush, bReplace) {
 		
 		// Reload the Facebook widgets for the current page.
 		
-		if (!bI) {
+		if (!oVars.bI) {
 			
 			var oComments = $(".fb-comments").get(0);
 			var oLike = $(".fb-like").get(0);
+			var oPlus = $("#___plusone_0");
 			
-			oComments.innerHTML = '<div class="fb-comments" data-href="http://' + window.location.host + '/' + strCurrent + '" data-num-posts="' + oPHP.const.FB_COMMENTS_NUM + '" data-width="' + oPHP.const.FB_COMMENTS_WIDTH + '"></div>';
-			oLike.innerHTML = '<div class="fb-like" data-href="http://' + window.location.host + '/' + (strCurrent == "home" ? "" : strCurrent ) + '" data-layout="' + oPHP.const.FB_LIKE_LAYOUT + '" data-send="' + oPHP.const.FB_LIKE_SEND + '" data-width="' + oPHP.const.FB_LIKE_WIDTH + '" data-show-faces="' + oPHP.const.FB_LIKE_FACES + '" data-font="' + oPHP.const.FB_LIKE_FONT + '"></div>';
+			var sURL = 'http://' + window.location.host + window.location.pathname; //(sCurrent == "home" ? "" : sCurrent );
+			
+			oComments.innerHTML = '<div class="fb-comments" data-href="' + sURL + '" data-num-posts="' + oPHP.const.FB_COMMENTS_NUM + '" data-width="' + oPHP.const.FB_COMMENTS_WIDTH + '"></div>';
+			oLike.innerHTML = '<div class="fb-like" data-href="' + sURL + '" data-layout="' + oPHP.const.FB_LIKE_LAYOUT + '" data-send="' + oPHP.const.FB_LIKE_SEND + '" data-width="' + oPHP.const.FB_LIKE_WIDTH + '" data-show-faces="' + oPHP.const.FB_LIKE_FACES + '" data-font="' + oPHP.const.FB_LIKE_FONT + '"></div>';
+			
+			oPlus.html('<div class="g-plusone" data-href="' + sURL + '" data-size="' + oPHP.const.GOOG_PLUS_SIZE + '"></div>');;
 			
 			FB.XFBML.parse(oComments);
 			FB.XFBML.parse(oLike);
 			
+			gapi.plusone.go();
+			
 		}
 		
 	}
+	
+}
+
+function possessive(sValue) {
+	
+	var sWord = sValue;
+	
+	if ( sWord.substr(-1) == 's' )
+		sWord += "'";
+	else
+		sWord += "'s";
+	
+	return sWord;
 	
 }
 
@@ -453,28 +560,28 @@ function scrollRight() {
 	
 	$Win = $(window);
 	
-	strLeft = $Win.width() + "px";
-	strTop = window.scrollY + "px"
+	sLeft = $Win.width() + "px";
+	sTop = window.scrollY + "px"
 	
 	$('html,body').stop().animate( {
 	
-		  scrollTop: strTop,
+		  scrollTop: sTop,
 		  
-		  scrollLeft: strLeft
+		  scrollLeft: sLeft
 	
 	} )
 	
 }
 
-function setCookie(strName, value, intDays) {
+function setCookie(sName, value, intDays) {
 	
 	var objDate = new Date();
 	
 	objDate.setDate( objDate.getDate() + intDays );
 	
-	var strValue = escape(value) + ( (intDays == null) ? "" : "; expires=" + objDate.toUTCString() );
+	var sValue = escape(value) + ( (intDays == null) ? "" : "; expires=" + objDate.toUTCsing() );
 	
-	document.cookie = strName + "=" + strValue;
+	document.cookie = sName + "=" + sValue;
 	
 }
 
@@ -501,7 +608,7 @@ function toggleBox(objElement, bInstant) {
 	
 	var $Image = $Master.find('.title img');
 	
-	var strID = $Master.attr("id");
+	var sID = $Master.attr("id");
 	
 	if ( $Body.is(":visible") ) {
 		
@@ -510,7 +617,7 @@ function toggleBox(objElement, bInstant) {
 		else
 			$Body.slideUp();
 		
-		setCookie(strID, "min", 1000);
+		setCookie(sID, "min", 1000);
 		
 		$Image.attr("src", "img/restore.png");
 		
@@ -521,7 +628,7 @@ function toggleBox(objElement, bInstant) {
 		else
 			$Body.slideDown();
 		
-		setCookie(strID, "max", 1000);
+		setCookie(sID, "max", 1000);
 		
 		$Image.attr("src", "img/minimize.png");
 		
@@ -529,9 +636,9 @@ function toggleBox(objElement, bInstant) {
 	
 }
 
-function track(strURL) {
+function track(sURL) {
 	
-	_gaq.push( ['_trackPageview', "/" + strURL] );
+	_gaq.push( ['_trackPageview', "/" + sURL] );
 	
 }
 
@@ -547,12 +654,28 @@ function ucwords(str) {
 
 ( function ($) {
 	
-	$.fn.glow = function (iTime) {
+	$.fn.glow = function (sColor, iTime, iRadius) {
 		
-		return this.each(function () {
+		if (!sColor)
+			var sColor = "FFFFFF";
+		
+		if (!iTime)
+			var iTime = 1000;
 			
-			jQuery(this).animate( {textShadow: "#ffffff 0 0 10px "} , ( (iTime) ? iTime : 1000 ) )
-		   				.animate( {textShadow: "#000000 0 0 0"} , 500 )
+		if (!iRadius)
+			var iRadius = 10;
+		
+		return this.each( function () {
+			
+			jQuery(this).animate( {
+							
+							textShadow: "#" + sColor + " 0 0 " + iRadius + "px"
+							
+						}, iTime).animate( {
+							
+							textShadow: "#000000 0 0 0"
+							
+						}, 500);
 			
 		} );
 		
@@ -566,7 +689,7 @@ function ucwords(str) {
 	
 	var sndYeah = new buzz.sound("etc/yeah.wav");
 	
-	if (!bI) {
+	if (!oVars.bI) {
 		
 		$( function() {
 			
@@ -613,6 +736,8 @@ function ucwords(str) {
 	
 	$(document).ready( function() {
 		
+		$Archive = $(oVars.sArchive);
+		
 		( function() {
 			
 			var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
@@ -628,32 +753,48 @@ function ucwords(str) {
 			var objState = event.state;
 			
 			if (objState && objState.page)
-				loadContent(objState.page, ( (!bLoaded) ? true : false ) );
+				loadContent(objState.page, ( (!oVars.bLoaded) ? true : false ) );
 			
-			if (!bLoaded)
-				bLoaded = true;
+			if (!oVars.bLoaded)
+				oVars.bLoaded = true;
 			
 		}
 		
-		if (bI)
+		if (oVars.bI)
 			window.scrollTo(0, 1);
+		
+		/*
 		
 		$.each( $("div.box-1"), function() {
 			
-			var strID = $(this).attr("id");
+			var sID = $(this).attr("id");
 			
-			if ( getCookie(strID) == "min" )
+			if ( getCookie(sID) == "min" )
 				toggleBox(this, true);
 			
 		} );
 		
-		if (!bI) {
+		*/
+		
+		if (!oVars.bI && oVars.sCurrent != "archive") {
 			
 			$Archive.waypoint( function(event, direction) {
 				
 				var bConditions = (direction === "down") && ( oArchive.isOpen() ) && ( $(window).width() >= 1110 );
 				
 				$(this).toggleClass("sticky", bConditions);
+				
+			} );
+			
+			// Considering the archive popout only works with the JavaScript site,
+			// I might as well load the appropriate page into it via the same method.
+			// This saves a lot of headaches caused by including it with PHP like
+			// if I use the same page twice they are both affected by the same
+			// variables.
+			
+			$.get("archive.php", function(data) {
+				
+				$Archive.html(data);
 				
 			} );
 			
@@ -691,9 +832,9 @@ function ucwords(str) {
 			
 		}
 		
-		if (!bI) {
+		if (!oVars.bI) {
 			
-			if ( !flux.browser.supportsTransitions && !getCookie("gotcha") )
+			if ( !flux.browser.supportsansitions && !getCookie("gotcha") )
 				$Warning.dialog("open");
 			
 		}
@@ -703,10 +844,11 @@ function ucwords(str) {
 			// Kind of a janky CSS fix.
 			
 			$(this).has("img").css("border", "none");
+			$(this).has("img").css("text-decoration", "none");
 		
 		} );
 		
-		if (!Modernizr.csstransitions) {
+		if (!Modernizr.cssansitions) {
 			
 			// Fall back to jQuery's animate() if CSS transitions are not supported.
 			
@@ -740,21 +882,21 @@ function ucwords(str) {
 			
 		$("#nav a").click( function(event) {
 			
-			var strHREF = $(this).attr("href");
-			var strPage = strHREF.replace(strPrefix, "");
+			var sHREF = $(this).attr("href");
+			var sPage = sHREF.replace( oVars.sPrefix() , "" );
 			
-			if (strCurrent != strPage) {
+			if (oVars.sCurrent != sPage) {
 				
 				// As long as we're not currently on the page we just clicked on...
 				
-				strCurrent = strPage;
+				oVars.sCurrent = sPage;
 				
 				if ( oArchive.isOpen() )
 					oArchive.toggle();
 				
-				loadContent(strHREF, true);
+				loadContent(sHREF, true);
 				
-				track(strPage);
+				track(sPage);
 				
 			}
 			
@@ -782,11 +924,13 @@ function ucwords(str) {
 			
         } );
 		
+		loadContent(oVars.sCurrent, true, true);
+		
 	} );
 	
 }() );
 
-if (!bI) {
+if (!oVars.bI) {
 	
 	var objOpts = {
 		
@@ -820,7 +964,7 @@ if (!bI) {
 			offsetY: -60
 		},
 		
-		thumbstrip: {
+		thumbsip: {
 			position: 'bottom center',
 			mode: 'horizontal',
 			relativeTo: 'viewport'
@@ -828,10 +972,13 @@ if (!bI) {
 		
 	} );
 	
-	//hs.captionEval = 'this.a.title';
+	hs.captionEval = 'this.a.title';
+	hs.align = 'center';
 	hs.maxHeight = $(window).height() - 300;
 	hs.showCredits = false;
 	hs.transitions = ['expand', 'crossfade'];
+	
+	/*
 	
 	hs.extend(hs.Expander.prototype, {
 			
@@ -841,13 +988,12 @@ if (!bI) {
 	
 			if (!on) hs.getPageSize(); // recalculate scroll positions
 			
-			
 			hs.setStyles (this.wrapper, {
 				position: on ? 'fixed' : 'absolute',
 				zoom: 1, // IE7 hasLayout bug,
 				left: (parseInt(stl.left) + sign * hs.page.scrollLeft) +'px',
 				top: (parseInt(stl.top) + sign * hs.page.scrollTop) +'px'
-			});
+			} );
 	
 			if (this.outline) {
 				stl = this.outline.table.style;
@@ -856,10 +1002,12 @@ if (!bI) {
 					zoom: 1, // IE7 hasLayout bug,
 					left: (parseInt(stl.left) + sign * hs.page.scrollLeft) +'px',
 					top: (parseInt(stl.top) + sign * hs.page.scrollTop) +'px'
-				});
+				} );
 	
 			}
+			
 			this.fixed = on; // flag for use on dragging
+			
 		},
 		
 		onAfterExpand: function() {
@@ -870,6 +1018,6 @@ if (!bI) {
 			this.fix(false); // unfix to get the animation right
 		}
 		
-	} );
+	} );*/
 
 }

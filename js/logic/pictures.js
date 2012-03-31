@@ -9,9 +9,35 @@ var oCBOpts = {
 	
 }
 
+$( function() {
+	
+	var div = $('div.gallery-container'),
+		ul = $('ul.gallery'),
+		ulPadding = 15;
+	
+	var divWidth = div.width();
+	
+	div.css({overflow: 'hidden'});
+	
+	var lastLi = ul.find('li:last-child');
+	
+	div.mousemove(function(e){
+		//As images are loaded ul width increases,
+		//so we recalculate it each time
+		var ulWidth = lastLi[0].offsetLeft + lastLi.outerWidth() + ulPadding;	
+		var left = (e.pageX - div.offset().left) * (ulWidth-divWidth) / divWidth;
+		div.scrollLeft(left);
+	} );
+	
+} );
+
 // The next bit is for making the non-JavaScript site work with pictures.  This adds
 // a switch for the JS-enabled one to exclude the header and container for the loaded
 // content.
+
+// TODO: I need to consolidate all the various "nb" and "nhf" methods I use.  I'm thinking just adding
+// it in with the href, etc. is the best idea.  Should I use JavaScript to attach the switch to the
+// end of links I need them to be or is that too much work?
 
 $(".album-container a").each(function() {
 	
@@ -21,7 +47,7 @@ $(".album-container a").each(function() {
    
 } );
 
-if (bI) {
+if (oVars.bI) {
 	
 	$("#gallery a").colorbox(oCBOpts);
 	
@@ -50,6 +76,44 @@ if (bI) {
 	
 	} );
 	
+} else {
+	
+	$(window).resize( function() {
+	
+		hs.maxHeight = $(window).height() - 300;
+		
+		if ( hs.getExpander() != null ) {
+			
+			// If there is a Highslide window open...
+			
+			/*
+			
+			$Image = $(".highslide-image");
+			
+			$Image.css( {
+				
+				"position": "fixed",	// set this outside of the resize?
+				
+				"top": ( $(window).height() - ( $Image.height() / 2 ) ) + "px"
+				
+			} );
+			
+			if ( $Image.width() >= $(window).width() ) {
+				
+				$Image.width( $(window).width() - 20 );
+				
+			} else if ( $Image.height() >= $(window).height() ) {
+				
+				$Image.width( $(window).height() - 20 );
+				
+			}
+			
+			*/
+			
+		}
+		
+	} );
+	
 }
 
 $("#pictures .album-container a").click( function(event) {
@@ -68,9 +132,13 @@ $("#pictures .album-container a").click( function(event) {
 		
 		function(strData) {
 			
-			$Body.html(strData).slideDown(1000, "easeOutBounce");
+			$Body.html(strData).slideDown(1000, "easeOutBounce", function() {
+				
+				$(this).find("div.back").show("slide", { direction: "right" }, function() { } );
+				
+			} );
 			
-			$Title.html( oPHP.vars.titles[strCurrent].replace(" ", oPHP.const.TEXT_DIVIDER + strName + ' ') );
+			$Title.html( oPHP.vars.titles[oVars.sCurrent].replace(" ", oPHP.const.TEXT_DIVIDER + strName + ' ') );
 			
 			$("a.fblink").attr("href", strFBLink).glow();
 			
@@ -92,25 +160,29 @@ $("#pictures a.back").click( function(event) {
 	
 	var strURL = $(this).attr("href");
 	
-	$Body.slideUp(100);
-	
-	$.get(
+	$Body.find("div.back").hide("slide", { direction: "right" }, function() {
 		
-		strURL,
+		$Body.slideUp(100);
 		
-		{ nb: true },
+		$.get(
+			
+			strURL,
+			
+			{ nb: true },
+			
+			function(strData) {
+				
+				$Title.html( oPHP.vars.titles[oVars.sCurrent] );
+				
+				$Body.html(strData).slideDown(1000, "easeOutBounce");
+				
+				$("a.fblink").glow();
+				
+			}
+			
+		);
 		
-		function(strData) {
-			
-			$Title.html( oPHP.vars.titles[strCurrent] );
-			
-			$Body.html(strData).slideDown(1000, "easeOutBounce");
-			
-			$("a.fblink").glow();
-			
-		}
-		
-	);
+	} );
 	
 	track(strURL);
 	

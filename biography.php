@@ -27,7 +27,8 @@ foreach ($aBios as $sFirst => $sValue) {
 	$aInfo = explode("|", $sValue);
 	
 	$sLast = $aInfo[0];
-	$sBio = $aInfo[1];
+	$sFBID = $aInfo[1];
+	$sBio = $aInfo[2];
 	
 	$sName = "$sFirst $sLast";
 	

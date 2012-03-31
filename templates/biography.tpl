@@ -1,6 +1,8 @@
 <div class="solo">
     
-    <img class="profile" src="" />
+    <img class="profile" src="" title="Check out <NAME> Facebook page!" />
+    
+    {$smarty.const.TEXT_ADD_BUTTON}
     
     <div class="biography"></div>
     

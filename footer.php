@@ -28,9 +28,7 @@
         </div>
         
 	</div>
-
+    
 </body>
-
-<script language="javascript" src="<?=TEXT_MIN_F . DIR_JS_LOGIC . "/footer.js"?>" type="text/javascript"></script>
 
 </html>
