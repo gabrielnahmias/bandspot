@@ -1,6 +1,6 @@
                                 
     
-                            </div><?php box( (!$bI) ? "comments" : "social" ) ?>
+                            </div><?php box( (!$bI) ? ( ($pg != "404") ? "comments" : "" ) : "social" ) ?>
                             
                             
                         </div>
@@ -12,6 +12,8 @@
                 </div>
                 
             </div>
+                                         
+										 
                 
             <div class="clear"></div>
             

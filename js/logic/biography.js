@@ -3,7 +3,7 @@ var $Load = $(".load");
 var $Main = $("#biography .main");
 var $Solo = $("#biography .solo");
 var $Title = $("#biography .title")
-var $Add = $Solo.find("#friend-button");
+var $Add = $Solo.find(oPHP.const.TEXT_FRIEND);
 
 $("#biography img.band").click( function() {
     
@@ -33,7 +33,7 @@ $("#biography img.band").click( function() {
 		
 		$Main.hide();
 		
-		friendButton($Add, sFBID);
+		friendButton($Add.selector, sFBID);
 		
 		$Solo.find("img.profile").one("load", function() {
 			
@@ -45,7 +45,7 @@ $("#biography img.band").click( function() {
 			
 			$Solo.show(0, "", function() {
 				
-				$Body.slideDown(1000, "easeOutBounce", function() {
+				$Body.slideDown(oVars.iSpeed, "easeOutBounce", function() {
 					
 					$Solo.find("div.back").show("slide", { direction: "right" }, function() { } );
 					
@@ -89,7 +89,7 @@ $("#biography a.back").click( function() {
 			
 			$Main.show(0, "", function() {
 				
-				$Body.slideDown(1000, "easeOutBounce");
+				$Body.slideDown(oVars.iSpeed, "easeOutBounce");
 				
 				$Title.text( oPHP.vars.titles['biography'] );
 				

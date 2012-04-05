@@ -145,7 +145,7 @@ abstract class BaseFacebook
   public static $DOMAIN_MAP = array(
     'api'       => 'https://api.facebook.com/',
     'api_video' => 'https://api-video.facebook.com/',
-    'api_read'  => 'https://api.facebook.com/',
+    'api_read'  => 'https://api-read.facebook.com/',
     'graph'     => 'https://graph.facebook.com/',
     'www'       => 'https://www.facebook.com/',
   );
@@ -719,14 +719,20 @@ abstract class BaseFacebook
    * @return String the response text
    */
   protected function makeRequest($url, $params, $ch=null) {
-    if ( function_exists( 'curl_init' ) AND function_exists("curl_exec") AND function_exists('curl_setopt_array') )
+    if ( function_exists( 'curl_init' ) && function_exists("curl_exec") && function_exists('curl_setopt_array') )
 	{
 		// I don't want to use cURL; it's too unreliable.
 	    if (!$ch) {
 	      $ch = curl_init();
 	    }
-	
-	    $opts = self::$CURL_OPTS;
+		
+		// NOTE:
+		// I had to exact the following solution so that on the site I wrote this for, elemovements.com,
+		// the pictures page would work.  For some reason, on my local server, I had no issue with that
+		// most of the time.  Another strange mystery I will hopefully someday understand...
+		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+	    
+		$opts = self::$CURL_OPTS;
 	    if ($this->useFileUploadSupport()) {
 	      $opts[CURLOPT_POSTFIELDS] = $params;
 	    } else {
@@ -750,6 +756,8 @@ abstract class BaseFacebook
 	    if (curl_errno($ch) == 60) { // CURLE_SSL_CACERT
 	      self::errorLog('Invalid or no certificate authority found, '.
 	                     'using bundled information');
+	      curl_setopt($ch, CURLOPT_CAINFO,
+	                  dirname(__FILE__) . '/fb_ca_chain_bundle.crt');
 	      curl_setopt($ch, CURLOPT_CAINFO,
 	                  dirname(__FILE__) . '/fb_ca_chain_bundle.crt');
 	      $result = curl_exec($ch);

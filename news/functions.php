@@ -2520,7 +2520,9 @@ function GenerateNewsPaginationLinks2($archive,$num,$newsperpage,$range)
     $result.='<span>'.$c.' - '.$c2.'</span>';
    }else
    {
-    $result.='<span><a href="'.$_SERVER['SCRIPT_NAME'].'?xnewsaction=getnews&amp;newsarch='.$archive.'&amp;xnewsrange='.$c.'-'.$c2.'">'.$c.' - '.$c2.'</a></span>';
+	$sMonth = substr($archive, 0, 2);
+	$sYear = substr($archive, -4);
+    $result.='<span><a href="news/rng/' . $sYear . '/' . $sMonth . '/'.$c.'-'.$c2.'">'.$c.' - '.$c2.'</a></span>';//.$_SERVER['SCRIPT_NAME'].'?xnewsaction=getnews&amp;newsarch='.$archive.'&amp;xnewsrange='.$c.'-'.$c2.'">'.$c.' - '.$c2.'</a></span>';
    }
    $c=$c2+1;
   }

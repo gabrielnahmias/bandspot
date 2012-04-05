@@ -210,9 +210,3 @@ OutputWrapper($xout,1);
 unset($content,$wrapper,$action,$xout);
 
 ?>
-                       
-<script language="javascript" type="text/javascript">
-
-$("span.pagination").remove();
-
-</script>

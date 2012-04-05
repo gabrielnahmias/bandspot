@@ -2,10 +2,60 @@
 
 require_once "functions.php";
 
-// I wish I could use const x = y; format but unfortunately const is unable
-// to have any kind of expression in it, it seems.
+function urlPath($bSlashes = false, $sURL = "") {
+    
+	// Make it so bSlashes is an array of booleans for left and right?
+	
+	if ( empty($sURL) )
+	        $sURL = $_SERVER['PHP_SELF'];
+    
+    $sURL = str_replace("index.php", "", $sURL);
+    $sURL = str_replace("archive.php", "", $sURL);
+    $sURL = str_replace( "http://" . $_SERVER['HTTP_HOST'] , "", $sURL);
+	
+	$sTrim = trim($sURL, "/");
+	
+	if ( empty($sTrim) )
+		return "";
+	
+	$sTrim = ltrim($sURL, "/");
+    
+	$sPath = substr($sTrim, 0, strrpos($sTrim, "/") );
+    
+    if ($bSlashes)
+        $sPath = "/$sPath/";
+    
+    return $sPath;
+	
+	/*
+	if ( !isset($sSelf) )
+		$sSelf = $_SERVER['PHP_SELF'];
+	
+	$aFilename = explode("/", $sSelf);
+	
+	array_pop($aFilename);
+	
+	$aFilename = array_filter($aFilename);
+	
+	unset( $aFilename[ array_search("index.php", $aFilename) ] );
+	
+	$aFilename = array_values($aFilename);
+	
+	$sFilename2 = "";
+	
+	for( $i = 0; $i < ( count($aFilename) ); ++$i )
+		$sFilename2 .= $aFilename[$i]. '/';
+	
+	return $sFilename2;
+	*/
+	
+}
 
-define("DOMAIN", "http://" . "el.x10.mx");// $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] );
+if ( localhost() )
+	define("DOMAIN", "http://localhost" . urlPath() );
+else
+	define("DOMAIN", "http://el.x10.mx/");
+
 define("NAME", "Elemovements");
 
 define("DATE_FMT", "F j<\s\u\p><\u>S</\u></\s\u\p>, Y \a\\t g:i A");
@@ -15,6 +65,7 @@ define("DIR_ETC", "etc");
 define("DIR_IMG", "img");
 define("DIR_JS", "js");
 define("DIR_JS_LOGIC", DIR_JS . "/logic");
+define("DIR_NEWS", "news");
 define("DIR_TEMPLATES", "templates");
 
 // Other image directories
@@ -32,6 +83,7 @@ define("FB_LIKE_LAYOUT", "box_count");
 define("FB_LIKE_SEND", "false");
 define("FB_LIKE_WIDTH", 35);
 define("FB_PERMS", "publish_actions, publish_stream, manage_pages, user_location, read_requests");
+define("FB_UID", "gnahmias");
 define("FB_URL", "http://www.facebook.com/");
 
 define("FILE_SMARTY", "smarty/Smarty.class.php");
@@ -62,10 +114,12 @@ define("ID_FB_ADMINS", "100000142903767,6512161,100003578410731");
 define("ID_FB_APP", "333026093402769");
 define("ID_FB_SEC", "cbd780cbf109fa395d2e96148f8937cc");
 
-define("TEXT_ADD_BUTTON", '<div class="add" id="friend-button" title="Add <NAME> as a Friend on Facebook"></div>');
-define("TEXT_ARCHIVE", "Click on the links to the right to load content.");
+// Consider not having an ID on this as a page may eventually contain more than one.
+
+define("TEXT_ADD_BUTTON", '<div class="add" id="friend-button" title=""></div>');
 define("TEXT_ARCHIVE_TITLE", 'News Archive <span class="links"><a class="latest" href="#" title="View the Latest News">Latest</a> · <a class="archive" href="archive" title="View the News Archive">Archive</a></span>');
-define("TEXT_BACK", "<div class='back'></div>");
+define("TEXT_ARCHIVE", trim( strtok(TEXT_ARCHIVE_TITLE, "<") ) );
+define("TEXT_BACK", "<div class='back' title='Go Back'></div>");
 
 define("TEXT_BIO",
 
@@ -83,30 +137,44 @@ define("TEXT_BIO",
 // the links won't work.
 
 define("TEXT_DIVIDER", " - ");
-define("TEXT_MIN_F", DOMAIN . "/min/?f=");
+define("TEXT_EMAIL", "E-mail this Address");
+define("TEXT_FRIEND", "#friend-button");
+
+// I know this next definition is fugly as hell but it just had to be done for my purposes.
+
+define("TEXT_MIN_F", "min/?f=");
+
 define("TEXT_NEWS_TITLE", 'Latest News <span class="links">Latest · <a class="archive" href="archive" title="View the News Archive">Archive</a>');
+define("TEXT_NEWS", trim( strtok(TEXT_NEWS_TITLE, "<") ) );
 define("TEXT_NO_DATES", 'There are no upcoming tour dates.');
-define("TEXT_NO_JS", '<noscript><h6>' . ( ($sJSGuideURL != NULL) ? '<a href="' . $sJSGuideURL . '" target="_blank" title="View a Guide for Your Browser on How to Enable JavaScript">' : '' ) .  'Turn on JavaScript' . ( ($sJSGuideURL != NULL) ? '</a>' : '' ) .  ' to enable this feature.</h6></noscript>');
+define("TEXT_NO_JS", '<noscript><h6>' . ( ($sJSGuideURL != NULL) ? '<a href="' . $sJSGuideURL . '" target="_blank" title="Read How to Enable JavaScript in ' . $oBr->Name . '">' : '' ) .  'Turn on JavaScript' . ( ($sJSGuideURL != NULL) ? '</a>' : '' ) .  ' to enable this feature.</h6></noscript>');
 define("TEXT_NO_MUSIC", NAME . ' is currently in the process of mixing and finishing their debut studio release.  Until it\'s finished check out some rough cuts from their sessions on ');
 define("TEXT_NO_MUSIC_ADD_DESK", 'the player to the left');
 define("TEXT_NO_MUSIC_ADD_IPHONE", 'ReverbNation');
 define("TEXT_NO_STORY", "This story does not exist. You are being redirected home.<script>setTimeout(\"$('#nav a[href=home]').click()\", 3000)</script>");
+define("TEXT_PICS_PROB", '<div title="Problem With Pictures Page">We are sorry.  Currently, the pictures section is experiencing some issues.  Please be patient while we resolve these.  Thank you.</div>');
+define("TEXT_READ", "Read the full article on the official " . NAME . " website.");
 
+define("TWTR_DOMAIN", NAME);
+define("TWTR_HASH", NAME . "Rules");;
+define("TWTR_URL", "http://www.twitter.com/");
+define("TWTR_RELATED", "gnahmias");
+define("TWTR_STYLE", "vertical");
+
+define("URL_ANALYTICS", "https://www.google.com/analytics/web/?pli=1#report/visitors-overview/a27838426w53292149p54112166/");
+define("URL_CPANEL", "https://boru.x10hosting.com:2083/frontend/x3/index.html?post_login=13727695247822");
 define("URL_FB", FB_URL . FB_DOMAIN);
 define("URL_MS", "http://www.myspace.com/elemovements");
-define("URL_NEWS", "news/news.php");
+define("URL_NEWS", DIR_NEWS . "/news.php");
 define("URL_RN", "http://www.reverbnation.com/2083759");
 define("URL_TOUR_RSS", "http://www.reverbnation.com/rss/artist_shows_rss/elemovements");
-define("URL_TW", "http://twitter.com/elemovements");
+define("URL_TW", TWTR_URL . TWTR_DOMAIN);
 define("URL_YT", "http://www.youtube.com/user/kbodonne");
 
 // I have to define this down here because URL_TOUR_RSS isn't defined before the TEXT_ definitions.
 
+define("TEXT_ADMIN_LINKS", '<span class="admin"> · <a href="' . DIR_NEWS . '" target="_blank">Login</a> · <a href="' . URL_ANALYTICS . '" target="_blank"><img alt="Access Google Analytics" class="admin-button" src="img/graph.png" title="Access Google Analytics" /></a> · <a href="' . URL_CPANEL . '" target="_blank"><img alt="Access Your cPanel" class="admin-button" src="img/cp.png" title="Access Your cPanel" /></a></span>');
 define("TEXT_TOUR_TITLE", 'Tour Schedule <span class="links"><a href="' . URL_TOUR_RSS . '" target="_blank">RSS</a></span>');
-
-// Logic needs to be added here (wtf is up with $_GET['action']?) to compensate for the non-JS site when you want
-// to view the individual album on Facebook.
-
 define("TEXT_FB", '<span class="links"><a class="fblink" href="' . URL_FB . '?sk=photos" target="_blank" title="Visit this Page on Facebook">View on Facebook</a></span>');
 
 define("WIDGET_ARTIST_ID", 2083759);
@@ -192,7 +260,7 @@ if ( isset( $_GET['xnewsaction'] ) && $_GET['xnewsaction'] == "fullnews" ) {
 		$sAuthorLink = FB_URL . "/";
 		
 		if ($sAuthor == "Gabriel")
-			$sAuthorLink .= "profile.php?id=gnahmias";
+			$sAuthorLink .= "profile.php?id=" . FB_UID;
 		else
 			$sAuthorLink = URL_FB;
 		
@@ -239,11 +307,11 @@ $aTitles["social-box"] = "Social";
 $aTitles["tour"] = TEXT_TOUR_TITLE;
 
 $bI = ( isset( $_GET['d'] ) ) ? false : ($oBr->Platform == "iPhone"); // iPhone or not? Later on, add functionality for all mobile devices.
-$bWK = ( strpos($oBr->UserAgent, "WebKit") );	// Is the current browser based on WebKit?
+$bWK = ( strpos($oBr->UserAgent, "WebKit") !== false );	// Is the current browser based on WebKit?
 
 // Put the current URL in a variable.
 
-$sRequest = $_SERVER['REQUEST_URI'];
+$sRequest = $_SERVER['REQUEST_URI'];	// May want to consider using PHP_SELF here.
 
 $sCurrURL = "http://{$_SERVER['HTTP_HOST']}";
 
@@ -259,13 +327,29 @@ if ( $sRequest != '/' ) {
 	
 }
 
+// Unfortunately, I have to put "data-href/url" at the end of all these tags because I can't write
+// a regular expression that will operate anywhere else.  Oh, well.
+
+define("CODE_COMMENTS", '<div class="fb-comments" data-num-posts="' . FB_COMMENTS_NUM . '" data-width="' . FB_COMMENTS_WIDTH . '" data-href="' . $sCurrURL . '"></div>');
+define("CODE_LIKE", '<div class="fb-like" data-layout="' . FB_LIKE_LAYOUT . '" data-send="' . FB_LIKE_SEND . '" data-width="' . FB_LIKE_WIDTH . '" data-show-faces="' . FB_LIKE_FACES . '" data-font="' . FB_LIKE_FONT . '" data-href="' . $sCurrURL . '"></div>');
+define("CODE_PLUS", '<div class="g-plusone" data-size="' . GOOG_PLUS_SIZE . '" id="plusone" data-href="' . $sCurrURL . '"></div>');
+define("CODE_TWTR", '<a href="http://www.twitter.com/share" class="twitter-share-button" data-via="' . TWTR_DOMAIN . '" data-lang="en" data-related="' . TWTR_RELATED . '" data-count="' . TWTR_STYLE . '" data-hashtags="' . TWTR_HASH . '" data-url="' . $sCurrURL . '"></a>');
+define("CODE_FOLLOW", '<a href="' . URL_TW . '" class="twitter-follow-button" data-show-screen-name="false" data-show-count="false" data-lang="en"></a>');
+
 // TODO: Move all the variables I can from index.php here.
 
-$sPath = urlPath();
+$sPathPlain = urlPath();
 
-$sJS = $sPath . DIR_JS . "/";
+$sPath = urlPath();
+$sPath = empty($sPath) ? "" : ($sPath . "/");
+
+$sJS = DIR_JS;
+
+if ( !empty($sPath) )
+	$sJS = $sPath.$sJS;
 
 $oSmarty->setCaching(false);
 
 $oSmarty->assign("bI", $bI);
 $oSmarty->assign("sCurrURL", $sCurrURL);
+$oSmarty->assign("sJSGuideURL", $sJSGuideURL);

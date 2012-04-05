@@ -3,7 +3,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title><?= NAME . TEXT_DIVIDER . ( !isset( $aOG['title'] ) ? $sPage : $aOG['title'] ) ?></title>
 
+<?php if ( !localhost() ): ?>
 <base href="http://<?=$_SERVER['HTTP_HOST']."/".urlPath()?>" />
+<?php endif;?>
 
 <link href="img/f.ico" rel="shortcut icon" />
 
@@ -11,7 +13,7 @@
 
 <link href="<?=TEXT_MIN_F?>styles.css,960.css,reset.css,text.css&b=<?=$sPath?>css" rel="stylesheet" type="text/css" />
 <link href="<?=TEXT_MIN_F?><?= $sPath . ( ($bI) ? "cb/colorbox" : "hs/highslide" ) ?>.css" rel="stylesheet" type="text/css" />
-<?php if ($bI): css_add(); ?>
+<?php css_add("css", $sPathPlain); if ($bI): ?>
 <link rel="apple-touch-icon-precomposed" href="img/touch.png"/>
 <?php endif; ?>
 
@@ -47,11 +49,16 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js" type="text/javascript"></script>
 <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js" type="text/javascript"></script>
 
-<script language="javascript" src="<?= TEXT_MIN_F . $sJS ?>buzz.js,<?=$sJS?>easing.js,<?php if (!$bI): ?><?=$sJS?>flux.js,<?=$sJS?>wp.js<?php else: ?><?=$sJS?>orientation.js<?php endif; ?>,<?=$sPath?><?=( ($bI) ? "cb/colorbox" : "hs/highslide" ) ?>.js,<?=$sJS?>modernizr.js,<?=$sJS?>scripts.js,<?=$sJS?>textshadow.js<?=( ($bWK && !$bI) ? "," . $sJS . "zepto.js" : "" )?>,<?=$sJS?>fb.js,<?=$sJS?>ga.js,<?=$sPath . DIR_JS_LOGIC?>/news.js" type="text/javascript"></script>
+<script src="<?=TEXT_MIN_F?><?=( ($bI) ? "cb/colorbox" : "hs/highslide" ) ?>.js,logic/news.js<?=( !empty($sPathPlain) ? "&b=$sPathPlain" : "" )?>" type="text/javascript"></script>
+<script language="javascript" src="<?= TEXT_MIN_F ?>buzz.js,effects.js,<?php if (!$bI): ?>flux.js,<?php else: ?>orientation.js<?php endif; ?>modernizr.js,scripts.js<?=( ($bWK && !$bI) ?( ",zepto.js") : "" )?>&b=<?=$sJS?>" type="text/javascript"></script>
+
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-4f770f490e3607ff"></script>
+<!-- <script type="text/javascript" src="https://apis.google.com/js/plusone.js">{"parsetags": "explicit"}</script> -->
 
 </head>
 
-<body<?=( ($bI) ? " onorientationchange=\"updateOrientation();\" onload=\"updateOrientation();\"" : "" )?>>
+<body class="<?=$pg?>"<?=( ($bI) ? " onorientationchange=\"updateOrientation();\" onload=\"updateOrientation();\"" : "" )?>>
 	
     <div class="wrapper">
         <?php if (!$bI): ?>
@@ -75,7 +82,7 @@
             	
                 <div id="header">
                     
-                    <a href="home"><div id="logo"></div></a>
+                    <a href="home"><div id="logo"><span class="fade-in hover"></span></div></a>
                 
                 </div>
                 
@@ -100,6 +107,38 @@
                     <?php endif; ?>
                     
                     <div class="tagline">Debut Album Coming Soon!</div>
+                                        
+                    <div class="box-3" id="social-popout">
+                        
+                        <div class="inner">
+                            
+                            <?=TEXT_NO_JS?>
+                            
+                            <div class="buttons center">
+                                
+                                <div id="fb-like">
+                                    
+                                    <?=CODE_LIKE?>
+                                    
+                                </div>
+                                
+                                <div id="plus-one">
+                                        
+                                    <?=CODE_PLUS?>
+                                    
+                                </div>
+                                
+                                <div id="tweet">
+                                        
+                                    <?=CODE_TWTR?>
+                                    
+                                </div>
+                                
+                            </div>
+                            
+                        </div>
+                        
+                    </div>
                     
                 </div>
                 
@@ -172,10 +211,8 @@
                            
                         </div>
                         <?php endif; ?>
-                        
+
                         <div class="grid_11" id="content">
-                            
-                            <?php if ($pg != "ar"): ?>
                             
 							<div class="box-2" id="archive-popout">
                                     
@@ -186,8 +223,6 @@
                                 </div>
                                     
                             </div>
-                            
-                            <?php endif; ?>
                             
 							<div id="loaded">
                             	

@@ -15,11 +15,10 @@
 }
 .highslide img {
     border: 3px solid silver;
-    height: 100px;
-    width: 100px;
+    height: 150px;
 }
 .highslide:hover img {
-	border-color: gray;
+	border-color: #373737;
 }
 .highslide-active-anchor img {
 	visibility: hidden;
@@ -48,7 +47,7 @@
 }
 .highslide-number {
 	font-weight: bold;
-	color: gray;
+	color: white;
 	font-size: .9em;
 }
 .highslide-caption {

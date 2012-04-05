@@ -9,27 +9,40 @@ var oCBOpts = {
 	
 }
 
-$( function() {
-	
-	var div = $('div.gallery-container'),
-		ul = $('ul.gallery'),
-		ulPadding = 15;
-	
-	var divWidth = div.width();
-	
-	div.css({overflow: 'hidden'});
-	
-	var lastLi = ul.find('li:last-child');
-	
-	div.mousemove(function(e){
-		//As images are loaded ul width increases,
-		//so we recalculate it each time
-		var ulWidth = lastLi[0].offsetLeft + lastLi.outerWidth() + ulPadding;	
-		var left = (e.pageX - div.offset().left) * (ulWidth-divWidth) / divWidth;
-		div.scrollLeft(left);
+// Scroller gallery:
+
+if ( $('div.highslide-gallery').length ) {
+
+	$( function() {
+		
+		var $Div = $('div.highslide-gallery'),
+			$Ul = $('ul.horiz-list'),
+			$UlPadding = 0;
+		
+		$Ul.width(9000);
+		$Div.width( $Div.parent().parent().width() - 26 );
+		
+		var $DivWidth = $Div.width();
+	 
+		$Div.css( {overflow: 'hidden'} );
+				
+		var lastLi = $Ul.find('li:last-child');
+		
+		$Div.mousemove(function(e){
+			
+			var $UlWidth = lastLi[0].offsetLeft + lastLi.outerWidth() + $UlPadding;	
+			
+			var left = (e.pageX - $Div.offset().left) * ($UlWidth-$DivWidth) / $DivWidth;
+			
+			$Div.scrollLeft(left);
+			
+		} );
+		
 	} );
-	
-} );
+
+}
+
+// End gallery.
 
 // The next bit is for making the non-JavaScript site work with pictures.  This adds
 // a switch for the JS-enabled one to exclude the header and container for the loaded
@@ -122,7 +135,7 @@ $("#pictures .album-container a").click( function(event) {
 	
 	var strURL = $(this).attr("href");
 	
-	var strName = getURLVars(strURL)['name'];
+	var strName = getUrlVars(strURL)['name'];
 	
 	$Body.slideUp(100);
 	
@@ -132,13 +145,13 @@ $("#pictures .album-container a").click( function(event) {
 		
 		function(strData) {
 			
-			$Body.html(strData).slideDown(1000, "easeOutBounce", function() {
+			$Body.html(strData).slideDown(oVars.iSpeed, "easeOutBounce", function() {
 				
-				$(this).find("div.back").show("slide", { direction: "right" }, function() { } );
+				$(this).find("div.back").show("slide", { direction: "right" }, oVars.iSpeed, function() { } );
 				
 			} );
 			
-			$Title.html( oPHP.vars.titles[oVars.sCurrent].replace(" ", oPHP.const.TEXT_DIVIDER + strName + ' ') );
+			$Title.html( oPHP.vars.titles[ extractPage("ending") ].replace(" ", oPHP.const.TEXT_DIVIDER + strName + ' ') );
 			
 			$("a.fblink").attr("href", strFBLink).glow();
 			
@@ -174,7 +187,7 @@ $("#pictures a.back").click( function(event) {
 				
 				$Title.html( oPHP.vars.titles[oVars.sCurrent] );
 				
-				$Body.html(strData).slideDown(1000, "easeOutBounce");
+				$Body.html(strData).slideDown(oVars.iSpeed, "easeOutBounce");
 				
 				$("a.fblink").glow();
 				

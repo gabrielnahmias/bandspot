@@ -21,16 +21,28 @@ if ( !isset($pg) )
 	$pg = "home";
 
 $sFile = "$pg.php";
-$sJSFile = $sJS . "logic/$pg.js";
+$sJSFile = DIR_JS_LOGIC . "/$pg.js";
 $sTPLFile = DIR_TEMPLATES . "/$pg.tpl";
+
+$oSmarty->assign("sJS", $sJS);
 
 if ( !file_exists($sFile) && !file_exists($sTPLFile) ) {
 	
 	// If neither the view nor the controller is present, go 404.
 	
-	$pg = "404";
+	header('HTTP/1.0 404 Not Found');
 	
-	$sFile = "$pg.php";
+	$sTemp = "404";
+	
+	// You might say this is a little extreme but you never know how
+	// intricate you can make a 404.  Take GitHub for example... sheesh.
+	// Star Wars and everything.
+	
+	$sFile = str_replace($pg, $sTemp, $sFile);
+	$sJSFile = str_replace($pg, $sTemp, $sJSFile);
+	$sTPLFile = str_replace($pg, $sTemp, $sTPLFile);
+	
+	$pg = "404";
 	
 }
 
@@ -65,8 +77,8 @@ if (!$bNB):
 										if ( file_exists($sTPLFile) )
 											$oSmarty->display($sTPLFile);
 										
-										if ( file_exists( str_replace( urlPath() , "", $sJSFile ) ) )
-											print "<script language=\"javascript\" src=\"" . TEXT_MIN_F . "$sJSFile\" type=\"text/javascript\"></script>";
+										if ( file_exists($sJSFile) )
+											print "<script id=\"logic\" language=\"javascript\" src=\"" . TEXT_MIN_F . urlPath() . "/$sJSFile\" type=\"text/javascript\"></script>";
 										
 										if (!$bNB):
 										

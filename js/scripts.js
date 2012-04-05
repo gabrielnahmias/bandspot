@@ -1,12 +1,30 @@
-var oPHP = json("/inc/json.php");
+var oPHP = json( "inc/json.php");
 
 if (!window.oVars)
 	window.oVars = {};
 
-// TODO: move all functions into a namespace as well! Should I put all jQuery references inside
-// an object, too...?
-
 window.oVars = {
+	
+	// Eventually put $Archive in here then refer to it always by its selector.
+	
+	$Social: $("#social-popout"),
+	
+	aMonths: [
+		
+		"January",
+		"February",
+		"March",
+		"April",
+		"May",
+		"June",
+		"July",
+		"August",
+		"September",
+		"October",
+		"November",
+		"December"
+		
+	],
 	
 	bGlown: false,
 	bI: ( navigator.platform.indexOf("iPhone") != -1 ),
@@ -14,89 +32,103 @@ window.oVars = {
 	bLoaded: false,
 	bFirstParse: true,
 	
+	// General speed of UI specialness.
+	
+	iSpeed: 1000,
+	
 	sArchive: "div#archive-popout",
-	sCurrent: ( ( extractPage() == "" ) ? "home" : extractPage() ),
+	sCurrent: extractPage(),
 	sDomain: "http://" + window.location.host,
+	sOrigin: window.location.pathname.replace("/", ""),
+	sNB: "&nb=true",
 	sPG: "pg",
 	sPrefix: function() { return "?" + this.sPG + "="; },
+	
+	oModal: {
+		
+		resizable: false,
+		
+		modal: true,
+		
+		buttons: {
+			
+			'OK': function() {
+				
+				$(this).dialog("close");
+				
+			},
+			
+			'Cancel': function() {
+				
+				$(this).dialog("close");
+				
+			}
+			
+		}
+		
+	},
+	
+	oArchive: {
+		
+		bOpen: false,
+		
+		sClosed: "0px",
+		
+		sOpen: "-115px",
+		
+		isOpen: function() {
+			
+			return this.bOpen;
+			
+		},
+		
+		toggle: function() {
+			
+			var sRight = $(oVars.sArchive).css("right");
+			
+			$(oVars.sArchive).removeClass("sticky");
+			
+			if (!this.bOpen) {
+				
+				$(oVars.sArchive).css("visibility", "visible").animate(
+					
+					{ right: this.sOpen },
+					
+					500,
+					
+					"easeOutBack",
+					
+					function() {
+						
+						$(oVars.sArchive).css("padding-left", "6px")
+										 .css("z-index", 0);
+						
+					}
+				
+				);
+				
+				scrollRight();
+				
+				this.bOpen = true;
+				
+			} else {
+				
+				$(oVars.sArchive).css("visibility", "hidden").css("padding-left", "20px");
+				$(oVars.sArchive).css("right", this.sClosed);
+				$(oVars.sArchive).css("z-index", -1);
+				
+				this.bOpen = false;
+				
+			}
+			
+		}
+		
+	},
 	
 	oNB: { nb: "true" },
 	oNHF: { nhf: "true" }
 	
 };
-
-var oArchive = {
-	
-	bOpen: false,
-	
-	sClosed: "0px",
-	
-	sOpen: "-115px",
-	
-	isOpen: function() {
-		
-		return this.bOpen;
-		
-	},
-	
-	toggle: function() {
-		
-		var sRight = $(oVars.sArchive).css("right");
-		
-		$(oVars.sArchive).removeClass("sticky");
-		
-		if (!this.bOpen) {
-			
-			$(oVars.sArchive).css("visibility", "visible").animate(
-				
-				{ right: this.sOpen },
-				
-				500,
-				
-				"easeOutBack",
-				
-				function() {
-					
-					$(oVars.sArchive).css("padding-left", "6px")
-									 .css("z-index", 0);
-					
-				}
-			
-			);
-			
-			scrollRight();
-			
-			this.bOpen = true;
-			
-		} else {
-			
-			$(oVars.sArchive).css("visibility", "hidden").css("padding-left", "20px");
-			$(oVars.sArchive).css("right", this.sClosed);
-			$(oVars.sArchive).css("z-index", -1);
-			
-			this.bOpen = false;
-			
-		}
-	}
-	
-}
-
-// Once you have an iPhone again >:(, it would be a good idea to eliminate the Facebook-related errors.
-
-window.fbAsyncInit = function() {
-	
-	FB.init( {
-		
-		appId      : oPHP.const.ID_FB_APP,
-		channelUrl : oPHP.const.DOMAIN + "/channel.php",
-		status     : true, 
-		cookie     : true,
-		xfbml      : true,
-		oauth      : true,
-		
-	} );
-  
-}
 
 String.prototype.trim = function() {
 	
@@ -125,42 +157,68 @@ function addFriend(sID) {
 	
 }
 
-function adminLinks() {
+var Facebook = function() {
 	
-	//(sCurrent == "home" || sCurrent == "archive")
+	// Add all FB functions in here.  Much neater.
 	
-	if ( $("#home").length && !$(".links .admin").length && typeof FB !== 'undefined' ) {
+	this.a = 1;
+	
+}
+
+function fbLinks() {
+	
+	// Expansion, ahoy!
+	
+	if ( fbLoggedIn() ) {
 		
-		var sID;
-		
-		FB.getLoginStatus( function() {
+		if ( $("#home").length && !$(".links .admin").length && typeof FB !== undefined ) {
 			
-			sID = response.authResponse.userID;
+			var sID;
 			
-			if ( oPHP.const.ID_FB_ADMINS.indexOf(sID) != -1 ) {
+			FB.getLoginStatus( function() {
 				
-				// One of the Facebook admins is using the page, so display some links for them.
+				sID = response.authResponse.userID;
 				
-				var $Links = $('<span class="admin"> · <a href="news/" target="_blank">Login</a> · <a href="https://www.google.com/analytics/web/?pli=1#report/visitors-overview/a27838426w53292149p54112166/" target="_blank"><img class="analytics" src="img/graph.png" title="Access Google Analytics" /></a></span>');
-				
-				// For some reason the beginning · doesn't get registered when encapsulated in a jQuery object... weird.
-				
-				// Make sure this thing doesn't get added twice like it has before. 
-				
-				if ( !$(".links .admin").length )
-					$(".box-1 .title .links").append($Links);
-				
-				if (!oVars.bGlown) {
+				if ( oPHP.const.ID_FB_ADMINS.indexOf(sID) != -1 ) {
 					
-					$Links.glow();
+					// One of the Facebook admins is using the page, so display some links for them.
 					
-					oVars.bGlown = true;
+					var $Links = $(oPHP.const.TEXT_ADMIN_LINKS);
+					
+					// For some reason the beginning · doesn't get registered when encapsulated in a jQuery object... weird.
+					
+					// Make sure this thing doesn't get added twice like it has before. 
+					
+					if ( !$(".links .admin").length )
+						$(".box-1 .title .links").append($Links);
+					
+					if (!oVars.bGlown) {
+						
+						$Links.glow();
+						
+						oVars.bGlown = true;
+						
+					}
 					
 				}
 				
-			}
+			} );
 			
-		} );
+		} else if ( $(".connect").length || $("#.add").length || $(".friends").length ) {
+			
+			// If you log in and you're on the contact or bio page, be sure to run this special function afterwards.
+			
+			// Consider using 
+			friendButton(oPHP.const.TEXT_FRIEND, ( $("#bio").length ? oPHP.const.FB_UID : null ) );
+			
+		}
+		
+	} else {
+		
+		if ( $("#home").length)
+			$(".links .admin").remove();
+		else if ( $("#contact").length)
+			friendButton(oPHP.const.TEXT_FRIEND, oPHP.const.FB_UID);	// Could run without arguments?
 		
 	}
 	
@@ -186,19 +244,177 @@ function adjustClassHeight(sClass, intAdjust) {
 	
 }
 
-function extractPage() {
+function afterLoad(sID, fFunc) {
+	
+	if( document.getElementById(sID) == null )
+		setTimeout(arguments.callee.name + '("' + sID + '")', 300);
+	else
+		eval(fFunc);
+	
+}
+
+function cleanUrlConvert(sURL, mType) {
+	
+   /*
+	*  Function cleanUrlConvert
+	*  
+	*  Parameters:
+	*-------------------------------*
+	*	sURL		mType			*				   *
+	*--------------------------------------------------*
+	*  String		String/Integer					   *
+	*--------------------------------------------------*
+	*	The URL		Denotes which way to convert.  It  *
+	*				can be "to," "from," or optionally *
+	*				be 0 or 1 respectively.			   *
+	*--------------------------------------------------*
+	* Returns: A string containing the converted URL.  *
+	*--------------------------------------------------*
+	
+	*/
+	
+	var sResult;
+	
+	var aVars = [];
+	
+	if (!sURL || !mType)
+		return undefined;
+	
+	if (mType == 1 || mType == "from") {
+		
+		var sAction;
+		
+		// For the year and month combo.
+		
+		var sMY = "";
+		
+		aVars = sURL.split("/");
+		
+		// Get rid of "news."
+		
+		aVars.shift();
+		
+		// Remove "rng," too, if it's there.
+		
+		if ( aVars.indexOf("rng") != -1 )
+			aVars.shift();
+		
+		// Prefix
+		
+		sResult = "index.php?pg=archive&newsarch=";
+		
+		// If they're there, add the year and the month together then add that to
+		// the end result.
+		
+		if ( aVars[0] )
+			sMY += aVars[0];
+		
+		if ( aVars[1] )
+			sMY = aVars[1] + sMY;
+		
+		sResult += sMY;
+		
+		// Add ID if it's there and figure out whether to show a specific post or just the monthly list.
+		
+		if (aVars.length > 2) {
+			
+			if ( aVars[aVars.length - 1].indexOf("-") != -1 ) {
+				
+				sAction = "getnews";
+				
+				sResult += "&xnewsrange=" + aVars[2];
+				
+			} else {
+				
+				sAction = "fullnews";
+				
+				sResult += "&newsid=" + aVars[2];
+				
+			}
+			
+		} else
+		
+			sAction = "getnews";
+		
+		// I might want to consider either changing the order that these parameters appear because I have it
+		// in another sequence below.
+		
+		sResult += "&xnewsaction=" + sAction;
+		
+	} else if (mType == 0 || mType == "to") {
+		
+		var sMonth, sYear;
+		
+		aVars = getUrlVars(sURL);
+		
+		sResult = "news";
+		
+		if ( aVars['xnewsrange'] )
+			sResult += "/rng";
+		
+		sResult += "/";
+		
+		if ( aVars['newsarch'] ) {
+			
+			sMonth = aVars['newsarch'].substr(0, 2);
+			
+			sYear = aVars['newsarch'].substr(-4);
+			
+			sResult += sYear + "/" + sMonth + "/";
+			
+			if ( aVars['newsid'] )
+				sResult += aVars['newsid'];
+			else if ( aVars['xnewsrange'] )
+				sResult += aVars['xnewsrange'];
+			
+		}
+		
+	}
+	
+	return sResult;
+		
+}
+
+function extractPage(sPart) {
 	
 	// This is pretty ugly...
 	
 	// return window.location.search.replace(/(.+)=(.+)&(.+)/, '$2');
 	
-	var sFirst = window.location.pathname.replace("/", "").split("&")[0];
+	var sFirst = (window.location.pathname.replace("/", "")).split("&")[0];
 	
-	if (sFirst == "index.php")
-		return window.location.search.split("&")[0].replace("?pg=", "");
-	else
-		return sFirst;
+	var sPage = sFirst.substr( sFirst.lastIndexOf("/") );
+	
+	if ( sFirst.indexOf(oPHP.const.DIR_NEWS) == 0 ) {
 		
+		// If "news" is at the beginning of the current page, you know we're in the archive.
+		
+		return "archive";
+		
+	} else if (sPage == "" || sPage == "/") {
+		
+		return "home";
+		
+	} else {
+		
+		if (sPart == "ending") {
+			
+			var aSplit = sFirst.split("/");
+			
+			return aSplit[aSplit.length - 1];
+			
+		} else {
+			
+			if (sFirst == "index.php")
+				return window.location.search.split("&")[0].replace("?pg=", "");
+			else if (sFirst == "")
+				return "home";
+			else
+				return sFirst;
+			
+		}
+		
+	}
 }
 
 function fbInfo() {
@@ -250,8 +466,6 @@ function fbInfo() {
 				$El.css("width", "31px")
 				   .wrap('<a href="' + sURL + '" target="_blank"></a>');
 				
-				adminLinks();
-				
 			} );
 			
 		} );
@@ -275,8 +489,6 @@ function fbInfo() {
 		} ).attr("src", "img/spacer.png")
 		   .css("width", "0");
 		
-		$(".links .admin").remove();
-		
 	}
 	
 	if ( navigator.userAgent.indexOf("WebKit") != -1 ) {
@@ -291,60 +503,87 @@ function fbInfo() {
 		
 	}
 	
+	fbLinks();
+	
 }
 
 function fbLoggedIn() {
 	
 	var bLoggedIn = false;
 	
-	FB.getLoginStatus( function(response) {
+	if (typeof FB !== "undefined") {
 		
-		if (response.status === 'connected') {
+		FB.getLoginStatus( function(response) {
 			
-			// var uid = response.authResponse.userID;
-			// var accessToken = response.authResponse.accessToken;
+			if (response.status === 'connected') {
+				
+				// var uid = response.authResponse.userID;
+				// var accessToken = response.authResponse.accessToken;
+				
+				bLoggedIn = true;
+				
+			}/* else if (response.status === 'not_authorized') {
+				
+				console.log('not authorized');
+				
+			}*/ else
+				
+				bLoggedIn = false;
 			
-			bLoggedIn = true;
-			
-		}/* else if (response.status === 'not_authorized') {
-			
-			console.log('not authorized');
-			
-		}*/ else
-			
-			bLoggedIn = false;
+		} );
 		
-	} );
+	}
 	
 	return bLoggedIn;
 	
 }
 
-function friendButton($El, sID) {
+function friendButton(sEl, sID) {
 	
 	// TODO: make it so that it detects whether there is a friend request pending.
 	
+	var $El = $(sEl);
+	
 	var sName;
 	
-	FB.api(sID, function(response) {
+	if (sID == null || !sID) {
 		
-		sName = response.first_name;
+		// Use the existing ID if there is not one specified as an argument.
 		
-		if ( !friends(sID) )
-			
-			$El.attr("onclick", "addFriend('" + sID + "');")
-				.attr("title", $El.attr("title").replace("<NAME>", sName) )
-				.removeClass("friends")
-				.addClass("add");
-			
-		else
-			
-			$El.attr("onclick", "")
-				.attr("title", "You two are already Facebook friends!")
-				.removeClass("add")
-				.addClass("friends");
+		sID = $El.attr("onclick").replace(/addFriend\('(.*)'\);/, '$1');
 		
-	} );
+	}
+	
+	if ( fbLoggedIn() ) {
+		
+		FB.api(sID, function(response) {
+			
+			sName = response.first_name;
+			
+			if ( !friends(sID) )
+				
+				$El.attr("onclick", "addFriend('" + sID + "');")
+				   .attr("title", "Add " + sName + " as a Friend on Facebook")
+				   .removeClass("friends connect")
+				   .addClass("add");
+				
+			else
+				
+				$El.attr("onclick", "")
+				   .attr("title", "You two are already Facebook friends!")
+				   .removeClass("add connect")
+				   .addClass("friends");
+			
+		} );
+		
+	} else {
+		
+		$El.attr("onclick", "")
+		   .attr("title", "Connect to Facebook for this Feature")	// Maybe more specific like "to Add this Person/Friend."
+		   .removeClass("add friends")
+		   .addClass("connect");
+		
+	}
 		
 }
 
@@ -352,34 +591,63 @@ function friends(sID) {
 	
 	var bFriends = false;
 	
-	$.ajax( {
+	if ( FB && fbLoggedIn() ) {
 		
-		async: false,
-		
-		url: "https://graph.facebook.com/me/friends/" + sID,
-		
-		dataType: 'json',
-		
-		data: {
+		$.ajax( {
 			
-			access_token: FB.getAccessToken()
+			async: false,
 			
-		},
-		
-		success: function(response) {
+			url: "https://graph.facebook.com/me/friends/" + sID,
 			
-			if (response.data[0]) {
+			dataType: 'json',
+			
+			data: {
 				
-				if (response.data[0].name)
-					bFriends = true;
+				access_token: FB.getAccessToken()
 				
-			}
+			},
 			
-		} 
+			success: function(response) {
+				
+				if (response.data[0]) {
+					
+					if (response.data[0].name)
+						bFriends = true;
+					
+				}
+				
+			} 
+			
+		} );
 		
-	} );
+		return bFriends;
+		
+	}
+		
+	return "undefined";
 	
-	return bFriends;
+}
+
+// END FACEBOOK FUNCTIONS (majority?)
+
+function fileExists(url) {
+	
+	if (url) {
+	
+	var req = this.window.ActiveXObject ? new ActiveXObject("Microsoft.XMLHTTP") : new XMLHttpRequest();
+	
+	if (!req)
+		throw new Error('XMLHttpRequest not supported');
+	
+	req.open('HEAD', url, false);
+	req.send(null);
+	
+	if (req.status == 200)
+		return true;
+	
+	return false;
+	
+	}
 	
 }
 
@@ -407,7 +675,7 @@ function getElemHeight(D) {
 	
 }
 
-function getURLVars(sVars) {
+function getUrlVars(sVars) {
 	
 	var arrVars = {};
 	
@@ -458,18 +726,59 @@ function loadContent(sURL, bPush, bReplace) {
 	
 	var $Box = $("#loaded");
 	
-	sCurrent = sURL.split("&")[0];
+	// Uncomment the next comment block if for some reason the pictures
+	// section is acting bitchy.
+	
+	/*
+	if (sURL == "pictures") {
+		
+		oPictures = oVars.oModal;
+		
+		delete oPictures.buttons.Cancel;
+		
+		oPictures.buttons.OK = function() {
+				
+			$(this).dialog('close');
+			
+		}
+		
+		$(oPHP.const.TEXT_PICS_PROB).dialog(oPictures).bind(
+			
+			"dialogclose",
+			
+			function(event, ui) {
+			
+			// I do this two ways because if we start out on the pictures page,
+			// the bottom half of the back of the site is gone.  Otherwise, all
+			// is well.
+			
+			if ( extractPage() == "pictures" )
+				location.replace("home");
+			else
+				loadContent("home", true, false);
+				//history.back();					// This would be ok but ending scripts don't get loaded?
+			
+			}
+			
+		);
+		
+	}
+	*/
+	
+	oVars.sCurrent = sURL.split("&")[0];
+	
+	document.body.className = extractPage("ending");
 	
 	// Closes any picture open in Colorbox.
 	
-	if (sCurrent != "pictures" && oVars.bI)
+	if (oVars.sCurrent != "pictures" && oVars.bI)
 		$.colorbox.close();
 	
 	if (!oVars.bIE) {
 		
 		if (bPush) {
 			
-			var objState = { page: sCurrent };
+			var objState = { page: oVars.sCurrent };
 			
 			if (bReplace)
 				history.replaceState(objState, "", "");
@@ -494,35 +803,21 @@ function loadContent(sURL, bPush, bReplace) {
 			
 			function(sData) {
 				
-				document.title = oPHP.const.NAME + oPHP.const.TEXT_DIVIDER + ucwords(sCurrent);
+				document.title = oPHP.const.NAME + oPHP.const.TEXT_DIVIDER + ucwords(oVars.sCurrent);
 				
-				$Box.html(sData).slideDown(1000, "easeOutBounce");
+				$Box.html(sData).slideDown(oVars.iSpeed, "easeOutBounce");
+				
+				// Check if the script exists and if it does and has not been loaded, do so.
+				
+				var sFile = oPHP.const.DIR_JS_LOGIC + "/" + sURL;
+				
+				// Reload the Facebook widgets for the current page.
+				
+				reloadWidgets();
 				
 			}
 			
 		);
-		
-		// Reload the Facebook widgets for the current page.
-		
-		if (!oVars.bI) {
-			
-			var oComments = $(".fb-comments").get(0);
-			var oLike = $(".fb-like").get(0);
-			var oPlus = $("#___plusone_0");
-			
-			var sURL = 'http://' + window.location.host + window.location.pathname; //(sCurrent == "home" ? "" : sCurrent );
-			
-			oComments.innerHTML = '<div class="fb-comments" data-href="' + sURL + '" data-num-posts="' + oPHP.const.FB_COMMENTS_NUM + '" data-width="' + oPHP.const.FB_COMMENTS_WIDTH + '"></div>';
-			oLike.innerHTML = '<div class="fb-like" data-href="' + sURL + '" data-layout="' + oPHP.const.FB_LIKE_LAYOUT + '" data-send="' + oPHP.const.FB_LIKE_SEND + '" data-width="' + oPHP.const.FB_LIKE_WIDTH + '" data-show-faces="' + oPHP.const.FB_LIKE_FACES + '" data-font="' + oPHP.const.FB_LIKE_FONT + '"></div>';
-			
-			oPlus.html('<div class="g-plusone" data-href="' + sURL + '" data-size="' + oPHP.const.GOOG_PLUS_SIZE + '"></div>');;
-			
-			FB.XFBML.parse(oComments);
-			FB.XFBML.parse(oLike);
-			
-			gapi.plusone.go();
-			
-		}
 		
 	}
 	
@@ -538,6 +833,88 @@ function possessive(sValue) {
 		sWord += "'s";
 	
 	return sWord;
+	
+}
+
+function reloadAddThis() {
+	
+	// I never thought these plugins would be so deficient that I would have to hand-code
+	// basically all the methods to handle them.  Yeesh.
+	
+	// TODO: I might want to employ $.each considering I'm using jQuery.
+	
+	var i = 0,
+		aTbxs = document.getElementsByClassName("addthis_toolbox");
+	
+	for (var oTbx in aTbxs) {
+		
+		oCurrent = $(".addthis_toolbox").get(i);
+		oCounter = $(".addthis_toolbox .addthis_counter").get(i);
+		
+		addthis.toolbox(oCurrent);
+		addthis.counter(oCounter);
+		
+		i++;
+		
+	}
+				
+}
+
+function reloadWidgets(sNewURL) {
+	
+	if (!oVars.bI) {
+		
+		$(oVars.$Social.selector).find(".inner").fadeOut(oVars.iSpeed, "", function() {
+			
+			var rData = /data-(href|url)=\"(.*)\"/;
+			
+			var sPath = window.location.pathname,
+				sURL;
+			
+			sURL = 'http://' + window.location.host;
+			
+			if (!sNewURL) {
+				
+					sURL += sPath;
+					
+					if ( sPath.indexOf("home") == -1 && oVars.sCurrent == "home" )
+						sURL += "home";
+					
+			} else
+				sURL += "/" + sNewURL;
+			
+			console.debug(sURL)
+			
+			var sData = "data-$1=\"" + sURL + "\"";
+			
+			var $Comments = $(".fb-comments");
+			var $Like = $("#fb-like");
+			var $Plus = $("#___plusone_0");
+			var $Twtr = $( oPHP.const.CODE_TWTR.replace(rData, sData) );
+			
+			$Comments.html( oPHP.const.CODE_COMMENTS.replace(rData, sData) );
+			$Like.html( oPHP.const.CODE_LIKE.replace(rData, sData) );
+			$Plus.html( oPHP.const.CODE_PLUS.replace(rData, sData) );
+			
+			// Reload Facebook.
+			
+			FB.XFBML.parse( $Like.get(0) );
+			FB.XFBML.parse( $Comments.get(0) );
+			
+			// Reload Plus One.
+			
+			gapi.plusone.go("social-popout");
+			
+			// Reload and its nasty overly-complicated ayuss.
+			
+			$(".twitter-share-button").remove();
+			$("#tweet").append($Twtr);
+			
+			twttr.widgets.load();
+			
+		} ).delay(oVars.iSpeed).fadeIn(oVars.iSpeed);
+				
+	}
 	
 }
 
@@ -593,6 +970,10 @@ function sleep(iMs) {
 	
 }
 
+/*
+
+// Ancient idea (minimize buttons for boxes).
+
 function toggleBox(objElement, bInstant) {
 	
 	var $Body,
@@ -636,6 +1017,8 @@ function toggleBox(objElement, bInstant) {
 	
 }
 
+*/
+
 function track(sURL) {
 	
 	_gaq.push( ['_trackPageview', "/" + sURL] );
@@ -654,13 +1037,13 @@ function ucwords(str) {
 
 ( function ($) {
 	
-	$.fn.glow = function (sColor, iTime, iRadius) {
+	$.fn.glow = function(sColor, iTime, iRadius) {
 		
 		if (!sColor)
 			var sColor = "FFFFFF";
 		
 		if (!iTime)
-			var iTime = 1000;
+			var iTime = oVars.iSpeed;
 			
 		if (!iRadius)
 			var iRadius = 10;
@@ -713,28 +1096,92 @@ function ucwords(str) {
 		// The URL of the bug report is http://developers.facebook.com/bugs/260258890721446 but this girl
 		// seems to think I'm wrong.  The next bit is a bit of debugging for this.
 		
-		FB.Event.subscribe('auth.authResponseChange', function(response) {
+		if (typeof FB !== "undefined") {
 			
-			//fbInfo();
+			FB.Event.subscribe('auth.authResponseChange', function(response) {
+				
+				//fbInfo();
+				
+				var sPreposition;
+				
+				console.log("Event fired.  Response object:");
+				
+				console.log(response);
+				
+				if (response.status == "connected")
+					sPreposition = "into";
+				else
+					sPreposition = "out of";
+				
+				console.info("You are currently logged " + sPreposition + " Facebook for the site.");
+				
+			} );
 			
-			var sPreposition;
-			
-			console.log("Event fired.  Response object:");
-			
-			console.log(response);
-			
-			if (response.status == "connected")
-				sPreposition = "into";
-			else
-				sPreposition = "out of";
-			
-			console.info("You are currently logged " + sPreposition + " Facebook for the site.");
-			
-		} );
+		}
 		
 	}
 	
-	$(document).ready( function() {
+	$( function() {
+		
+		// MAIN:
+		
+		// Makes sense to set this with CSS because if they don't have Javascript they can't use the social popout anyway.
+		
+//		$("#social-popout").css("top", -4000);
+		
+		// Let's run ASAP to get it over with.
+		
+		// Facebook first.
+		
+		(function(d, s, id) {
+		  var js, fjs = d.getElementsByTagName(s)[0];
+		  if (d.getElementById(id)) return;
+		  js = d.createElement(s); js.id = id;
+		  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=" + oPHP.const.ID_FB_APP;
+		  fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+		
+		// Google Analytics second.
+		
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-27838426-1']);
+		_gaq.push(['_trackPageview']);
+		
+		( function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		} )();
+		
+		// Twitter third.
+		
+		!function(d, s, id) {
+			var js,
+			fjs = d.getElementsByTagName(s)[0];
+			if (!d.getElementById(id)) {
+				js = d.createElement(s);
+				js.id = id;
+				js.src = "//platform.twitter.com/widgets.js";
+				fjs.parentNode.insertBefore(js, fjs);
+			}
+		} (document, "script", "twitter-wjs");
+		
+		// Once you have an iPhone again >:(, it would be a good idea to eliminate the Facebook-related errors.
+		
+		window.fbAsyncInit = function() {
+			
+			FB.init( {
+				
+				appId      : oPHP.const.ID_FB_APP,
+				channelUrl : oPHP.const.DOMAIN + "/channel.php",
+				status     : true, 
+				cookie     : true,
+				xfbml      : true,
+				oauth      : true,
+				
+			} );
+		  
+		}
 		
 		$Archive = $(oVars.sArchive);
 		
@@ -763,42 +1210,34 @@ function ucwords(str) {
 		if (oVars.bI)
 			window.scrollTo(0, 1);
 		
-		/*
-		
-		$.each( $("div.box-1"), function() {
+		if (!oVars.bI /*&& oVars.sCurrent != "archive"*/) {
 			
-			var sID = $(this).attr("id");
-			
-			if ( getCookie(sID) == "min" )
-				toggleBox(this, true);
-			
-		} );
-		
-		*/
-		
-		if (!oVars.bI && oVars.sCurrent != "archive") {
+			var bConditions;
 			
 			$Archive.waypoint( function(event, direction) {
 				
-				var bConditions = (direction === "down") && ( oArchive.isOpen() ) && ( $(window).width() >= 1110 );
+				bConditions = (direction === "down") && ( oVars.oArchive.isOpen() ) && ( $(window).width() >= 1110 );
 				
-				$(this).toggleClass("sticky", bConditions);
-				
-			} );
-			
-			// Considering the archive popout only works with the JavaScript site,
-			// I might as well load the appropriate page into it via the same method.
-			// This saves a lot of headaches caused by including it with PHP like
-			// if I use the same page twice they are both affected by the same
-			// variables.
-			
-			$.get("archive.php", function(data) {
-				
-				$Archive.html(data);
+				$(this).toggleClass("sticky right", bConditions);
 				
 			} );
 			
 		}
+		
+		// Considering the archive popout only works with the JavaScript site,
+		// I might as well load the appropriate page into it via the same method.
+		// This saves a lot of headaches caused by including it with PHP like
+		// if I use the same page twice they are both affected by the same
+		// variables.  I took it out of the prior conditional because sometimes
+		// it's not wise to have it set like this.  If you visit a new page that
+		// is not the Archive and you loaded that initially, there should still
+		// be a way to open that popout.
+		
+		$.get("archive.php", function(data) {
+			
+			$Archive.html(data);
+			
+		} );
 		
 		if ( !getCookie("gotcha") ) {
 			
@@ -848,7 +1287,7 @@ function ucwords(str) {
 		
 		} );
 		
-		if (!Modernizr.cssansitions) {
+		if (!Modernizr.csstransitions) {
 			
 			// Fall back to jQuery's animate() if CSS transitions are not supported.
 			
@@ -889,10 +1328,10 @@ function ucwords(str) {
 				
 				// As long as we're not currently on the page we just clicked on...
 				
-				oVars.sCurrent = sPage;
+				//oVars.sCurrent = sPage;
 				
-				if ( oArchive.isOpen() )
-					oArchive.toggle();
+				if ( oVars.oArchive.isOpen() )
+					oVars.oArchive.toggle();
 				
 				loadContent(sHREF, true);
 				
@@ -930,6 +1369,45 @@ function ucwords(str) {
 	
 }() );
 
+$(window).load( function() {
+	
+	// Mainly to do with the social popout and Twitter.
+	
+	$(".twtr-widget.twtr-widget-profile.twtr-scroll").append('<div id="follow"></div>').find("#follow").html(oPHP.const.CODE_FOLLOW);
+	
+	twttr.widgets.load();
+		
+	var iTop = 10;
+	
+	$(oVars.$Social.selector).animate( {
+		
+		top:  10
+		
+		}, oVars.iSpeed * 2, "easeOutBack" , function() {
+			
+			$(this).css("top", iTop).waypoint( function(event, direction) {
+				
+				bConditions = (direction === "down");
+				
+				$(this).toggleClass("sticky left", bConditions);
+				
+			} ).find(".inner").fadeIn(oVars.iSpeed * 2);
+			   
+			
+		}
+		
+	);
+	/*
+	$(window).one("scroll", function() {
+		
+		if ( $(window).scrollTop() < -2000  )
+			$(oVars.$Social.selector).css("top", iTop);
+		
+	} );
+	*/
+} );
+
+
 if (!oVars.bI) {
 	
 	var objOpts = {
@@ -964,7 +1442,7 @@ if (!oVars.bI) {
 			offsetY: -60
 		},
 		
-		thumbsip: {
+		thumbstrip: {
 			position: 'bottom center',
 			mode: 'horizontal',
 			relativeTo: 'viewport'

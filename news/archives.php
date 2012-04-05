@@ -1,6 +1,6 @@
 <?php
 
-define("LINK", "index.php?pg=archive&");
+define("LINK", "news");//index.php?pg=archive&");
 
 error_reporting(0);
 if (!isset($xnews_prev_inc)){
@@ -68,7 +68,7 @@ if (empty($action))
    {
     if ($subitem['newscount']>0)
     {
-     $hlink=/*$_SERVER['SCRIPT_NAME']*/LINK.'xnewsaction=getnews&amp;newsarch='.$subitem['month'].$subitem['year'];
+     $hlink=/*$_SERVER['SCRIPT_NAME']*/LINK.'/'.$subitem['year']."/".$subitem['month'];
      if (isset($_GET['xnews-catlist'])){$hlink.='&amp;xnews-catlist='.$_GET['xnews-catlist'];}
      $mtpl=str_replace("{ARCH}",MonthfromNum($subitem['month']),$archmonth);
      $mtpl=str_replace("{ARCHLINK}",$hlink,$mtpl);

@@ -23,13 +23,15 @@ function array_key_exists_r($needle, $haystack) {
 
 function box($sName) {
 	
-	global $aTitles, $oSmarty;
-	
-	$sFile = "$sName.php";
-	
-	if ( file_exists($sFile) )
-		include $sFile;
-	
+	if ( !empty($sName) ) {
+		
+		global $aTitles, $oSmarty;
+		
+		$sFile = "$sName.php";
+		
+		if ( file_exists($sFile) )
+			include $sFile;
+		
 ?>
 
 
@@ -51,11 +53,34 @@ function box($sName) {
                             
 <?php
 	
+	}
+	
+}
+
+function domain() {
+	
+	return "http://" . $_SERVER['HTTP_HOST'] . "/";
+	
 }
 
 function isExt($sFile, $sExt) {
 	
 	return ( substr($sFile, ( strrpos($sFile, ".") + 1 ) ) == $sExt );
+	
+}
+
+function isOnline() {
+	
+    return ( checkdnsrr('google.com', 'ANY') && checkdnsrr('yahoo.com', 'ANY') && checkdnsrr('microsoft.com', 'ANY') );
+	
+}
+
+function localhost() {
+	
+	// I'm not sure if I really need the second half of the logic.  It might even be detrimental in
+	// certain cases.
+	
+	return ( $_SERVER['HTTP_HOST'] == "localhost" || $_SERVER['SERVER_ADDR'] == "127.0.0.1" );
 	
 }
 
@@ -87,6 +112,18 @@ function tabs($intNumber) {
 	
 }
 
+function extractPage() {
+	
+	// This, the PHP version, only returns the part after the last slash.
+	
+	$aParts = explode( "/", strtok( strtok( $_SERVER['REQUEST_URI'] , "?") , "&") );
+	
+	return $aParts[ count($aParts) - 1 ];
+	
+}
+
+/*
+
 function urlPath() {
 	
 	if ( !isset($sSelf) )
@@ -110,6 +147,8 @@ function urlPath() {
 	return $sFilename2;
 	
 }
+
+*/
 
 function wordWithEnding($sWord, $intNumber) {
 	

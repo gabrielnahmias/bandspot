@@ -36,9 +36,9 @@
     
     <div class="section-title">{$sAlbum}</div> <span class="gray italic">({count($aPics)} pictures)</span>
     
-        <div{if !$bI} class="highslide-gallery gallery-container"{/if}>
+        <div{if !$bI} class="highslide-gallery scroller"{/if}>
             
-            <ul class="gallery">
+            <ul class="horiz-list scroller">
             
             {foreach $aPics as $aPic}
             	                

@@ -273,11 +273,11 @@ if ($action=='addnews')
   $wrapper=str_replace('{NEWS_ARCH}',$newsarch,$wrapper);
   $wrapper=str_replace('{NEWS_ID}',$newsid,$wrapper);
   
-  $sArch = date("mY", EncodeTime('') );
-  $sFile = "news/news-$sArch.php";
-  $sID = count( file($sFile) );
+  $sArch =  date("Y", EncodeTime('') ) . "/" . date("m", EncodeTime('') );
+  $sFile = "news/news-" . date("m", EncodeTime('') ) . date("Y", EncodeTime('') ) . ".php";
+  $sID = count( file($sFile) ) + 1;
   
-  $wrapper=str_replace('{VARS}',"newsarch=$sArch&newsid=$sID",$wrapper); // This is for the Facebook link.
+  $wrapper=str_replace('{VARS}',"/news/$sArch/$sID",$wrapper); // This is for the Facebook link.
   
   $catlist=GetCatList();
   $catcode='';

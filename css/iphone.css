@@ -232,6 +232,16 @@ div#nav.bar a {
 	
 }
 
+div.addthis_toolbox {
+	
+	height: 16px;
+	
+	overflow: hidden;
+	
+	width: 18px;
+	
+}
+
 div.album-container {
 	
 	width: auto;

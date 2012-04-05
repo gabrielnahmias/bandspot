@@ -6,23 +6,23 @@ function OnNewsSubmit(id)
 // TODO: Figure out how to add a link to the Facebook URL containing their post and put it in the bottom
 // right hand corner of the article box for each one.
 
-var sAction = opener.getURLVars(window.location.search)['a'];
+var sAction;
 
-var bTestMode = true;
+var bTestMode = false;
 
 var sFB = "ikonstyle";
 var sName = "Ikon";
 
 function SocialPost() {
 	
-	// I forgot all about opener.*; what a handy little fucker!
-	
-	// Work on adding a section for a link to the news article on the site.
+	// I forgot all about opener; what a handy little fucker!
 	
 	var $Form = $("form[name=addnewsfrm]");
 	var $Load = $(".fb-load");
 	
 	var bSubmit = true;
+	
+	sAction = opener.getUrlVars(window.location.search)['a'];
 	
 	if ( opener.fbLoggedIn() && sAction == "addnews" ) {
 		
@@ -74,8 +74,6 @@ function SocialPost() {
 					
 					// Other possible options: message, picture, link, name, caption, description, source parameters
 					
-					var sBefore = "http://" + window.location.host;
-					
 					var wallPost = {
 						
 						access_token: sToken,
@@ -84,20 +82,20 @@ function SocialPost() {
 						
 						// Add some funny random description generator here
 						
-						description: 'Read the full article on ' + opener.possessive(opener.oPHP.const.NAME) + ' official website.',
+						description: opener.oPHP.const.TEXT_READ,
 						
-						//icon: sBefore + "/" + opener.oPHP.const.DIR_IMG + "/news.gif",
+						icon: opener.oVars.sDomain + "/" + opener.oPHP.const.DIR_IMG + "/news.gif",
 						
 						// I think this next bit may need a bit of modification to always be right
 						// but it works.  Could use oPHP.const.DOMAIN.
 						
-						link: sBefore + "/?xnewsaction=fullnews&" + $("#vars").val(),
+						link: opener.oVars.sDomain + $("#vars").val(),
 						
 						message: sStory,
 						
 						name: "Read \"" + sTitle + "\"",
 						
-						picture: sBefore + "/" + opener.oPHP.const.DIR_IMG + "/news.png",
+						picture: opener.oVars.sDomain + "/" + opener.oPHP.const.DIR_IMG + "/news.png",
 						
 						type: 'article'
 						
@@ -140,7 +138,7 @@ function SocialPost() {
 						} else {
 							
 							var sID = response.id;
-							var sLink = ( (bTestMode) ? opener.oPHP.const.FB_URL : opener.oPHP.const.URL_FB ) + "/posts/" + sID.split("_")[1];
+							var sLink = ( (bTestMode) ? opener.oPHP.const.FB_URL + sFB : opener.oPHP.const.URL_FB ) + "/posts/" + sID.split("_")[1];
 							
 							var iCnt;
 							var iTime = 10;

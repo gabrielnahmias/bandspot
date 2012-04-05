@@ -1,12 +1,19 @@
 <?php
 
-function css_add($css_dir = "css") {
+function css_add($css_dir = "css", $css_dir_add = "", $min = true) {
 	
 	$br = new Browser;
 	
+	// Convert browser name to lower case and then find if it exists.
+	// MUCH shorter code.  Something is definitely wrong with this.
+	
 	if ( $br->Platform == 'Windows' && $br->Name == 'MSIE' ) {
 	
-		if ($br->Version >= 7)
+		if ($br->Version >= 9)
+			$css_file = 'ie9';
+		if ($br->Version >= 8 && $br->Version < 9)
+			$css_file = 'ie8';
+		if ($br->Version >= 7 && $br->Version < 8)
 			$css_file = 'ie7';
 		if ($br->Version >= 6 && $br->Version < 7)
 			$css_file = 'ie6';
@@ -23,14 +30,16 @@ function css_add($css_dir = "css") {
 		$css_file = 'safari';
 	elseif ($br->Name =='OmniWeb')
 		$css_file = 'omniweb';
+	elseif ($br->Name =='WebKit')
+		$css_file = 'webkit';
 	else
-		return;
+		$css_file = "";
 	
 	$file_name = "$css_dir/$css_file.css";
 	
 	if ( file_exists($file_name) ) {
 		
-		echo("<link href=\"".$file_name."\" rel=\"stylesheet\" type=\"text/css\" media=\"screen\" />\r\n");
+		echo("<link href=\"" . ( ( !empty($css_dir_add) ) ? "min/?f=" : "" ) . "$file_name" . ( ( !empty($css_dir_add) ) ? "&b=$css_dir_add" : "" ) . "\" rel=\"stylesheet\" type=\"text/css\" media=\"screen\" />\r\n");
 		
 		return true;
 		
@@ -177,11 +186,20 @@ class Browser {
 				$bd['browser'] = "Lynx";
 				$bd['version'] = $val[1];
 			}
-		
+		/*
 		// test for Chrome
 		}elseif(preg_match("/chrome/i", $agent)){
 			
 			$bd['browser'] = "Chrome";
+			$bd['version'] = "";
+			
+		// test for WebKit
+		*/}elseif(preg_match("/webkit/i", $agent)){
+			
+			// Technically, this is kind of odd but it comes in handy to have a blanket
+			// for all browsers using this rendering engine.
+			
+			$bd['browser'] = "WebKit";
 			$bd['version'] = "";
 			
 		// test for Safari

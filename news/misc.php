@@ -24,7 +24,9 @@ function GenerateHeadlinks($page,$shownum,$listitem,$listbody,$catlist='',$autho
 		foreach ($newsfiles as $i=>$line){
 			$news=GetNews($line,$catlist,$authorlist,0,'newest',"");
 			foreach ($news as $j=>$article) {
-				$link=$page."?xnewsaction=fullnews&amp;newsarch={NEWSARCH}&amp;newsid={NEWSID}";
+				$link=$page."news/{YEAR}/{MONTH}/{NEWSID}";
+				$temp=str_replace('{YEAR}',substr( $article['archive'] , -4 ),$temp);
+				$temp=str_replace('{MONTH}',substr( $article['archive'] , 0 , 2 ),$temp);
 				$temp=str_replace('{LINK}',$link,$listitem);
 				$temp=str_replace('{NEWSARCH}',$article['archive'],$temp);
 				$temp=str_replace('{NEWSID}',$article['id'],$temp);

@@ -1,4 +1,5 @@
 if (oVars.bI)
 	resizeTitles();
 
-adminLinks();
+fbLinks();
+reloadAddThis();

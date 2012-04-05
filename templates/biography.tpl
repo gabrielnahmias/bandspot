@@ -20,7 +20,7 @@
         
         <h5>Click on anyone below to view their individual biography!</h5>
         
-        <noscript><h6>Ooooh, you'll need JavaScript for that.  Scroll down to view those.</h6></noscript>
+        <noscript><h6>Ooooh, <a href="{$sJSGuideURL}" target="_blank">you'll need JavaScript</a> for that.  Scroll down to view those.</h6></noscript>
         
         {foreach $aPhotos as $sName => $sFile}
             <img class="band" src="{$sFile}" title="{$sName}" />

@@ -4,6 +4,25 @@
 <script language="javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js" type="text/javascript"></script>
 <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js" type="text/javascript"></script>
 
+<script>
+
+$( function() {
+	
+	var sSearch = window.location.search;
+	
+	// Hopefully all that's in the parameters is the action... I could use the same
+	// method as bbeditor.js but I'm trying something different.
+	
+	if ( sSearch.substr( sSearch.indexOf("a=") + 2  ) == "addnews")
+		document.getElementById("note").innerHTML = "<strong>NOTE:</strong> the above text will be used for the post to your Facebook page.";
+	
+	if (bTestMode)
+		document.getElementById("test-mode").innerHTML = " - <u>You are currently in test mode which means on Facebook your posts will go to an account other than yours.</u><br />&nbsp;&nbsp;&nbsp;Please be patient while Gabriel fixes what he needs to.  He apologizes for the inconvenience.";
+	
+} );
+
+</script>
+
 <div id="fb"></div>
 
   <form action="{FORM_ACTION}" method="post" name="addnewsfrm">
@@ -14,7 +33,7 @@
       <td width="12%" rowspan="11" align="CENTER" valign="TOP"><p>&nbsp;</p>
         <p><img src="inc/img/icon_editnews1.gif" width="60" height="60"></p></td>
       <td height="98" colspan="2"><br>
-<h1>{HEADER}</h1>
+		<h1>{HEADER}</h1><div id="test-mode" style="color: #aa0000; display: inline-block; font: bold 12px Verdana, Geneva, sans-serif; margin-bottom: 10px;"></div>
         <p class="SpanClass2"><em>$__l_postingas{USER_NAME} [{USER_NICK}]</em></p>
         <p>{EDIT_INFO} {PREVIEW}</p></td>
       <input type="hidden" name="author" value="{USER_NICK}">
@@ -52,9 +71,6 @@
       <td>
       	<div id="note" style="color: #AA0000; font: 12px Verdana, Geneva, sans-serif; margin: 10px 0;">
         </div>
-        
-        <script language="javascript" type="text/javascript">if (sAction == "addnews") document.getElementById("note").innerHTML = "<strong>NOTE:</strong> the above text will be used for the post to your Facebook page.";</script>
-        
         <span id="hint"> 
         <input name="hintbox2" type="text" class="HintBox" id="hintbox2" size="70">
         </span>

@@ -153,9 +153,15 @@ function SkinNewsArticle($article,$tpl,$xsection = 0)
          $c2=substr($c,strpos($c,'{/com-link}')+11);
          $c=$c1.$c2;
         }
+		$sPrefix = "http://{$_SERVER['HTTP_HOST']}";
+		$sPrefix = trim($sPrefix, "/");
         $c=str_replace('{num-com}',NumComments($article['archive'],$article['id']),$c);
-        if ($article['full_story']!=''){
-         $linkfull = $_SERVER['SCRIPT_NAME'].'?xnewsaction=fullnews&amp;newsarch='.$article['archive'].'&amp;newsid='.$article['id'];
+		$linkfull = "news/{YEAR}/{MONTH}/{ID}";//$_SERVER['SCRIPT_NAME'].'?xnewsaction=fullnews&amp;newsarch='.$article['archive'].'&amp;newsid='.$article['id'];
+		$linkfull=str_replace('{YEAR}',substr( $article['archive'] , -4 ),$linkfull);
+		$linkfull=str_replace('{MONTH}',substr( $article['archive'] , 0 , 2 ),$linkfull);
+		$linkfull=str_replace('{ID}',$article['id'],$linkfull);
+  		if ($article['full_story']!=''){
+			$c=str_replace('{url}',"$sPrefix/$linkfull",$c);		// EXTRA SLASH POSSIBLE SOURCE
          if ($xsection!=0) $linkfull.= "&amp;xsection={$xsection}";
          $c=str_replace('{full_news_link}','<a href="'.$linkfull.'">',$c);
          $c=str_replace('{/full_news_link}','</a>',$c);
@@ -165,12 +171,14 @@ function SkinNewsArticle($article,$tpl,$xsection = 0)
          $c2=substr($c,strpos($c,'{/full_news_link}')+17);
          $c=$c1.$c2;
         }
+		$c=str_replace('{url}',"$sPrefix/$linkfull",$c);
         $c=str_replace('{newsarch}',$article['archive'],$c);
         $c=str_replace('{newsid}',$article['id'],$c);
         $c=str_replace('{cat-name}',GetCatName($article['cat']),$c);
         $c=str_replace('{cat-id}',$article['cat'],$c);
         $c=str_replace('{self}',$_SERVER['SCRIPT_NAME'],$c);
-        return $c;
+        
+		return $c;
 }
 
 function SkinRandomAd($tpl='')
@@ -238,6 +246,13 @@ function SkinFullNewsArticle($article,$tpl,$xsection=0)
         } else {
          $authorline=$uinfo['name'];
         }
+		
+		$linkfull = "news/{YEAR}/{MONTH}/{ID}";
+		$linkfull=str_replace('{YEAR}',substr( $article['archive'] , -4 ),$linkfull);
+		$linkfull=str_replace('{MONTH}',substr( $article['archive'] , 0 , 2 ),$linkfull);
+		$linkfull=str_replace('{ID}',$article['id'],$linkfull);
+		
+		$c=str_replace('{url}',"$sPrefix/$linkfull",$c);
         $c=str_replace('{author}',$authorline,$c);
         $c=str_replace('{newsarch}',$article['archive'],$c);
         $c=str_replace('{newsid}',$article['id'],$c);
@@ -329,7 +344,7 @@ function SkinCommentsPage($article,$comments,$template,$thispage,$range,$xsectio
 
 	$wrapper=str_replace('{full_story}',SkinFullNewsArticle($article,$fullnewsarticletpl),$wrapper);
 	$wrapper=str_replace('{short_story}',SkinNewsArticle($article,$newsarticletpl),$wrapper);
-
+	
 	$comcode='';
 	$validlogin  = ValidateLogin($_COOKIE['xusername'],$_COOKIE['xpassword']);
 	if ($validlogin){

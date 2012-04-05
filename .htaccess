@@ -9,6 +9,6 @@ RewriteRule ^(?!news)(.*) index.php?pg=$1 [L]
 RewriteRule ^news/([0-9]{4})/([0-9]{2})/([0-9]{1}) index.php?pg=archive&xnewsaction=fullnews&newsarch=$2$1&newsid=$3 [L]
 RewriteRule ^news/([0-9]{4})/([0-9]{2}) index.php?pg=archive&xnewsaction=getnews&newsarch=$2$1 [L]
 
-#http://el.x10.mx/index.php?pg=archive&xnewsaction=getnews&newsarch=032012
+RewriteRule ^news/rng/([0-9]{4})/([0-9]{2})/(.*) index.php?pg=archive&xnewsaction=getnews&newsarch=$2$1&xnewsrange=$3 [L]
 
 Options +FollowSymLinks
