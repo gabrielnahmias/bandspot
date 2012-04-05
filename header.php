@@ -49,8 +49,11 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js" type="text/javascript"></script>
 <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js" type="text/javascript"></script>
 
-<script src="<?=TEXT_MIN_F?><?=( ($bI) ? "cb/colorbox" : "hs/highslide" ) ?>.js,logic/news.js<?=( !empty($sPathPlain) ? "&b=$sPathPlain" : "" )?>" type="text/javascript"></script>
+<script src="<?=TEXT_MIN_F?><?=( ($bI) ? "cb/colorbox" : "hs/highslide" ) ?>.js<?=( !empty($sPathPlain) ? "&b=$sPathPlain" : "" )?>" type="text/javascript"></script>
+
 <script language="javascript" src="<?= TEXT_MIN_F ?>buzz.js,effects.js,<?php if (!$bI): ?>flux.js,<?php else: ?>orientation.js<?php endif; ?>modernizr.js,scripts.js<?=( ($bWK && !$bI) ?( ",zepto.js") : "" )?>&b=<?=$sJS?>" type="text/javascript"></script>
+
+<script src="<?=TEXT_MIN_F . DIR_JS_LOGIC?>/news.js<?=( !empty($sPathPlain) ? "&b=$sPathPlain" : "" )?>" type="text/javascript"></script>
 
 <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js" type="text/javascript"></script>
 <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-4f770f490e3607ff"></script>

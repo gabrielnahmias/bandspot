@@ -27,7 +27,7 @@ Browser support
 * Mozilla **Firefox** 3+
 * Apple **Safari** 4+
 * **Opera** 10+
-* **Internet Explorer** 6+
+* **Internet Explorer** 7+
 
 License
 -----------
