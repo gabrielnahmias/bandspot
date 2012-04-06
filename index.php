@@ -2,6 +2,10 @@
 
 require "inc/common.php";
 
+// IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT
+// We need to disable minification if the domain specified  in config is not in the current hostname.
+// It's too much of a hassle.
+
 import_request_variables("g");
 
 // NHF = no header or footer

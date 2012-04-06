@@ -1288,26 +1288,26 @@ function ucwords(str) {
 		} );
 		
 		if (!Modernizr.csstransitions) {
-			
-			// Fall back to jQuery's animate() if CSS transitions are not supported.
-			
-			$(".icon").hover( function() {
 				
-				$(this).animate( {
-					
-					opacity: 1
-			
-				} )
-			
-			} ).mouseleave( function() {
+				// Fall back to jQuery's animate() if CSS transitions are not supported.
 				
-				$(this).animate( {
+				$(".fade-in").hover( function() {
 					
-					opacity: 0.7
+					$(this).animate( {
+						
+						opacity: 1
+				
+					} )
+				
+				} ).mouseleave( function() {
 					
-				} )
-			
-			} );
+					$(this).animate( {
+						
+						opacity: 0.7
+						
+					} )
+				
+				} );
 			
 		}
 		
@@ -1376,8 +1376,6 @@ $(window).load( function() {
 	$(".twtr-widget.twtr-widget-profile.twtr-scroll").append('<div id="follow"></div>').find("#follow").html(oPHP.const.CODE_FOLLOW);
 	
 	twttr.widgets.load();
-		
-	var iTop = 10;
 	
 	$(oVars.$Social.selector).animate( {
 		
@@ -1385,14 +1383,22 @@ $(window).load( function() {
 		
 		}, oVars.iSpeed * 2, "easeOutBack" , function() {
 			
-			$(this).css("top", iTop).waypoint( function(event, direction) {
+			// Callback after it's done moving down.
+			
+			$(this).waypoint( function(event, direction) {
 				
 				bConditions = (direction === "down");
 				
 				$(this).toggleClass("sticky left", bConditions);
 				
-			} ).find(".inner").fadeIn(oVars.iSpeed * 2);
-			   
+			} ).animate( {
+				
+				// Change background while fading in the interior simultaneously.
+				
+				backgroundColor: "#CCCCFF"
+				
+			}, oVars.iSpeed * 2 ).find(".inner")
+								 .fadeIn(oVars.iSpeed * 2);
 			
 		}
 		

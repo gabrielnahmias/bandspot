@@ -348,6 +348,18 @@ $sJS = DIR_JS;
 if ( !empty($sPath) )
 	$sJS = $sPath.$sJS;
 
+/*
+$bMinify = true;
+
+if ( strpos($_SERVER['HTTP_HOST'], DOMAIN) == -1 )
+	$bMinify = false;
+
+if (!$bMinify)
+	$sMinF = "";
+else
+	$sMinF = TEXT_MIN_F; 
+*/
+
 $oSmarty->setCaching(false);
 
 $oSmarty->assign("bI", $bI);

@@ -42,21 +42,24 @@
 <!-- <meta property="article:tag"             content=""> -->
 <?php endif; ?>
 
-<!--[if lte IE 8]>
-<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<script language="javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js" type="text/javascript"></script>
+<script language="javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js" type="text/javascript"></script>
+
+<!--[if (gte IE 5.5)&(lte IE 6)]>
+<script language="javascript" src="<?=DIR_JS?>/png.js" type="text/javascript"></script>
 <![endif]-->
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js" type="text/javascript"></script>
-<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js" type="text/javascript"></script>
+<!--[if lte IE 8]>
+<script language="javascript" src="http://html5shiv.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+<![endif]-->
 
-<script src="<?=TEXT_MIN_F?><?=( ($bI) ? "cb/colorbox" : "hs/highslide" ) ?>.js<?=( !empty($sPathPlain) ? "&b=$sPathPlain" : "" )?>" type="text/javascript"></script>
+<script language="javascript" src="<?=TEXT_MIN_F?><?=( ($bI) ? "cb/colorbox" : "hs/highslide" ) ?>.js<?=( !empty($sPathPlain) ? "&b=$sPathPlain" : "" )?>" type="text/javascript"></script>
 
 <script language="javascript" src="<?= TEXT_MIN_F ?>buzz.js,effects.js,<?php if (!$bI): ?>flux.js,<?php else: ?>orientation.js<?php endif; ?>modernizr.js,scripts.js<?=( ($bWK && !$bI) ?( ",zepto.js") : "" )?>&b=<?=$sJS?>" type="text/javascript"></script>
 
-<script src="<?=TEXT_MIN_F . DIR_JS_LOGIC?>/news.js<?=( !empty($sPathPlain) ? "&b=$sPathPlain" : "" )?>" type="text/javascript"></script>
+<script language="javascript" src="<?=TEXT_MIN_F . DIR_JS_LOGIC?>/news.js<?=( !empty($sPathPlain) ? "&b=$sPathPlain" : "" )?>" type="text/javascript"></script>
 
-<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js" type="text/javascript"></script>
-<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-4f770f490e3607ff"></script>
+<script language="javascript" type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-4f770f490e3607ff"></script>
 <!-- <script type="text/javascript" src="https://apis.google.com/js/plusone.js">{"parsetags": "explicit"}</script> -->
 
 </head>
@@ -116,6 +119,8 @@
                         <div class="inner">
                             
                             <?=TEXT_NO_JS?>
+                            
+                            <img alt="Share!" src="img/share.png" />
                             
                             <div class="buttons center">
                                 
@@ -187,7 +192,7 @@
 						// Part 3 of the string denotes if it's only meant for iPhone users to see.
 						
 						if ( ( $aParts[2] == "1" && $bI ) || $aParts[2] == "0" )
-							print '<a href="' . $aParts[1] . ( ( isset($d) ) ? "&d" : "" ) . '">' . strtoupper( $aParts[0] ) . '</a>' . "\r\n" . tabs(5);
+							print '<a href="' . $aParts[1] . ( ( isset($d) ) ? "&d" : "" ) . '">' . strtoupper( $aParts[0] ) . '<div class="fade-in hover">' . strtoupper( $aParts[0] ) . '</div></a>' . "\r\n" . tabs(5);
 						
 					}
                     

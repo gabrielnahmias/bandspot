@@ -47,7 +47,7 @@ aPreviews["{$sVarName}"] = ( new buzz.sound('{$aTrack.preview}') ).bind("playing
                 	
                     <a href="{$sLink}" target="_blank" title="Buy Album On {$sLink@key}">
                     
-                    	<img class="icon" src="img/{if $sLink@key eq "iTunes"}itunes{elseif $sLink@key eq "CD Baby"}cdbaby{/if}.png" />
+                    	<img class="fade-in icon" src="img/{if $sLink@key eq "iTunes"}itunes{elseif $sLink@key eq "CD Baby"}cdbaby{/if}.png" />
                         
                     </a>
                     

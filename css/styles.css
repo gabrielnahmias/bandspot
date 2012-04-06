@@ -312,22 +312,6 @@ div#logo {
 	
 }
 
-.fade-in {
-	
-	-webkit-transition: opacity 0.5s;
-	
-	-khtml-transition: opacity 0.5s;
-	
-	-moz-transition: opacity 0.5s;
-	
-	-ms-transition: opacity 0.5s;
-	
-	-o-transition: opacity 0.5s;
-	
-	transition: opacity 0.5s;
-	
-}
-
 div#logo {
 	
 	display: inline-block;
@@ -378,6 +362,17 @@ div#music .year {
 
 div#nav.bar a {
 	
+	margin-right: -5px;
+	
+}
+
+div#nav.bar a,
+div#nav.bar div.hover {
+	
+	/* Was transparent */
+	
+	background: url('../img/nav.png') 0 0 no-repeat;
+	
 	color: #FFFFFF;
 
 	display: inline-block;
@@ -394,13 +389,26 @@ div#nav.bar a {
 	
 	min-width: 50px;
 	
+	position: relative;
+	
 }
 
-div#nav.bar a:hover {
+div#nav.bar a {
+	
+}
+
+div#nav.bar a:hover,
+div#nav.bar div.hover {
 	
 	background-color: #FFFFFF;
 	
-	background-image: linear-gradient(bottom, #FFFFFF 5%, #CDCDCD 44%);				/* Old end color: #EBD9D6 */
+	background: url('../img/nav.png') repeat-x;
+	
+	background-position: bottom;
+	
+	/*
+	
+	background-image: linear-gradient(bottom, #FFFFFF 5%, #CDCDCD 44%);				
 	background-image: -o-linear-gradient(bottom, #FFFFFF 5%, #CDCDCD 44%);
 	background-image: -moz-linear-gradient(bottom, #FFFFFF 5%, #CDCDCD 44%);
 	background-image: -webkit-linear-gradient(bottom, #FFFFFF 5%, #CDCDCD 44%);
@@ -414,9 +422,33 @@ div#nav.bar a:hover {
 		color-stop(0.44, #CDCDCD)
 	);
 	
+	*/
+	
 	border: none;
 	
 	color: #383231;
+	
+}
+
+div#nav.bar div.hover {
+	
+	position: absolute;
+	
+	top: 0; left: 0; bottom: 0; right: 0;
+	
+	opacity: 0;
+	
+}
+
+div#nav.bar a:hover div.hover {
+	
+	opacity: 1;
+	
+}
+
+div#nav.bar a:hover {
+	
+	background-position: 0 0;
 	
 }
 
@@ -573,15 +605,11 @@ div#social .inner {
 
 div#social-popout {
 	
-	background: #CCCCFF;
-	
-	height: 208px;
+	background: #001834;
 	
 	left: -79px;
 	
-	height: 208px;
-	
-	min-height: 208px;
+	min-height: 245px;
 	
 	position: absolute;
 	
@@ -591,9 +619,10 @@ div#social-popout {
 	
 	width: 64px;
 	
-	word-wrap: break-word;		/* For the non-JS site.  Not the best solution but it's better than the alternative. */
+	/* For the non-JS site.  Not the best solution but if this's visible it looks bad otherwise. */
+	word-wrap: break-word;
 	
-	z-index: 1;
+	z-index: 301;
 	
 }
 
@@ -1071,6 +1100,8 @@ div.box-3 {
 }
 
 div.buttons {
+	
+	margin-top: 15px;
 	
 }
 
@@ -1718,6 +1749,38 @@ ul.pagination {
 	
 }
 
+.change-bg {
+	
+	-webkit-transition: background 1s linear;
+	
+	-khtml-transition: background 1s linear;
+	
+	-moz-transition: background 1s linear;
+	
+	-ms-transition: background 1s linear;
+	
+	-o-transition: background 1s linear;
+	
+	transition: background 1s linear;
+	
+}
+
+.change-color {
+	
+	-webkit-transition: color 0.5s;
+	
+	-khtml-transition: color 0.5;
+	
+	-moz-transition: color 0.5;
+	
+	-ms-transition: color 0.5;
+	
+	-o-transition: color 0.5;
+	
+	transition: color 0.5;
+	
+}
+
 .bar {
 	
 	background-color: #383231;
@@ -1797,6 +1860,22 @@ ul.pagination {
 	margin: 2px 0 0;
 	
 	padding: 5px;
+	
+}
+
+.fade-in {
+	
+	-webkit-transition: opacity 0.5s;
+	
+	-khtml-transition: opacity 0.5s;
+	
+	-moz-transition: opacity 0.5s;
+	
+	-ms-transition: opacity 0.5s;
+	
+	-o-transition: opacity 0.5s;
+	
+	transition: opacity 0.5s;
 	
 }
 
@@ -1944,16 +2023,8 @@ ul.pagination {
 
 .icon {
 	
-	transition: opacity 0.5s linear;
-	
-	-moz-transition: opacity 0.5s linear;
-	
-	-o-transition: opacity 0.5s linear;
-	
-	-webkit-transition: opacity 0.5s linear;
-	
 	opacity: 0.7;
-	
+		
 }
 	
 	.icon:hover {
