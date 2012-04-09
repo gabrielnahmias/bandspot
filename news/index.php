@@ -242,7 +242,7 @@ if ($action=='addnews')
 
    $wrapper=ShowBBEditor('2','{FULLSTORY_EDITOR}','fullstory',$wrapper);
    $wrapper=str_replace('{INPUTTEXT}','',$wrapper);
-   $wrapper=str_replace('{FORM_ONSUBMIT}',"OnNewsSubmit(1);OnNewsSubmit(2);if ('$action' == 'addnews') { SocialPost(); return false; }",$wrapper);
+   $wrapper=str_replace('{FORM_ONSUBMIT}',"OnNewsSubmit(1);OnNewsSubmit(2);if ( '$action' == 'addnews' && opener.fbLoggedIn() ) { SocialPost(); return false; }",$wrapper);
    if ($script['editor']['wysiwyg']=='ON')
    {
     $wrapper=str_replace('{CHANGE_EDITOR}','<a href="#" onClick="window.open(\'index.php?a=cheditor&amp;e=wysiwyg\', \'\', \'HEIGHT=100,resizable=yes,scrollbars=no,WIDTH=100\');return false;" class="SpanClass1">[ $__l_activatewysiwyg ]</a>',$wrapper);
@@ -275,7 +275,7 @@ if ($action=='addnews')
   
   $sArch =  date("Y", EncodeTime('') ) . "/" . date("m", EncodeTime('') );
   $sFile = "news/news-" . date("m", EncodeTime('') ) . date("Y", EncodeTime('') ) . ".php";
-  $sID = count( file($sFile) ) + 1;
+  $sID = count( file($sFile) );
   
   $wrapper=str_replace('{VARS}',"/news/$sArch/$sID",$wrapper); // This is for the Facebook link.
   
@@ -400,7 +400,7 @@ if ($action=='editnewsfrm')
    $wrapper=str_replace('{INPUTTEXT}',$article['short_story'],$wrapper);
    $wrapper=ShowBBEditor('2','{FULLSTORY_EDITOR}','fullstory',$wrapper);
    $wrapper=str_replace('{INPUTTEXT}',$article['full_story'],$wrapper);
-   $wrapper=str_replace('{FORM_ONSUBMIT}',"OnNewsSubmit(1);OnNewsSubmit(2);if ('$action' == 'addnews') { SocialPost(); return false; }",$wrapper);
+   $wrapper=str_replace('{FORM_ONSUBMIT}',"OnNewsSubmit(1);OnNewsSubmit(2);if ( '$action' == 'addnews' && opener.fbLoggedIn() ) { SocialPost(); return false; }",$wrapper);
    if ($script['editor']['wysiwyg']=='ON')
    {
     $wrapper=str_replace('{CHANGE_EDITOR}','<a href="#" onClick="window.open(\'index.php?a=cheditor&amp;e=wysiwyg\', \'\', \'HEIGHT=100,resizable=yes,scrollbars=no,WIDTH=100\');return false;" class="SpanClass1">[ $__l_activatewysiwyg ]</a>',$wrapper);

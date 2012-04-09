@@ -25,6 +25,12 @@ a.back:hover {
 	*/
 }
 
+a.right {
+	
+	float: right;
+	
+}
+
 a, img.band {
 	
 	cursor: pointer;
@@ -67,50 +73,6 @@ body span.pagination {
 	
 	display: inline;
 	
-}
-
-body.home span.pagination {
-	
-	display: none;
-	
-}
-
-div[id='404'] .inner {
-	
-	background: url('../img/404facestand.png') 124px 250px no-repeat;
-	
-	font-size: 30px;
-	
-	font-weight: bold;
-	
-	min-height: 400px;
-	
-	padding: 0 50px 156px;
-
-	text-align: center;
-	
-}
-
-div[id='404'] div#message {
-	
-	position: absolute;
-	
-	bottom: 8px;
-	
-	left: 64px;
-	
-}
-
-div[id='404'] img#face {
-
-	position: absolute;
-
-	left: 100px;
-
-	z-index: 1;
-
-	top: 0px;
-
 }
 
 div#archive-popout {
@@ -378,9 +340,9 @@ div#nav.bar div.hover {
 	display: inline-block;
 	
 	height: 30px;
-	
+	/*
 	margin: 0;
-	
+	*/
 	padding: 10px 10px 0;
 	
 	text-align: center;
@@ -629,6 +591,138 @@ div#social-popout {
 	div#social-popout .inner {
 		
 		display: none;
+		
+	}
+
+div#tweets {
+	
+	background: #FFFFFF;
+	
+	border: 1px solid #888888;
+	
+	border-width: 1px 0;
+	
+	font-size: 13px;
+	
+	height: 130px;
+	
+	line-height: 21px;
+	
+	list-style: none;
+	
+	margin: 5px 0 30px -10px;
+	
+	overflow: auto;
+	
+	padding: 10px;
+	
+	position: relative;
+	
+	text-align: left;
+	
+	width: 224px;
+	
+}
+	
+	div#tweets a.time {
+		
+		font-size: 11px;
+		
+	}
+	
+	div#tweets p {
+		
+		background: #E8F4FF;
+	
+		border: 1px solid #DDDDDD;
+	
+		margin: 0 0 9px;
+	
+		padding: 5px;
+		
+	}
+	
+	div#tweets a[style="font-size: 85%;"] {
+		
+		font-size: 10px !important;
+		
+	}
+
+div#tweets span, div#tweets span a {
+	
+	color: #333333;
+	
+	text-decoration: none;
+	
+}
+
+div#twitter_box {
+	
+	background: #FFF3ED;
+	
+	border: 1px solid #111111;
+	
+	border-radius: 20px;
+	
+	-moz-border-radius: 20px;
+	
+	-webkit-border-radius: 20px;
+	
+	-o-border-radius: 20px;
+	
+	-ms-border-radius: 20px;
+	
+	-khtml-border-radius: 20px;
+	
+	color: #333333;
+	
+	margin-bottom: 15px;
+	
+	padding: 10px;
+	
+	position: relative
+	
+}
+	
+	div#twitter_box a.right {
+		
+		color: #019AD2;
+		
+		font-weight: bold;
+		
+	}
+	
+	div#twitter_box div.overlay {
+		
+		background: url("../img/overlay.png") repeat scroll 0 0 transparent;
+		
+		height: 150px;
+		
+		left: 0;
+		
+		position: absolute;
+		
+		top: 40px;
+		
+		width: 244px;
+		
+	}
+	
+	div#twitter_box .overlay img {
+		
+		left: 100px;
+		
+		position: relative;
+		
+		top: 60px;
+		
+	}
+	
+	div#twitter_box span.title {
+		
+		font-size: 16px;
+		
+		font-weight: bold;
 		
 	}
 
@@ -1252,11 +1346,11 @@ div.friends {
 
 div#follow {
 	
-	top: 3px;
+	bottom: 6px;
 	
 	position: absolute;
 	
-	right: 1px;
+	left: 10px;
 	
 }
 
@@ -1461,6 +1555,13 @@ div.ui-dialog-titlebar {
 div.wrapper {
 	
 	padding-bottom: 20px;
+	
+}
+
+html.home span.pagination,
+html.news span.pagination {
+	
+	display: none;
 	
 }
 

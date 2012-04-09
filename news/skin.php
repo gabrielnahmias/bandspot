@@ -252,6 +252,8 @@ function SkinFullNewsArticle($article,$tpl,$xsection=0)
 		$linkfull=str_replace('{MONTH}',substr( $article['archive'] , 0 , 2 ),$linkfull);
 		$linkfull=str_replace('{ID}',$article['id'],$linkfull);
 		
+		// FB pulls info from Open Graph tag so this does not apply to it.
+		
 		$c=str_replace('{url}',"$sPrefix/$linkfull",$c);
         $c=str_replace('{author}',$authorline,$c);
         $c=str_replace('{newsarch}',$article['archive'],$c);

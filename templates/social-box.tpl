@@ -1,36 +1,28 @@
 {if !$bI}
 
-<script charset="utf-8" src="http://widgets.twimg.com/j/2/widget.js"></script>
-
-<script>
-
-new TWTR.Widget({
-  version: 2,
-  type: 'profile',
-  rpp: 4,
-  interval: 30000,
-  width: 'auto',
-  height: 100,
-  theme: {
-    shell: {
-      background: '#ffd6c2',
-      color: '#333333'
-    },
-    tweets: {
-      background: '#ffffff',
-      color: '#333333',
-      links: '#f96d02'
-    }
-  },
-  features: {
-    scrollbar: true,
-    loop: false,
-    live: true,
-    behavior: 'all'
-  }
-}).render().setUser('{$smarty.const.TWTR_DOMAIN}').start();
-
-</script>
+<div id="twitter_box">
+    
+    <span class="title">Tweets</span>
+    
+    <a class="right" href="{$smarty.const.URL_TW}" target="_blank">@{$smarty.const.TWTR_DOMAIN}</a>
+    
+    <div id="tweets">
+        
+    </div>
+    
+    <div class="overlay">
+    
+        <img src="img/load2.gif" />
+    	
+    </div>
+    
+    <div id="follow">
+    	
+        {$smarty.const.CODE_FOLLOW}
+        
+    </div>
+    
+</div>
 
 {/if}
 

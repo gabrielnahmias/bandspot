@@ -2,6 +2,15 @@
 
 require_once "functions.php";
 
+function localhost() {
+	
+	// I'm not sure if I really need the second half of the logic.  It might even be detrimental in
+	// certain cases.
+	
+	return ( $_SERVER['HTTP_HOST'] == "localhost" || $_SERVER['SERVER_ADDR'] == "127.0.0.1" );
+	
+}
+
 function urlPath($bSlashes = false, $sURL = "") {
     
 	// Make it so bSlashes is an array of booleans for left and right?
@@ -61,6 +70,7 @@ define("NAME", "Elemovements");
 define("DATE_FMT", "F j<\s\u\p><\u>S</\u></\s\u\p>, Y \a\\t g:i A");
 
 define("DIR_BASE", "el");
+define("DIR_CSS", "css");
 define("DIR_ETC", "etc");
 define("DIR_IMG", "img");
 define("DIR_JS", "js");
@@ -140,8 +150,6 @@ define("TEXT_DIVIDER", " - ");
 define("TEXT_EMAIL", "E-mail this Address");
 define("TEXT_FRIEND", "#friend-button");
 
-// I know this next definition is fugly as hell but it just had to be done for my purposes.
-
 define("TEXT_MIN_F", "min/?f=");
 
 define("TEXT_NEWS_TITLE", 'Latest News <span class="links">Latest · <a class="archive" href="archive" title="View the News Archive">Archive</a>');
@@ -155,7 +163,7 @@ define("TEXT_NO_STORY", "This story does not exist. You are being redirected hom
 define("TEXT_PICS_PROB", '<div title="Problem With Pictures Page">We are sorry.  Currently, the pictures section is experiencing some issues.  Please be patient while we resolve these.  Thank you.</div>');
 define("TEXT_READ", "Read the full article on the official " . NAME . " website.");
 
-define("TWTR_DOMAIN", NAME);
+define("TWTR_DOMAIN", FB_DOMAIN);
 define("TWTR_HASH", NAME . "Rules");;
 define("TWTR_URL", "http://www.twitter.com/");
 define("TWTR_RELATED", "gnahmias");
@@ -243,7 +251,7 @@ if ( isset( $_GET['xnewsaction'] ) && $_GET['xnewsaction'] == "fullnews" ) {
 		
 		$sDateFmt = "Y-m-d";
 		
-		$sLink = DOMAIN . "/news/" . substr($sArch, -4) . "/" . substr($sArch, 0, 2) . "/$sID/";
+		$sLink = DOMAIN . "news/" . substr($sArch, -4) . "/" . substr($sArch, 0, 2) . "/$sID/";
 		
 		$aLines = file($sFile);
 		
@@ -256,6 +264,7 @@ if ( isset( $_GET['xnewsaction'] ) && $_GET['xnewsaction'] == "fullnews" ) {
 		$sExp = date($sDateFmt, strtotime( date($sDateFmt, $iTime) . " +1 month" ) );
 		
 		$sAuthor = @ucwords( $aInfo[4] );
+		$sMsg = str_replace("<br />", " ", $aInfo[6] );
 		
 		$sAuthorLink = FB_URL . "/";
 		
@@ -270,7 +279,7 @@ if ( isset( $_GET['xnewsaction'] ) && $_GET['xnewsaction'] == "fullnews" ) {
 		$aOG['modified'] = $sMod;
 		$aOG['expires'] = $sExp;
 		$aOG['author'] = $sAuthorLink;
-		$aOG['description'] = "";		// I'm not sure the repercussions of this...
+		$aOG['description'] = $sMsg;
 		$aOG['title'] = $sTitle;
 		$aOG['type'] = "article";
 		$aOG['url'] = $sLink;

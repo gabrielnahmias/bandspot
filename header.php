@@ -1,10 +1,10 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"><head>
+<html class="<?=$pg?>" xmlns="http://www.w3.org/1999/xhtml"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title><?= NAME . TEXT_DIVIDER . ( !isset( $aOG['title'] ) ? $sPage : $aOG['title'] ) ?></title>
 
 <?php if ( !localhost() ): ?>
-<base href="http://<?=$_SERVER['HTTP_HOST']."/".urlPath()?>" />
+<base href="http://<?=$_SERVER['HTTP_HOST'].urlPath(true)?>" />
 <?php endif;?>
 
 <link href="img/f.ico" rel="shortcut icon" />
@@ -15,9 +15,20 @@
 <link href="<?=TEXT_MIN_F?><?= $sPath . ( ($bI) ? "cb/colorbox" : "hs/highslide" ) ?>.css" rel="stylesheet" type="text/css" />
 <?php css_add("css", $sPathPlain); if ($bI): ?>
 <link rel="apple-touch-icon-precomposed" href="img/touch.png"/>
-<?php endif; ?>
+<?php endif;
 
-<meta name="description" content="<?=$aMeta[$pg]?>" />
+// I'm not sure if I want to load separate CSS... it sounds like a good idea but a bit of a hassle.
+// We shall see if I feel like separating that 1500 behemoth of a stylesheet into different files.
+
+// Special CSS loading time.  Don't forget to add this functionality to loadContent (dynamically load the file).
+// Also, remember you need to do the same for JavaScript anyway!
+
+if ( file_exists($sCSSFile) )
+	print '<link href="' . TEXT_MIN_F . urlPath() . $sCSSFile . '" rel="stylesheet" type="text/css" />';
+
+?>
+
+<meta name="description" content="<?= ( ( !isset( $aOG['description'] ) ) ? $aMeta[$pg] : $aOG['description'] ) ?>" />
 <meta name="keywords" content="<?= implode(",", $aKeywords) . ",$pg" ?>" />
 <meta name="author" content="Gabriel Nahmias" />
 <meta name="robots" content="index, follow" />
@@ -53,23 +64,47 @@
 <script language="javascript" src="http://html5shiv.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
 <![endif]-->
 
+<?php if ($bI):
+
+/*	WHAT IN THE NAME OF GOD ALWAYS CAUSES SOMETHING TO GO WRONG WITH THE JAVASCRIPT ON THE SITE????
+	EITHER IT'S THE DESKTOP SITE WITH A THOUSAND ERRORS OR THE EVER-IMPOSSIBLE-TO-TRACE-EVEN-ONE-ERROR
+	IPHONE VERSION.	I'll simply have to take time out to eliminate one by one which file causes it like
+	every other time!
+ */
+
+?>
+
+<script language="javascript" src="cb/colorbox.js" type="text/javascript"></script>
+<script language="javascript" src="js/buzz.js" type="text/javascript"></script>
+<script language="javascript" src="js/effects.js" type="text/javascript"></script>
+<script language="javascript" src="js/orientation.js" type="text/javascript"></script>
+<script language="javascript" src="js/modernizr.js" type="text/javascript"></script>
+<script language="javascript" src="js/scripts.js" type="text/javascript"></script>
+
+<?php else: ?>
+
 <script language="javascript" src="<?=TEXT_MIN_F?><?=( ($bI) ? "cb/colorbox" : "hs/highslide" ) ?>.js<?=( !empty($sPathPlain) ? "&b=$sPathPlain" : "" )?>" type="text/javascript"></script>
 
 <script language="javascript" src="<?= TEXT_MIN_F ?>buzz.js,effects.js,<?php if (!$bI): ?>flux.js,<?php else: ?>orientation.js<?php endif; ?>modernizr.js,scripts.js<?=( ($bWK && !$bI) ?( ",zepto.js") : "" )?>&b=<?=$sJS?>" type="text/javascript"></script>
 
 <script language="javascript" src="<?=TEXT_MIN_F . DIR_JS_LOGIC?>/news.js<?=( !empty($sPathPlain) ? "&b=$sPathPlain" : "" )?>" type="text/javascript"></script>
 
-<script language="javascript" type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-4f770f490e3607ff"></script>
 <!-- <script type="text/javascript" src="https://apis.google.com/js/plusone.js">{"parsetags": "explicit"}</script> -->
+
+<?php endif; ?>
+
+<script language="javascript" type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-4f770f490e3607ff"></script>
 
 </head>
 
-<body class="<?=$pg?>"<?=( ($bI) ? " onorientationchange=\"updateOrientation();\" onload=\"updateOrientation();\"" : "" )?>>
+<body<?=( ($bI) ? " onorientationchange=\"updateOrientation();\" onload=\"updateOrientation();\"" : "" )?>>
 	
-    <div class="wrapper">
+	<div class="wrapper">
         <?php if (!$bI): ?>
         
         <div id="fb-root"></div>
+        
+        <script language="javascript" src="<?=TEXT_MIN_F?>fb.js&b=<?=$sJS?>" type="text/javascript"></script>
         
         <div class="warning dialog">
             
@@ -102,7 +137,7 @@
                     
                     <div id="fb-name"></div>
                     
-                    <div class="fb-login-button" autologoutlink="true" data-scope="<?=FB_PERMS?>" data-show-faces="false" data-width="200" data-max-rows="1" onlogin="fbInfo()"></div>
+                    <div class="fb-login-button" autologoutlink="true" data-scope="<?=FB_PERMS?>" data-show-faces="false" data-width="200" data-max-rows="1" onlogin="console.log('hmm')"></div>
                     
                     <div class="fb-load">
                     	

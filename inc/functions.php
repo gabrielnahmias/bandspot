@@ -75,15 +75,6 @@ function isOnline() {
 	
 }
 
-function localhost() {
-	
-	// I'm not sure if I really need the second half of the logic.  It might even be detrimental in
-	// certain cases.
-	
-	return ( $_SERVER['HTTP_HOST'] == "localhost" || $_SERVER['SERVER_ADDR'] == "127.0.0.1" );
-	
-}
-
 function nbsp($intNumber) {
 	
 	$sText = "";

@@ -27,6 +27,7 @@ if ( !isset($pg) )
 $sFile = "$pg.php";
 $sJSFile = DIR_JS_LOGIC . "/$pg.js";
 $sTPLFile = DIR_TEMPLATES . "/$pg.tpl";
+$sCSSFile = DIR_CSS . "/$pg.css";
 
 $oSmarty->assign("sJS", $sJS);
 
@@ -45,6 +46,7 @@ if ( !file_exists($sFile) && !file_exists($sTPLFile) ) {
 	$sFile = str_replace($pg, $sTemp, $sFile);
 	$sJSFile = str_replace($pg, $sTemp, $sJSFile);
 	$sTPLFile = str_replace($pg, $sTemp, $sTPLFile);
+	$sCSSFile = str_replace($pg, $sTemp, $sCSSFile);
 	
 	$pg = "404";
 	

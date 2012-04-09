@@ -5,9 +5,8 @@ if (!window.oVars)
 
 window.oVars = {
 	
-	// Eventually put $Archive in here then refer to it always by its selector.
-	
-	$Social: $("#social-popout"),
+	$Archive: $("div#archive-popout"),
+	$Social: $("div#social-popout"),
 	
 	aMonths: [
 		
@@ -36,7 +35,6 @@ window.oVars = {
 	
 	iSpeed: 1000,
 	
-	sArchive: "div#archive-popout",
 	sCurrent: extractPage(),
 	sDomain: "http://" + window.location.host,
 	sOrigin: window.location.pathname.replace("/", ""),
@@ -84,13 +82,13 @@ window.oVars = {
 		
 		toggle: function() {
 			
-			var sRight = $(oVars.sArchive).css("right");
+			var sRight = $(oVars.$Archive.selector).css("right");
 			
-			$(oVars.sArchive).removeClass("sticky");
+			$(oVars.$Archive.selector).removeClass("sticky");
 			
 			if (!this.bOpen) {
 				
-				$(oVars.sArchive).css("visibility", "visible").animate(
+				$(oVars.$Archive.selector).css("visibility", "visible").animate(
 					
 					{ right: this.sOpen },
 					
@@ -100,7 +98,7 @@ window.oVars = {
 					
 					function() {
 						
-						$(oVars.sArchive).css("padding-left", "6px")
+						$(oVars.$Archive.selector).css("padding-left", "6px")
 										 .css("z-index", 0);
 						
 					}
@@ -113,9 +111,9 @@ window.oVars = {
 				
 			} else {
 				
-				$(oVars.sArchive).css("visibility", "hidden").css("padding-left", "20px");
-				$(oVars.sArchive).css("right", this.sClosed);
-				$(oVars.sArchive).css("z-index", -1);
+				$(oVars.$Archive.selector).css("visibility", "hidden").css("padding-left", "20px");
+				$(oVars.$Archive.selector).css("right", this.sClosed);
+				$(oVars.$Archive.selector).css("z-index", -1);
 				
 				this.bOpen = false;
 				
@@ -133,6 +131,23 @@ window.oVars = {
 String.prototype.trim = function() {
 	
 	return this.replace(/^\s+|\s+$/g, '');
+	
+}
+
+function addBodyClass(sClass) {
+	
+	// I implemented these two functions because the iPhone site was getting affected by me
+	// setting the body's class throughout the code (I also was using that class to determine
+	// the site's orientation [landscape/portrait]).  I've decided to use the HTML element
+	// for these purposes but may revert, so these stay.
+	
+	document.body.setAttribute("class", document.body.getAttribute("class") + " " + sClass)
+	
+}
+
+function removeBodyClass(sClass) {
+	
+	document.body.setAttribute("class", document.body.getAttribute("class").replace(/\btesting\b/g, "") )
 	
 }
 
@@ -175,7 +190,7 @@ function fbLinks() {
 			
 			var sID;
 			
-			FB.getLoginStatus( function() {
+			FB.getLoginStatus( function(response) {
 				
 				sID = response.authResponse.userID;
 				
@@ -208,7 +223,6 @@ function fbLinks() {
 			
 			// If you log in and you're on the contact or bio page, be sure to run this special function afterwards.
 			
-			// Consider using 
 			friendButton(oPHP.const.TEXT_FRIEND, ( $("#bio").length ? oPHP.const.FB_UID : null ) );
 			
 		}
@@ -437,9 +451,9 @@ function fbInfo() {
 		
 		// Change the logout button's text.
 		
-		$(".fb-login-button .fb_button_text").text("Log Out");
-		
 		FB.api('/me', function(response) {
+			
+			$(".fb-login-button .fb_button_text").text("Log Out");
 			
 			var sName = response.first_name;
 			
@@ -767,8 +781,6 @@ function loadContent(sURL, bPush, bReplace) {
 	
 	oVars.sCurrent = sURL.split("&")[0];
 	
-	document.body.className = extractPage("ending");
-	
 	// Closes any picture open in Colorbox.
 	
 	if (oVars.sCurrent != "pictures" && oVars.bI)
@@ -803,6 +815,8 @@ function loadContent(sURL, bPush, bReplace) {
 			
 			function(sData) {
 				
+				document.documentElement.className = extractPage("ending");
+				
 				document.title = oPHP.const.NAME + oPHP.const.TEXT_DIVIDER + ucwords(oVars.sCurrent);
 				
 				$Box.html(sData).slideDown(oVars.iSpeed, "easeOutBounce");
@@ -836,28 +850,63 @@ function possessive(sValue) {
 	
 }
 
+function relativeTime(sTime) {
+	
+	var values = sTime.split(" ");
+	
+	sTime = values[1] + " " + values[2] + ", " + values[5] + " " + values[3];
+	
+	var parsed_date = Date.parse(sTime);
+	
+	var relative_to = (arguments.length > 1) ? arguments[1] : new Date();
+	
+	var delta = parseInt((relative_to.getTime() - parsed_date) / 1000);
+	
+	delta = delta + (relative_to.getTimezoneOffset() * 60);
+	
+	if (delta < 60)
+		return 'less than a minute ago';
+	else if (delta < 120)
+		return 'about a minute ago';
+	else if ( delta < (60 * 60) )
+		return (parseInt(delta / 60)).toString() + ' minutes ago';
+	else if (delta < (120 * 60))
+		return 'about an hour ago';
+	else if (delta < (24 * 60 * 60))
+		return 'about ' + (parseInt(delta / 3600)).toString() + ' hours ago';
+	else if (delta < (48 * 60 * 60))
+		return '1 day ago';
+	else
+		return (parseInt(delta / 86400)).toString() + ' days ago';
+	
+}
+
 function reloadAddThis() {
 	
-	// I never thought these plugins would be so deficient that I would have to hand-code
-	// basically all the methods to handle them.  Yeesh.
+	//if (!oVars.bI) {
+		
+		// I never thought these plugins would be so deficient that I would have to hand-code
+		// basically all the methods to handle them.  Yeesh.
+		
+		// TODO: I might want to employ $.each considering I'm using jQuery.
+		
+		var i = 0,
+			aTbxs = document.getElementsByClassName("addthis_toolbox");
+		
+		for (var oTbx in aTbxs) {
+			
+			oCurrent = $(".addthis_toolbox").get(i);
+			oCounter = $(".addthis_toolbox .addthis_counter").get(i);
+			
+			addthis.toolbox(oCurrent);
+			addthis.counter(oCounter);
+			
+			i++;
+			
+		}
+		
+	//}
 	
-	// TODO: I might want to employ $.each considering I'm using jQuery.
-	
-	var i = 0,
-		aTbxs = document.getElementsByClassName("addthis_toolbox");
-	
-	for (var oTbx in aTbxs) {
-		
-		oCurrent = $(".addthis_toolbox").get(i);
-		oCounter = $(".addthis_toolbox .addthis_counter").get(i);
-		
-		addthis.toolbox(oCurrent);
-		addthis.counter(oCounter);
-		
-		i++;
-		
-	}
-				
 }
 
 function reloadWidgets(sNewURL) {
@@ -883,7 +932,7 @@ function reloadWidgets(sNewURL) {
 			} else
 				sURL += "/" + sNewURL;
 			
-			console.debug(sURL)
+			//console.debug(sURL)
 			
 			var sData = "data-$1=\"" + sURL + "\"";
 			
@@ -924,8 +973,10 @@ function resizeTitles() {
 		
 		var iLength = $(this).text().length;
 		
-		if ( iLength > 33 && iLength < 43 )
-			$(this).css('font-size', '13px');
+		if ( iLength > 27 && iLength <= 31 )
+			$(this).css('font-size', '14px');
+		else if ( iLength > 31 && iLength < 43 )
+			$(this).css('font-size', '12px');
 		else if ( iLength >= 43 )
 			$(this).css('font-size', '10px');
 		
@@ -1090,34 +1141,7 @@ function ucwords(str) {
 	
 	window.onload = function() {
 		
-		fbInfo();
-		
-		// I'm trying to tell Facebook they have a problem somewhere in the interactivity of their widgets.
-		// The URL of the bug report is http://developers.facebook.com/bugs/260258890721446 but this girl
-		// seems to think I'm wrong.  The next bit is a bit of debugging for this.
-		
-		if (typeof FB !== "undefined") {
-			
-			FB.Event.subscribe('auth.authResponseChange', function(response) {
-				
-				//fbInfo();
-				
-				var sPreposition;
-				
-				console.log("Event fired.  Response object:");
-				
-				console.log(response);
-				
-				if (response.status == "connected")
-					sPreposition = "into";
-				else
-					sPreposition = "out of";
-				
-				console.info("You are currently logged " + sPreposition + " Facebook for the site.");
-				
-			} );
-			
-		}
+		// Nothing here.
 		
 	}
 	
@@ -1125,23 +1149,9 @@ function ucwords(str) {
 		
 		// MAIN:
 		
-		// Makes sense to set this with CSS because if they don't have Javascript they can't use the social popout anyway.
-		
-//		$("#social-popout").css("top", -4000);
-		
 		// Let's run ASAP to get it over with.
 		
-		// Facebook first.
-		
-		(function(d, s, id) {
-		  var js, fjs = d.getElementsByTagName(s)[0];
-		  if (d.getElementById(id)) return;
-		  js = d.createElement(s); js.id = id;
-		  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=" + oPHP.const.ID_FB_APP;
-		  fjs.parentNode.insertBefore(js, fjs);
-		}(document, 'script', 'facebook-jssdk'));
-		
-		// Google Analytics second.
+		// Google first.
 		
 		var _gaq = _gaq || [];
 		_gaq.push(['_setAccount', 'UA-27838426-1']);
@@ -1153,7 +1163,17 @@ function ucwords(str) {
 			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 		} )();
 		
-		// Twitter third.
+		( function() {
+			
+			var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+			
+			po.src = 'https://apis.google.com/js/plusone.js';
+			
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+			
+		} )();
+		
+		// Twitter second.
 		
 		!function(d, s, id) {
 			var js,
@@ -1166,46 +1186,8 @@ function ucwords(str) {
 			}
 		} (document, "script", "twitter-wjs");
 		
-		// Once you have an iPhone again >:(, it would be a good idea to eliminate the Facebook-related errors.
-		
-		window.fbAsyncInit = function() {
-			
-			FB.init( {
-				
-				appId      : oPHP.const.ID_FB_APP,
-				channelUrl : oPHP.const.DOMAIN + "/channel.php",
-				status     : true, 
-				cookie     : true,
-				xfbml      : true,
-				oauth      : true,
-				
-			} );
-		  
-		}
-		
-		$Archive = $(oVars.sArchive);
-		
-		( function() {
-			
-			var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-			
-			po.src = 'https://apis.google.com/js/plusone.js';
-			
-			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-			
-		} )();
-		
-		window.onpopstate = function(event) {
-			
-			var objState = event.state;
-			
-			if (objState && objState.page)
-				loadContent(objState.page, ( (!oVars.bLoaded) ? true : false ) );
-			
-			if (!oVars.bLoaded)
-				oVars.bLoaded = true;
-			
-		}
+		if ($.browser.msie && $.browser.version <= 6)
+			$(document).pngFix();
 		
 		if (oVars.bI)
 			window.scrollTo(0, 1);
@@ -1363,6 +1345,82 @@ function ucwords(str) {
 			
         } );
 		
+		// TWITTER TWEETS LOADER
+		
+		var $Box = $("#twitter_box");
+		var $Ol = $Box.find(".overlay");
+		var $Tweets = $("#tweets");
+		
+		var bEnd = false;
+		
+		var iCount = 3;
+		var currentPage = 1;
+		
+		var appendTweet = function(tweet, id, sDate) {
+			
+			$("<p />").html(tweet + " ")
+					  .append( $('<a class="time" target="_blank">' + relativeTime(sDate) + '</a>').attr("href", "http://twitter.com/" + oPHP.const.TWTR_DOMAIN + "/status/" + id)
+									   		 .attr("title", "Check tweet on Twitter") ).appendTo($Tweets);
+				
+		};
+		
+		var loadTweets = function() {
+			
+			var url = "http://twitter.com/status/user_timeline/" + oPHP.const.TWTR_DOMAIN + ".json?count=" + iCount + "&page=" + currentPage + "&callback=?";
+			
+			$.ajax( {
+				
+				url: url,
+				
+				// async is set to false because we want to modify a variable outside the
+				// scope of the following callback.
+				
+				async: false,
+				
+				dataType: 'json',
+				
+				success: function(data) {
+					
+					// If the data is empty, we are at the end, so stop loading tweets.
+					
+					if (!data.length)
+						bEnd = true;
+					
+					$.each(data, function(i, post) {
+						appendTweet(post.text, post.id, post.created_at);
+					});
+									
+					$Ol.fadeOut(oVars.iSpeed, "", function() {
+						$Box.find(".count").html( (currentPage * pageSize) + " total tweets");
+					} );
+					
+				}
+				
+			} );
+			
+		};
+		
+		loadTweets();
+		
+		$Tweets.scroll(function() {
+			
+			if ( $(this)[0].scrollHeight - $(this).scrollTop() == $(this).outerHeight() ) {
+				
+				if (!bEnd) {
+					
+					currentPage++;
+					
+					$Ol.fadeIn();
+					
+					loadTweets();
+					
+				}
+				
+			}
+		});
+		
+		// END LOADER
+		
 		loadContent(oVars.sCurrent, true, true);
 		
 	} );
@@ -1373,7 +1431,7 @@ $(window).load( function() {
 	
 	// Mainly to do with the social popout and Twitter.
 	
-	$(".twtr-widget.twtr-widget-profile.twtr-scroll").append('<div id="follow"></div>').find("#follow").html(oPHP.const.CODE_FOLLOW);
+	fbInfo();
 	
 	twttr.widgets.load();
 	

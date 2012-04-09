@@ -36,7 +36,7 @@
     
     <div class="section-title">{$sAlbum}</div> <span class="gray italic">({count($aPics)} pictures)</span>
     
-        <div{if !$bI} class="highslide-gallery scroller"{/if}>
+        <div{* {if !$bI} *} class="highslide-gallery scroller"{* {/if} *}>
             
             <ul class="horiz-list scroller">
             

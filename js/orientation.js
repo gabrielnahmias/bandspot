@@ -15,7 +15,7 @@ function updateOrientation() {
 		
 	}
 	
-	document.body.setAttribute("class", strClass);
+	addBodyClass(strClass);
 	
 	/*
 	
