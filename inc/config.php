@@ -63,7 +63,7 @@ function urlPath($bSlashes = false, $sURL = "") {
 if ( localhost() )
 	define("DOMAIN", "http://localhost" . urlPath() );
 else
-	define("DOMAIN", "http://el.x10.mx/");
+	define("DOMAIN", "http://el.x10.mx");
 
 define("NAME", "Elemovements");
 
@@ -92,7 +92,7 @@ define("FB_LIKE_FONT", "arial");
 define("FB_LIKE_LAYOUT", "box_count");
 define("FB_LIKE_SEND", "false");
 define("FB_LIKE_WIDTH", 35);
-define("FB_PERMS", "publish_actions, publish_stream, manage_pages, user_location, read_requests");
+define("FB_PERMS", "publish_actions, publish_stream, manage_pages, user_location, read_requests, user_actions.news");
 define("FB_UID", "gnahmias");
 define("FB_URL", "http://www.facebook.com/");
 
@@ -162,6 +162,8 @@ define("TEXT_NO_MUSIC_ADD_IPHONE", 'ReverbNation');
 define("TEXT_NO_STORY", "This story does not exist. You are being redirected home.<script>setTimeout(\"$('#nav a[href=home]').click()\", 3000)</script>");
 define("TEXT_PICS_PROB", '<div title="Problem With Pictures Page">We are sorry.  Currently, the pictures section is experiencing some issues.  Please be patient while we resolve these.  Thank you.</div>');
 define("TEXT_READ", "Read the full article on the official " . NAME . " website.");
+define("TEXT_HIDE_MENU", "Hide Admin Menu");
+define("TEXT_SHOW_MENU", "Show Admin Menu");
 
 define("TWTR_DOMAIN", FB_DOMAIN);
 define("TWTR_HASH", NAME . "Rules");;
@@ -170,6 +172,7 @@ define("TWTR_RELATED", "gnahmias");
 define("TWTR_STYLE", "vertical");
 
 define("URL_ANALYTICS", "https://www.google.com/analytics/web/?pli=1#report/visitors-overview/a27838426w53292149p54112166/");
+define("URL_ADDTHIS", "http://www.addthis.com/analytics");
 define("URL_CPANEL", "https://boru.x10hosting.com:2083/frontend/x3/index.html?post_login=13727695247822");
 define("URL_FB", FB_URL . FB_DOMAIN);
 define("URL_MS", "http://www.myspace.com/elemovements");
@@ -177,11 +180,13 @@ define("URL_NEWS", DIR_NEWS . "/news.php");
 define("URL_RN", "http://www.reverbnation.com/2083759");
 define("URL_TOUR_RSS", "http://www.reverbnation.com/rss/artist_shows_rss/elemovements");
 define("URL_TW", TWTR_URL . TWTR_DOMAIN);
+define("URL_TERRASOFT", "http://www.terrasoftlabs.com/");
 define("URL_YT", "http://www.youtube.com/user/kbodonne");
 
 // I have to define this down here because URL_TOUR_RSS isn't defined before the TEXT_ definitions.
 
-define("TEXT_ADMIN_LINKS", '<span class="admin"> · <a href="' . DIR_NEWS . '" target="_blank">Login</a> · <a href="' . URL_ANALYTICS . '" target="_blank"><img alt="Access Google Analytics" class="admin-button" src="img/graph.png" title="Access Google Analytics" /></a> · <a href="' . URL_CPANEL . '" target="_blank"><img alt="Access Your cPanel" class="admin-button" src="img/cp.png" title="Access Your cPanel" /></a></span>');
+define("TEXT_ADMIN_LINKS", '<div class="admin"><span class="menu-clicked"></span><span class="gear" title="Admin Menu"></span><div id="admin-menu"><a href="' . DIR_NEWS . '" target="_blank"><img alt="Log In" class="admin-button" src="img/news.gif" title="Log in to Your News Manager" /></a></a><a href="' . URL_ANALYTICS . '" target="_blank"><img alt="Access Google Analytics" class="admin-button" src="img/graph.png" title="Access Google Analytics" /></a><a href="' . URL_CPANEL . '" target="_blank"><img alt="Access Your cPanel" class="admin-button" src="img/cp.png" title="Access Your cPanel" /></a><a href="' . URL_ADDTHIS . '" target="_blank"><img alt="Access AddThis Analytics" class="admin-button" src="img/at.png" title="Access AddThis Analytics" /></a></div></div>');
+
 define("TEXT_TOUR_TITLE", 'Tour Schedule <span class="links"><a href="' . URL_TOUR_RSS . '" target="_blank">RSS</a></span>');
 define("TEXT_FB", '<span class="links"><a class="fblink" href="' . URL_FB . '?sk=photos" target="_blank" title="Visit this Page on Facebook">View on Facebook</a></span>');
 
@@ -251,7 +256,7 @@ if ( isset( $_GET['xnewsaction'] ) && $_GET['xnewsaction'] == "fullnews" ) {
 		
 		$sDateFmt = "Y-m-d";
 		
-		$sLink = DOMAIN . "news/" . substr($sArch, -4) . "/" . substr($sArch, 0, 2) . "/$sID/";
+		$sLink = DOMAIN . "/news/" . substr($sArch, -4) . "/" . substr($sArch, 0, 2) . "/$sID/";
 		
 		$aLines = file($sFile);
 		

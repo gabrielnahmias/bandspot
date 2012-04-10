@@ -1,5 +1,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html class="<?=$pg?>" xmlns="http://www.w3.org/1999/xhtml"><head>
+<html class="<?=$pg?>" xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US"
+      xmlns:fb="https://www.facebook.com/2008/fbml"> 
+<head prefix="og: http://ogp.me/ns# elemovements: 
+                  http://ogp.me/ns/apps/elemovements#">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title><?= NAME . TEXT_DIVIDER . ( !isset( $aOG['title'] ) ? $sPage : $aOG['title'] ) ?></title>
 
@@ -39,14 +42,14 @@ if ( file_exists($sCSSFile) )
 <meta property="og:site_name"			 content="<?=NAME?>" />
 <meta property="fb:admins"				 content="<?=ID_FB_ADMINS?>" />
 <meta property="fb:app_id"				 content="<?=ID_FB_APP?>" />
-<meta property="og:url"					 content="<?= ( ( !isset($aOG['url'] ) ) ? DOMAIN . "/$pg" : $aOG['url'] ) ?>" />
-<meta property="og:title"				 content="<?= ( ( !isset($aOG['title'] ) ) ? NAME . TEXT_DIVIDER . $sPage : $aOG['title'] ) ?>" />
+<meta property="og:url"					 content="<?= ( ( !isset( $aOG['url'] ) ) ? DOMAIN . "/$pg" : $aOG['url'] ) ?>" />
+<meta property="og:title"				 content="<?= ( ( !isset( $aOG['title'] ) ) ? NAME . TEXT_DIVIDER . $sPage : $aOG['title'] ) ?>" />
 <meta property="og:type"				 content="<?=$aOG['type']?>" />
 <meta property="og:image"				 content="<?= DOMAIN . "/" . DIR_IMG . "/" . $aOG['picture'] ?>" />
 <meta property="og:description"			 content="<?= ( ( !isset( $aOG['description'] ) ) ? $aMeta[$pg] : $aOG['description'] ) ?>" />
 <?php if ( isset( $_GET['xnewsaction'] ) ): ?>
 <meta property="article:published_time"  content="<?=$aOG['published']?>">
-<meta property="article:modified_time"   content="<?=$aOG['modified']?>">
+<meta property="article:modified_time"   content="<?=( !isset( $aOG['modified'] ) || empty( $aOG['modified'] ) ) ? $aOG['published'] : $aOG['modified'] ?>">
 <meta property="article:expiration_time" content="<?=$aOG['expires']?>">
 <meta property="article:author"          content="<?=$aOG['author']?>">
 <meta property="article:section"         content="music">
@@ -85,7 +88,7 @@ if ( file_exists($sCSSFile) )
 
 <script language="javascript" src="<?=TEXT_MIN_F?><?=( ($bI) ? "cb/colorbox" : "hs/highslide" ) ?>.js<?=( !empty($sPathPlain) ? "&b=$sPathPlain" : "" )?>" type="text/javascript"></script>
 
-<script language="javascript" src="<?= TEXT_MIN_F ?>buzz.js,effects.js,<?php if (!$bI): ?>flux.js,<?php else: ?>orientation.js<?php endif; ?>modernizr.js,scripts.js<?=( ($bWK && !$bI) ?( ",zepto.js") : "" )?>&b=<?=$sJS?>" type="text/javascript"></script>
+<script language="javascript" src="<?= TEXT_MIN_F ?>buzz.js,paper.js,effects.js,<?php if (!$bI): ?>flux.js,<?php else: ?>orientation.js<?php endif; ?>modernizr.js,scripts.js<?=( ($bWK && !$bI) ?( ",zepto.js") : "" )?>&b=<?=$sJS?>" type="text/javascript"></script>
 
 <script language="javascript" src="<?=TEXT_MIN_F . DIR_JS_LOGIC?>/news.js<?=( !empty($sPathPlain) ? "&b=$sPathPlain" : "" )?>" type="text/javascript"></script>
 
@@ -137,7 +140,7 @@ if ( file_exists($sCSSFile) )
                     
                     <div id="fb-name"></div>
                     
-                    <div class="fb-login-button" autologoutlink="true" data-scope="<?=FB_PERMS?>" data-show-faces="false" data-width="200" data-max-rows="1" onlogin="console.log('hmm')"></div>
+                    <div class="fb-login-button" autologoutlink="true" data-scope="<?=FB_PERMS?>" data-show-faces="false" data-width="200" data-max-rows="1" onlogin=""></div>
                     
                     <div class="fb-load">
                     	

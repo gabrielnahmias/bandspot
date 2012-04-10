@@ -36,7 +36,12 @@ window.oVars = {
 	iSpeed: 1000,
 	
 	sCurrent: extractPage(),
+	
+	// Ok, wtf is the logic here?  I have no idea why I am not using the PHP
+	// for this... what is wrong with me?
+	
 	sDomain: "http://" + window.location.host,
+	
 	sOrigin: window.location.pathname.replace("/", ""),
 	sNB: "&nb=true",
 	sPG: "pg",
@@ -184,15 +189,18 @@ function fbLinks() {
 	
 	// Expansion, ahoy!
 	
+	var bMenuDown = true;
+	
 	if ( fbLoggedIn() ) {
 		
-		if ( $("#home").length && !$(".links .admin").length && typeof FB !== undefined ) {
+		if ( $("#home").length && !$(".links .admin").length && typeof FB !== "undefined" ) {
 			
 			var sID;
 			
-			FB.getLoginStatus( function(response) {
+			if (FB._userStatus == "connected") {
+			//FB.getLoginStatus( function(response) {
 				
-				sID = response.authResponse.userID;
+				sID = FB._userID;//response.authResponse.userID;
 				
 				if ( oPHP.const.ID_FB_ADMINS.indexOf(sID) != -1 ) {
 					
@@ -204,8 +212,58 @@ function fbLinks() {
 					
 					// Make sure this thing doesn't get added twice like it has before. 
 					
-					if ( !$(".links .admin").length )
-						$(".box-1 .title .links").append($Links);
+					if ( !$(".links .admin").length ) {
+						
+						$(".box-1 .title .links").append($Links)
+												 .animate( {
+													 
+													 width: 100
+													 
+												 }, oVars.iSpeed, "easeOutBounce", function() {
+													
+													$(this).find(".gear").fadeIn(oVars.iSpeed);
+													 
+												 } );
+						
+						$(".box-1 .title .gear").click( function() {
+							
+							// I would do this with slideToggle() but it just doesn't suffice.
+							
+							var sTitle = "";
+							
+							if (bMenuDown) {
+								
+								// We are sliding the menu up.
+								
+								$("#admin-menu").slideUp( (oVars.iSpeed / 2) , "" , function() {
+									
+									$(".menu-clicked").fadeOut();
+									
+								} );
+								
+								sTitle = oPHP.const.TEXT_SHOW_MENU;
+								
+								bMenuDown = false;
+								
+							} else {
+								
+								// Sliding menu down.
+								
+								$(".menu-clicked").show();
+								
+								$("#admin-menu").slideDown();
+								
+								sTitle = oPHP.const.TEXT_HIDE_MENU;
+								
+								bMenuDown = true;
+								
+							}
+							
+							$(this).attr("title", sTitle);
+							
+						} );
+						
+					}
 					
 					if (!oVars.bGlown) {
 						
@@ -217,7 +275,7 @@ function fbLinks() {
 					
 				}
 				
-			} );
+			}// );
 			
 		} else if ( $(".connect").length || $("#.add").length || $(".friends").length ) {
 			
@@ -230,10 +288,17 @@ function fbLinks() {
 	} else {
 		
 		if ( $("#home").length)
-			$(".links .admin").remove();
-		else if ( $("#contact").length)
-			friendButton(oPHP.const.TEXT_FRIEND, oPHP.const.FB_UID);	// Could run without arguments?
 		
+			$(".links").find(".admin").remove().end().animate( {
+				
+				width: "auto"
+				
+			} );
+			
+		else if ( $("#contact").length)
+			
+			friendButton(oPHP.const.TEXT_FRIEND, oPHP.const.FB_UID);	// Could run without arguments?
+			
 	}
 	
 }
@@ -850,6 +915,26 @@ function possessive(sValue) {
 	
 }
 
+function read(sURL) {
+	
+	if ( FB._userStatus == "connected" ) {
+		
+		FB.api( ( '/me/news.reads?article=' + sURL + "&access_token=" + FB.getAccessToken() ) , 'post',
+		
+		function(response) {
+			
+			if (!response || response.error) {
+				console.debug('Error with reading article at URL ' + sURL + ':');
+				console.debug(response);
+			} else
+				console.debug('The article at URL ' + sURL + ' was successfully read.');
+			
+		} );
+		
+	}
+	
+}
+
 function relativeTime(sTime) {
 	
 	var values = sTime.split(" ");
@@ -1099,13 +1184,21 @@ function ucwords(str) {
 		if (!iRadius)
 			var iRadius = 10;
 		
+		sOriginal = jQuery(this).css("color");
+		
+		sColor = "#" + sColor;
+		
 		return this.each( function () {
 			
 			jQuery(this).animate( {
 							
-							textShadow: "#" + sColor + " 0 0 " + iRadius + "px"
+							color: sColor,
+							
+							textShadow: sColor + " 0 0 " + iRadius + "px"
 							
 						}, iTime).animate( {
+							
+							color: sOriginal,
 							
 							textShadow: "#000000 0 0 0"
 							
@@ -1139,11 +1232,21 @@ function ucwords(str) {
 		
 	}
 	
-	window.onload = function() {
+	$(document).mousemove( function() {
 		
-		// Nothing here.
+		// This is so sheisty but it works.
 		
-	}
+		if ( typeof FB !== "undefined" ) {
+			
+			// Previously was using a variable bFBLoad to tell.  I think this way is better.
+			
+			fbInfo();
+			
+			$(document).unbind("mousemove");
+			
+		}
+		
+	} );
 	
 	$( function() {
 		
@@ -1185,6 +1288,18 @@ function ucwords(str) {
 				fjs.parentNode.insertBefore(js, fjs);
 			}
 		} (document, "script", "twitter-wjs");
+				
+		window.onpopstate = function(event) {
+			
+			var objState = event.state;
+			
+			if (objState && objState.page)
+				loadContent(objState.page, ( (!oVars.bLoaded) ? true : false ) );
+			
+			if (!oVars.bLoaded)
+				oVars.bLoaded = true;
+			
+		}
 		
 		if ($.browser.msie && $.browser.version <= 6)
 			$(document).pngFix();
@@ -1217,7 +1332,7 @@ function ucwords(str) {
 		
 		$.get("archive.php", function(data) {
 			
-			$Archive.html(data);
+			$(oVars.$Archive.selector).html(data);
 			
 		} );
 		
@@ -1345,7 +1460,7 @@ function ucwords(str) {
 			
         } );
 		
-		// TWITTER TWEETS LOADER
+		// TWEETS LOADER
 		
 		var $Box = $("#twitter_box");
 		var $Ol = $Box.find(".overlay");
@@ -1354,23 +1469,25 @@ function ucwords(str) {
 		var bEnd = false;
 		
 		var iCount = 3;
-		var currentPage = 1;
-		
+		var iPage = 1;
+				
 		var appendTweet = function(tweet, id, sDate) {
 			
 			$("<p />").html(tweet + " ")
-					  .append( $('<a class="time" target="_blank">' + relativeTime(sDate) + '</a>').attr("href", "http://twitter.com/" + oPHP.const.TWTR_DOMAIN + "/status/" + id)
-									   		 .attr("title", "Check tweet on Twitter") ).appendTo($Tweets);
+					  .append( $('<a class="time" target="_blank">' + relativeTime(sDate) + '</a>')
+					  			.attr("href", "http://twitter.com/" + oPHP.const.TWTR_DOMAIN + "/status/" + id)
+								.attr("title", "Check tweet on Twitter") )
+					  .appendTo( $($Tweets.selector) );
 				
 		};
 		
 		var loadTweets = function() {
 			
-			var url = "http://twitter.com/status/user_timeline/" + oPHP.const.TWTR_DOMAIN + ".json?count=" + iCount + "&page=" + currentPage + "&callback=?";
+			var sURL = oPHP.const.TWTR_URL + "status/user_timeline/" + oPHP.const.TWTR_DOMAIN + ".json?count=" + iCount + "&page=" + iPage + "&callback=?";
 			
 			$.ajax( {
 				
-				url: url,
+				url: sURL,
 				
 				// async is set to false because we want to modify a variable outside the
 				// scope of the following callback.
@@ -1379,20 +1496,59 @@ function ucwords(str) {
 				
 				dataType: 'json',
 				
+				complete: function(data, sStatus) {
+					
+					if (sStatus != "success") {
+						
+						$Ol.fadeOut();
+						
+						$Tweets.html("Error loading tweets!");
+						
+					}
+					
+				},
+				
 				success: function(data) {
 					
-					// If the data is empty, we are at the end, so stop loading tweets.
-					
-					if (!data.length)
-						bEnd = true;
-					
-					$.each(data, function(i, post) {
-						appendTweet(post.text, post.id, post.created_at);
-					});
-									
-					$Ol.fadeOut(oVars.iSpeed, "", function() {
-						$Box.find(".count").html( (currentPage * pageSize) + " total tweets");
-					} );
+					if (!bEnd) {
+						
+						// Now, we check if the next page is empty, and if so, stop loading tweets.
+						
+						$.ajax( {
+							
+							url: sURL.replace(/page=(\d)*/, "page=" + (iPage + 1) ),
+							
+							async: false,
+							
+							dataType: 'json',
+							
+							success: function(data) {
+								
+								if (!data.length)
+									bEnd = true;
+								
+							}
+							
+						} );
+						
+						// In all my time as a programmer, I don't think I have EVER seen a scenario like this
+						// and it made sense to do so: a variable is being checked if it's false inside a block
+						// with the same conditions.  I'm not even sure this is appropriate but I'm doing it anyway.
+						// Ah, the wonder of events.
+						
+						if (!bEnd) {
+							
+							$.each(data, function(i, post) {
+								
+								appendTweet(post.text, post.id, post.created_at);
+								
+							} );
+							
+							$Ol.find(".count").html( ( $("#tweets p").length ) + " total tweets loaded").delay(1000).end().fadeOut();
+							
+						}
+						
+					}
 					
 				}
 				
@@ -1402,13 +1558,21 @@ function ucwords(str) {
 		
 		loadTweets();
 		
-		$Tweets.scroll(function() {
+		$Tweets.scroll( function() {
 			
-			if ( $(this)[0].scrollHeight - $(this).scrollTop() == $(this).outerHeight() ) {
+			if ( $(this)[0].scrollHeight - $(this).scrollTop() + 2 == $(this).outerHeight() ) {
 				
 				if (!bEnd) {
 					
-					currentPage++;
+					iPage++;
+					
+					if (iPage > 10) {
+						
+						$Ol.find(".count").html("Maximum tweets loaded.").end().fadeIn(oVars.iSpeed, "", function() { $(this).fadeOut() } );;
+						
+						return false;
+						
+					} 
 					
 					$Ol.fadeIn();
 					
@@ -1419,9 +1583,13 @@ function ucwords(str) {
 			}
 		});
 		
+		//$Tweets.lionbars();
+		
 		// END LOADER
 		
 		loadContent(oVars.sCurrent, true, true);
+		
+		fbInfo();
 		
 	} );
 	
@@ -1439,7 +1607,7 @@ $(window).load( function() {
 		
 		top:  10
 		
-		}, oVars.iSpeed * 2, "easeOutBack" , function() {
+		}, oVars.iSpeed * 2, "easeOutElastic" , function() {
 			
 			// Callback after it's done moving down.
 			

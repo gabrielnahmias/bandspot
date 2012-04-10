@@ -141,7 +141,7 @@ function SocialPost() {
 							var sLink = ( (bTestMode) ? opener.oPHP.const.FB_URL + sFB : opener.oPHP.const.URL_FB ) + "/posts/" + sID.split("_")[1];
 							
 							var iCnt;
-							var iTime = 10;
+							var iTime = 3;
 							 
 							countDown = function() {
 								

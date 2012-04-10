@@ -75,6 +75,36 @@ body span.pagination {
 	
 }
 
+div#admin-menu {
+	
+	display: none;
+	
+	position: absolute;
+	
+	width: 16px;
+	
+	padding: 3px 5px;
+	
+	background: white;
+	
+	z-index: 1;
+	
+	border: 1px solid #333;
+	
+	right: -1px;
+	
+	border-width: 0px 1px 1px;
+	
+	top: 25px;
+	
+}
+	
+	div#admin-menu img {
+		
+		margin: 2px 0;
+		
+	}
+
 div#archive-popout {
 	
 	height: 300px;
@@ -254,13 +284,23 @@ div#footer {
 	
 	font-size: 10px;
 	
-	padding: 20px 20px 0;
+	padding: 25px 60px 0 20px;
 	
 	position: relative;
 	
 	width: auto; /* 914px */
 	
 }
+	
+	div#footer img {
+		
+		bottom: 13px;
+		
+		position: absolute;
+		
+		right: 14px;
+		
+	}
 
 div#logo {
 	
@@ -575,7 +615,7 @@ div#social-popout {
 	
 	position: absolute;
 	
-	top: -4000px;	/* was 0 */
+	top: -1000px;	/* was 0 */
 	
 	visibility: visible;
 	
@@ -626,6 +666,8 @@ div#tweets {
 	
 	div#tweets a.time {
 		
+		display: block;
+		
 		font-size: 11px;
 		
 	}
@@ -634,7 +676,7 @@ div#tweets {
 		
 		background: #E8F4FF;
 	
-		border: 1px solid #DDDDDD;
+		border: 2px outset #BBFFFF;
 	
 		margin: 0 0 9px;
 	
@@ -707,7 +749,21 @@ div#twitter_box {
 		width: 244px;
 		
 	}
-	
+		
+		div#twitter_box div.overlay div.count {
+			
+			color: white;
+			
+			font-weight: bold;
+			
+			left: 50px;
+			
+			position: absolute;
+			
+			top: 100px;
+			
+		}
+		
 	div#twitter_box .overlay img {
 		
 		left: 100px;
@@ -761,6 +817,32 @@ div.addthis_toolbox {
 	width: 138px;
 	
 }
+
+div.admin {
+	
+	height: 95px;
+	
+	width: 26px;
+	
+	position: absolute;
+	
+	right: 3px;
+	
+	top: 2px;
+	
+}
+	
+	div.admin:hover div#admin-menu {
+		
+		display: block;
+		
+	}
+	
+	div.admin:hover span.menu-clicked {
+		
+		display: block;
+		
+	}
 
 div.album {
 	
@@ -1050,9 +1132,9 @@ div.box-1 > .title {
 	
 	div.box-1 > .title a {
 		
-		border-color: #86D7FD !important; 
+		border-color: #86D7FD /* !important */; 
 		
-		color: #86D7FD !important;
+		color: #86D7FD /* !important */;
 		
 	}
 	
@@ -1587,11 +1669,12 @@ img#fb-picture {
     
 }
 
+/*
 img.admin-button {
 	
 	vertical-align: bottom;
 	
-}
+}*/
 
 img.band {
 	
@@ -2058,6 +2141,78 @@ ul.pagination {
 
     -moz-border-radius: 3px;
 
+}
+
+.gear {
+	
+	background: url('/img/gear.png') no-repeat;
+	
+	border-radius: 0 0 5px 5px;
+	
+	-moz-border-radius: 0 0 5px 5px;
+	
+	-webkit-border-radius: 0 0 5px 5px;
+	
+	-o-border-radius: 0 0 5px 5px;
+	
+	-ms-border-radius: 0 0 5px 5px;
+	
+	-khtml-border-radius: 0 0 5px 5px;
+    
+	display: none;
+	
+	height: 22px;
+	
+	width: 22px;
+	
+	right: 2px;
+	
+	top: 0;
+	
+	position: absolute;
+	
+}
+	
+	.gear:hover {
+		
+		background-position: bottom;
+		
+		cursor: pointer;
+		
+	}
+
+.menu-clicked {
+	
+	background: white;
+	
+	border: 1px solid #333;
+	
+	border-radius: 0 5px 0 0;
+	
+	-moz-border-radius: 0 5px 0 0;
+	
+	-webkit-border-radius: 0 5px 0 0;
+	
+	-o-border-radius: 0 5px 0 0;
+	
+	-ms-border-radius: 0 5px 0 0;
+	
+	-khtml-border-radius: 0 5px 0 0;
+    
+	border-width: 1px 1px 0;	
+	
+	display: none;
+	
+	height: 27px;
+	
+	position: absolute;
+	
+	right: -1px;
+	
+	top: -3px;
+	
+	width: 26px;
+	
 }
 
 .gray {

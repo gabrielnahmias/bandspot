@@ -14,6 +14,10 @@
     
         <img src="img/load2.gif" />
     	
+        <div class="count">
+            
+        </div>
+        
     </div>
     
     <div id="follow">
